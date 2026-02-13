@@ -253,7 +253,11 @@ return {
   -- floating terminal
   {
     "numToStr/FTerm.nvim",
-    keys = { "<A-f>" },
+    lazy = false,
+    keys = {
+      { "<A-f>", function() require("FTerm").toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
+      { "<A-i>", function() require("FTerm").toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
+    },
     config = function()
       require("FTerm").setup({
         border = "rounded",
@@ -269,7 +273,10 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    keys = { "<A-h>" },
+    lazy = false,
+    keys = {
+      { "<A-h>", function() require("toggleterm").toggle(1, 15, vim.loop.cwd(), "horizontal") end, mode = { "n", "t" }, desc = "Toggle horizontal terminal" },
+    },
     config = function()
       require("toggleterm").setup({
         size = 15,

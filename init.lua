@@ -293,6 +293,7 @@ require("lazy").setup({
   -- floating terminal
   {
     "numToStr/FTerm.nvim",
+    lazy = false,
     config = function()
       require("FTerm").setup({
         border = "double",
@@ -308,6 +309,7 @@ require("lazy").setup({
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    lazy = false,
     config = function()
       require("toggleterm").setup({
         size = 15,

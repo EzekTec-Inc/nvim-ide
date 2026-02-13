@@ -41,17 +41,18 @@ map({ "n", "t" }, "<A-v>", function()
   require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
 end, { desc = "terminal toggleable vertical term" })
 
-map({ "n", "t" }, "<A-h>", function()
-  require("toggleterm").toggle(1, 15, vim.fn.getcwd(), "horizontal")
-end, { desc = "terminal toggle horizontal term" })
 
 map({ "n", "t" }, "<A-f>", function()
   require("FTerm").toggle()
 end, { desc = "terminal toggle floating term" })
 
 map({ "n", "t" }, "<A-i>", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+  require("FTerm").toggle()
 end, { desc = "terminal toggle floating term" })
+
+map({ "n", "t" }, "<A-h>", function()
+  vim.cmd("ToggleTerm direction=horizontal size=15")
+end, { desc = "terminal toggleable horizontal term" })
 
 
 -- -- vim sourround

@@ -93,6 +93,7 @@ return {
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
+    opts = {},
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
       require("which-key").setup(opts)
@@ -285,6 +286,17 @@ return {
         close_on_exit = true,
         shell = vim.o.shell,
       })
+    end,
+  },
+
+  -- thePrimeagen's Harpoon2
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    config = function()
+      require("harpoon"):setup()
     end,
   },
 }

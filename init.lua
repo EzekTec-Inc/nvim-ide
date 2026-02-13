@@ -73,6 +73,7 @@ require("lazy").setup({
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
+    opts = {},
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
       require("which-key").setup(opts)
@@ -273,6 +274,11 @@ require("lazy").setup({
   -- thePrimeagen's plugins ["harpoon"]
   {
     "thePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("harpoon"):setup()
+    end,
   },
 
   -- code folding

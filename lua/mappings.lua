@@ -113,23 +113,16 @@ map(
   { desc = "telescope find all files" }
 )
 
--- thePrimeagen's Harpoon
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-map("n", "<C-a>", mark.add_file)
-map("n", "<C-e>", ui.toggle_quick_menu)
-map("n", "<C-h>", function()
-  ui.nav_file(1)
-end)
-map("n", "<C-t>", function()
-  ui.nav_file(2)
-end)
+-- thePrimeagen's Harpoon2
+local harpoon = require("harpoon")
+map("n", "<C-w>", function() harpoon:list():add() end, { desc = "Harpoon mark file" })
+map("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon UI" })
+map("n", "<C-h>", function() harpoon:list():select(1) end, { desc = "Harpoon nav file 1" })
+map("n", "<C-t>", function() harpoon:list():select(2) end, { desc = "Harpoon nav file 2" })
 -- map("n", "<C-nn>", function()
---   ui.nav_file(3)
+--   harpoon:list():select(3)
 -- end)
-map("n", "<C-s>", function()
-  ui.nav_file(4)
-end)
+map("n", "<C-s>", function() harpoon:list():select(4) end, { desc = "Harpoon nav file 4" })
 
 -- code fold 
 map("n", "zR", require("ufo").openAllFolds)

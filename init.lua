@@ -253,7 +253,7 @@ require("lazy").setup({
       return require "nvchad.configs.treesitter"
     end,
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter").setup(opts)
     end,
   },
 
@@ -287,6 +287,35 @@ require("lazy").setup({
       -- vim.o.foldcolumn = '1'
       -- vim.o.foldlevelstart = 99
       vim.o.foldenable = true
+    end,
+  },
+
+  -- floating terminal
+  {
+    "numToStr/FTerm.nvim",
+    config = function()
+      require("FTerm").setup({
+        border = "double",
+        dimensions = {
+          height = 0.9,
+          width = 0.9,
+        },
+      })
+    end,
+  },
+
+  -- toggleable horizontal terminal
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        size = 15,
+        open_mapping = nil,
+        direction = "horizontal",
+        close_on_exit = true,
+        shell = vim.o.shell,
+      })
     end,
   },
 

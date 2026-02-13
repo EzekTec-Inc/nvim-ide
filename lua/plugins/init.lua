@@ -242,7 +242,42 @@ return {
       return require "nvchad.configs.treesitter"
     end,
     config = function(_, opts)
+      pcall(function()
+        dofile(vim.g.base46_cache .. "syntax")
+        dofile(vim.g.base46_cache .. "treesitter")
+      end)
       require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  -- floating terminal
+  {
+    "numToStr/FTerm.nvim",
+    keys = { "<A-f>" },
+    config = function()
+      require("FTerm").setup({
+        border = "rounded",
+        dimensions = {
+          height = 0.8,
+          width = 0.8,
+        },
+      })
+    end,
+  },
+
+  -- toggleable horizontal terminal
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    keys = { "<A-h>" },
+    config = function()
+      require("toggleterm").setup({
+        size = 15,
+        open_mapping = nil,
+        direction = "horizontal",
+        close_on_exit = true,
+        shell = vim.o.shell,
+      })
     end,
   },
 }

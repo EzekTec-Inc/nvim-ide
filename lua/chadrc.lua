@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "ayu_dark",
+-- 	theme = "bearded-arc",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -23,7 +23,7 @@
 local options = {
 
   base46 = {
-    theme = "ayu_dark", -- default theme
+    theme = "bearded-arc", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},

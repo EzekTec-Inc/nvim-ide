@@ -3,9 +3,9 @@ local M = {}
 local map = vim.keymap.set
 
 -- export on_attach & capabilities
-M.on_attach = function(_, bufnr)
+M.on_attach = function(client, bufnr)
   local function opts(desc)
-    return { buffer = bufnr, desc = "LSP " .. desc }
+    return { buffer = bufnr, desc = "LSP " .. desc, noremap = true, silent = true }
   end
 
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
@@ -57,8 +57,32 @@ M.capabilities.textDocument.completion.completionItem = {
 }
 
 M.defaults = function()
-  dofile(vim.g.base46_cache .. "lsp")
-  require ("nvchad.lsp").diagnostic_config()
+  local base46_cache = vim.g.base46_cache
+  if type(base46_cache) == "string" and base46_cache ~= "" then
+    local lsp_cache = base46_cache .. "lsp"
+    local readable = vim.fn.filereadable(lsp_cache)
+    if readable == 1 or readable == true then
+      pcall(dofile, lsp_cache)
+    end
+  end
+  
+  -- Configure diagnostics
+  local config = {
+    virtual_text = { spacing = 4, prefix = "●" },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  }
+  vim.diagnostic.config(config)
 
   require("lspconfig").lua_ls.setup {
     on_attach = M.on_attach,

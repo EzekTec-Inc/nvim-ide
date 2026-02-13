@@ -1,6 +1,8 @@
 pcall(function()
-  dofile(vim.g.base46_cache .. "syntax")
-  dofile(vim.g.base46_cache .. "treesitter")
+  if vim.g.base46_cache and type(vim.g.base46_cache) == "string" then
+    dofile(vim.g.base46_cache .. "syntax")
+    dofile(vim.g.base46_cache .. "treesitter")
+  end
 end)
 
 local options = {

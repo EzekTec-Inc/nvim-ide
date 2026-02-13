@@ -146,7 +146,7 @@ return {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
+      require("configs.lspconfig").defaults()
     end,
   },
 
@@ -289,14 +289,14 @@ return {
     end,
   },
 
-  -- thePrimeagen's Harpoon2
+  -- nvim-surround
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    lazy = false,
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
     config = function()
-      require("harpoon"):setup()
+      require("nvim-surround").setup({})
     end,
   },
+
 }

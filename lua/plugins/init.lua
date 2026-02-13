@@ -146,7 +146,8 @@ return {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
-      require("configs.lspconfig").defaults()
+      require("configs.lsp").defaults()
+      require("configs.lsp").setup_lua_ls()
     end,
   },
 

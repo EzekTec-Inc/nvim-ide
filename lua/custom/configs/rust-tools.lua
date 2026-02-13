@@ -1,5 +1,5 @@
-local on_attach = require("configs.lspconfig").on_attach
-local capabilities = require("configs.lspconfig").capabilities
+local on_attach = require("configs.lsp").on_attach
+local capabilities = require("configs.lsp").capabilities
 
 local options = {
   server = {

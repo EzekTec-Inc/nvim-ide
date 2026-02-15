@@ -57,6 +57,24 @@ local function _apply_ft_to_lang_shim()
 
   if type(_G._nvim_ft_to_lang_shim) == "function" then
     rawset(lang, "ft_to_lang", _G._nvim_ft_to_lang_shim)
+
+    local mt = getmetatable(lang) or {}
+    if mt.__nvchad_ft_to_lang_shim_applied ~= true then
+      local prev_index = mt.__index
+      mt.__index = function(t, k)
+        if k == "ft_to_lang" then
+          return _G._nvim_ft_to_lang_shim
+        end
+
+        if type(prev_index) == "function" then
+          return prev_index(t, k)
+        elseif type(prev_index) == "table" then
+          return prev_index[k]
+        end
+      end
+      mt.__nvchad_ft_to_lang_shim_applied = true
+      pcall(setmetatable, lang, mt)
+    end
   end
 end
 

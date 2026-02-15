@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "bearded-arc",
+-- 	theme = "kanagawa",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -20,10 +20,69 @@
 --
 -- return M
 
+-- NVChad themes picker entrypoint, avoids the Telescope builtin `themes` (layout themes) picker.
+do
+  if type(_G._nvchad_open_themes_picker) ~= "function" then
+    _G._nvchad_open_themes_picker = function(opts)
+      opts = opts or {}
+      if type(_G._apply_ft_to_lang_shim) == "function" then
+        pcall(_G._apply_ft_to_lang_shim)
+      end
+
+      local base46_cache = vim.g.base46_cache
+      if type(base46_cache) == "string" and base46_cache ~= "" then
+        pcall(dofile, base46_cache .. "telescope")
+      end
+
+      local ok_telescope, telescope = pcall(require, "telescope")
+      if not ok_telescope then
+        local ok_lazy, lazy = pcall(require, "lazy")
+        if ok_lazy and type(lazy.load) == "function" then
+          pcall(lazy.load, { plugins = { "telescope.nvim" } })
+        end
+
+        ok_telescope, telescope = pcall(require, "telescope")
+        if not ok_telescope then
+          pcall(vim.cmd, "Telescope colorscheme")
+          return
+        end
+      end
+
+      local themes_ext = telescope.extensions and telescope.extensions.themes
+      if not (themes_ext and (type(themes_ext) == "function" or type(themes_ext.themes) == "function")) then
+        local ok_ext = pcall(require, "telescope._extensions.themes")
+        if ok_ext then
+          pcall(telescope.load_extension, "themes")
+        end
+        themes_ext = telescope.extensions and telescope.extensions.themes
+      end
+
+      if themes_ext then
+        local picker = themes_ext
+        if type(themes_ext) == "table" then
+          picker = themes_ext.themes
+        end
+
+        if type(picker) == "function" then
+          local ok_picker = pcall(picker, opts)
+          if ok_picker then
+            return
+          end
+        end
+      end
+
+      local ok_builtin, builtin = pcall(require, "telescope.builtin")
+      if ok_builtin and type(builtin.colorscheme) == "function" then
+        builtin.colorscheme(opts)
+      end
+    end
+  end
+end
+
 local options = {
 
   base46 = {
-    theme = "bearded-arc", -- default theme
+    theme = "kanagawa", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
@@ -33,6 +92,9 @@ local options = {
   },
 
   ui = {
+    theme = "kanagawa",
+    theme_toggle = { "catppuccin", "catppuccin_light" },
+
     cmp = {
       icons = true,
       lspkind_text = true,
@@ -78,7 +140,7 @@ local options = {
         { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
         { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
         { "  Bookmarks", "Spc m a", "Telescope marks" },
-        { "  Themes", "Spc t h", "Telescope themes" },
+        { "  Themes", "Spc t h", "lua _G._nvchad_open_themes_picker()" },
         { "  Mappings", "Spc c h", "NvCheatsheet" },
       },
     },

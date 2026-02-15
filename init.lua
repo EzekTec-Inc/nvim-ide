@@ -1,6 +1,187 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
 
+-- FIX 2026-02-13T23:58:08: Robust ft_to_lang shim using metatable proxy
+-- The ft_to_lang function was removed in Neovim 0.10+
+-- Telescope previewers still reference it, causing "attempt to call field 'ft_to_lang' (a nil value)"
+-- Previous direct assignment approaches failed because plugins can overwrite the table
+-- Solution: Use a metatable proxy that intercepts all access to vim.treesitter.language
+
+-- Create the shim function that wraps get_lang (the Neovim 0.10+ replacement)
+local function _nvim_ft_to_lang_shim(ft)
+  if type(ft) ~= "string" or ft == "" then
+    return ""
+  end
+
+  -- Try get_lang first (Neovim 0.10+)
+  local lang_tbl = vim.treesitter and vim.treesitter.language
+  local get_lang = lang_tbl and rawget(lang_tbl, "get_lang")
+  if type(get_lang) == "function" then
+    local ok, lang = pcall(get_lang, ft)
+    if ok and type(lang) == "string" and lang ~= "" then
+      return lang
+    end
+  end
+
+  -- Fallback: return filetype as-is (many filetypes map directly to their language name)
+  return ft
+end
+
+-- Store in global for persistence
+_G._nvim_ft_to_lang_shim = _nvim_ft_to_lang_shim
+
+local function _apply_ft_to_lang_shim()
+  if vim.treesitter == nil then
+    local ok, ts_mod = pcall(require, "vim.treesitter")
+    if ok and vim.treesitter == nil then
+      vim.treesitter = ts_mod
+    end
+  end
+
+  local ts = vim.treesitter
+  if type(ts) ~= "table" then
+    return
+  end
+
+  if ts.language == nil then
+    local ok, lang_mod = pcall(require, "vim.treesitter.language")
+    if ok and ts.language == nil then
+      ts.language = lang_mod
+    end
+  end
+
+  local lang = ts.language
+  if type(lang) ~= "table" then
+    return
+  end
+
+  if type(_G._nvim_ft_to_lang_shim) == "function" then
+    rawset(lang, "ft_to_lang", _G._nvim_ft_to_lang_shim)
+  end
+end
+
+_G._apply_ft_to_lang_shim = _apply_ft_to_lang_shim
+
+-- FIX 2026-02-15T12:56:41: Ensure :Telescope themes routes to NvChad theme picker.
+
+local function _apply_telescope_nvchad_themes_picker()
+  local ok_builtin, builtin = pcall(require, "telescope.builtin")
+  if not ok_builtin then
+    return
+  end
+
+  if type(_G._nvchad_open_themes_picker) ~= "function" then
+    pcall(require, "chadrc")
+  end
+
+  if type(_G._nvchad_open_themes_picker) == "function" then
+    builtin.themes = function(opts)
+      opts = opts or {}
+      if type(_G._apply_ft_to_lang_shim) == "function" then
+        pcall(_G._apply_ft_to_lang_shim)
+      end
+      return _G._nvchad_open_themes_picker(opts)
+    end
+    return
+  end
+
+  local ok_telescope, telescope = pcall(require, "telescope")
+  if ok_telescope then
+    local themes_ext = telescope.extensions and telescope.extensions.themes
+    local picker = nil
+
+    if themes_ext then
+      if type(themes_ext) == "function" then
+        picker = themes_ext
+      elseif type(themes_ext) == "table" and type(themes_ext.themes) == "function" then
+        picker = themes_ext.themes
+      end
+    end
+
+    if type(picker) ~= "function" then
+      local ok_ext = pcall(require, "telescope._extensions.themes")
+      if ok_ext then
+        pcall(telescope.load_extension, "themes")
+      end
+      themes_ext = telescope.extensions and telescope.extensions.themes
+      if themes_ext then
+        if type(themes_ext) == "function" then
+          picker = themes_ext
+        elseif type(themes_ext) == "table" and type(themes_ext.themes) == "function" then
+          picker = themes_ext.themes
+        end
+      end
+    end
+
+    if type(picker) == "function" then
+      builtin.themes = function(opts)
+        opts = opts or {}
+        local base46_cache = vim.g.base46_cache
+        if type(base46_cache) == "string" and base46_cache ~= "" then
+          pcall(dofile, base46_cache .. "telescope")
+        end
+        if type(_G._apply_ft_to_lang_shim) == "function" then
+          pcall(_G._apply_ft_to_lang_shim)
+        end
+        return picker(opts)
+      end
+      return
+    end
+  end
+
+  builtin.themes = function(opts)
+    opts = opts or {}
+    local base46_cache = vim.g.base46_cache
+    if type(base46_cache) == "string" and base46_cache ~= "" then
+      pcall(dofile, base46_cache .. "telescope")
+    end
+
+    if type(_G._apply_ft_to_lang_shim) == "function" then
+      pcall(_G._apply_ft_to_lang_shim)
+    end
+
+    if type(_G._nvchad_open_themes_picker) ~= "function" then
+      pcall(require, "chadrc")
+    end
+
+    if type(_G._nvchad_open_themes_picker) == "function" then
+      return _G._nvchad_open_themes_picker(opts)
+    end
+
+    if type(builtin.colorscheme) == "function" then
+      return builtin.colorscheme(opts)
+    end
+  end
+end
+
+_G._apply_telescope_nvchad_themes_picker = _apply_telescope_nvchad_themes_picker
+
+local function _apply_nvchad_themes_and_ft_to_lang_shims()
+  _apply_ft_to_lang_shim()
+  _apply_telescope_nvchad_themes_picker()
+end
+
+_apply_nvchad_themes_and_ft_to_lang_shims()
+vim.defer_fn(_apply_nvchad_themes_and_ft_to_lang_shims, 0)
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyDone",
+  once = true,
+  callback = _apply_nvchad_themes_and_ft_to_lang_shims,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = _apply_nvchad_themes_and_ft_to_lang_shims,
+})
+
+-- FIX 2026-02-15T13:09:31-07:00: Re-apply shims on LazyLoad to cover lazy-loaded Telescope.
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyLoad",
+  callback = _apply_nvchad_themes_and_ft_to_lang_shims,
+})
+
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -189,12 +370,26 @@ require("lazy").setup({
       return require "nvchad.configs.telescope"
     end,
     config = function(_, opts)
+      if type(_G._apply_ft_to_lang_shim) == "function" then
+        pcall(_G._apply_ft_to_lang_shim)
+      end
+
+      if type(vim.g.base46_cache) == "string" and vim.g.base46_cache ~= "" then
+        pcall(dofile, vim.g.base46_cache .. "telescope")
+      end
+
       local telescope = require "telescope"
       telescope.setup(opts)
 
       -- load extensions
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
+      local extensions_list = opts.extensions_list or {}
+      for _, ext in ipairs(extensions_list) do
+        pcall(telescope.load_extension, ext)
+      end
+      pcall(telescope.load_extension, "themes")
+
+      if type(_G._apply_telescope_nvchad_themes_picker) == "function" then
+        pcall(_G._apply_telescope_nvchad_themes_picker)
       end
     end,
   },
@@ -251,11 +446,25 @@ require("lazy").setup({
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
+    },
     opts = function()
       return require "nvchad.configs.treesitter"
     end,
     config = function(_, opts)
-      require("nvim-treesitter").setup(opts)
+      -- nvim-treesitter 1.0+ removed the configs module
+      local ok, ts_configs = pcall(require, "nvim-treesitter.configs")
+      if ok and ts_configs and ts_configs.setup then
+        ts_configs.setup(opts)
+      else
+        local ts_ok, ts = pcall(require, "nvim-treesitter")
+        if ts_ok and ts and ts.setup then
+          ts.setup(opts)
+        end
+      end
     end,
   },
 
@@ -278,13 +487,64 @@ require("lazy").setup({
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
-   -- { 'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile' },
-    config = function()
-      require("ufo").setup()
-      vim.o.foldlevel = 90
-      -- vim.o.foldcolumn = '1'
-      -- vim.o.foldlevelstart = 99
+    init = function()
+      -- FIX 2026-02-13T23:18:09: Set fold options BEFORE plugin loads
+      -- E1511 error occurs when foldcolumn > 0 and fillchars foldopen/foldclose are invalid
+      -- Setting foldcolumn to "0" disables the fold column entirely, avoiding fillchars validation
+      -- nvim-ufo displays folds via virtual text, not the fold column
+      vim.o.foldcolumn = "0"
       vim.o.foldenable = true
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldmethod = "manual"
+      -- Set fillchars without any fold-related fields to avoid E1511
+      -- Only set eob (end of buffer) and fold fields which accept any character
+      vim.opt.fillchars = { eob = " ", fold = " " }
+    end,
+    config = function()
+      local handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local suffix = (" ... %d "):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, "MoreMsg" })
+        return newVirtText
+      end
+
+      require("ufo").setup({
+        fold_virt_text_handler = handler,
+        preview = {
+          win_config = {
+            border = "rounded",
+            winhighlight = "Normal:Folded",
+            winblend = 0,
+          },
+          mappings = {
+            scrollU = "<C-u>",
+            scrollD = "<C-d>",
+            jumpTop = "[",
+            jumpBot = "]",
+          },
+        },
+      })
     end,
   },
 

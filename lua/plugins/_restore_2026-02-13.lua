@@ -1,0 +1,50 @@
+-- Restore point created: 2026-02-13T21:50:28-07:00
+-- Updated: 2026-02-13T22:02:27-07:00
+-- Updated: 2026-02-13T23:09:58-07:00
+-- Updated: 2026-02-13T23:41:57-07:00
+-- This file documents the state before adding backup plugins
+-- To restore: remove the newly added plugin files listed below
+--
+-- Files added in this update:
+--   - lua/plugins/bigfile.lua
+--   - lua/plugins/cloak.lua
+--   - lua/plugins/illuminate.lua
+--   - lua/plugins/inlayhints.lua
+--   - lua/plugins/legendary.lua
+--   - lua/plugins/lspsaga.lua
+--   - lua/plugins/rustaceanvim.lua
+--   - lua/plugins/sessions.lua
+--
+-- To restore previous state:
+--   1. Delete the files listed above
+--   2. Delete this restore point file
+--
+-- No changes were made to existing files during this update.
+--
+-- Fix applied 2026-02-13T22:02:27-07:00:
+--   - lua/plugins/treesitter_extended.lua: Removed config function that was
+--     trying to require 'nvim-treesitter.configs' which no longer exists in
+--     nvim-treesitter 1.0+. The file now only declares the plugin as a
+--     dependency without a config function.
+--
+-- Fix applied 2026-02-13T23:09:58-07:00:
+--   - lua/plugins/ufo.lua: Fixed E1511 error "Wrong number of characters for
+--     field foldopen". Removed foldopen, foldsep, foldclose from fillchars
+--     as these fields require single-byte ASCII chars only. nvim-ufo handles
+--     fold display via fold_virt_text_handler instead.
+--   - lua/plugins/ufo_extended.lua: Disabled to prevent duplicate nvim-ufo
+--     configuration conflicts. Returns empty table now.
+--
+-- Fix applied 2026-02-13T23:41:57-07:00:
+--   - init.lua: Enhanced ft_to_lang shim to use _G global storage for persistence
+--     and added rawset to bypass any potential metatables. The shim function is
+--     now stored in _G._nvim_ft_to_lang_shim and applied via rawset to ensure
+--     it cannot be overwritten by lazy-loaded modules.
+--   - lua/configs/telescope.lua: Added pre-config check to ensure ft_to_lang
+--     shim is present before telescope loads.
+--
+-- To restore previous ft_to_lang fix:
+--   In init.lua, revert the do...end block to the previous version without
+--   rawset and _G storage.
+
+return {}

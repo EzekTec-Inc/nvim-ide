@@ -1,4 +1,19 @@
-dofile(vim.g.base46_cache .. "telescope")
+-- FIX 2026-02-13T23:54:07: ft_to_lang shim is now handled via metatable proxy in init.lua
+-- The proxy ensures ft_to_lang is always available and cannot be overwritten to nil
+-- This safety check is kept as a fallback but should not be needed
+if
+  vim.treesitter
+  and type(vim.treesitter.language) == "table"
+  and rawget(vim.treesitter.language, "ft_to_lang") == nil
+  and _G._nvim_ft_to_lang_shim
+then
+  rawset(vim.treesitter.language, "ft_to_lang", _G._nvim_ft_to_lang_shim)
+end
+
+local base46_cache = vim.g.base46_cache
+if type(base46_cache) == "string" and base46_cache ~= "" then
+  pcall(dofile, base46_cache .. "telescope")
+end
 
 local options = {
   defaults = {
@@ -12,7 +27,7 @@ local options = {
       "--column",
       "--smart-case",
     },
-    prompt_prefix = "   ",
+    prompt_prefix = "   ",
     selection_caret = "  ",
     entry_prefix = "  ",
     initial_mode = "insert",

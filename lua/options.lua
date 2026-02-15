@@ -9,8 +9,10 @@ local opt = vim.opt
 local o = vim.o
 local g = vim.g
 
+-- FIX 2026-02-13T23:47:40: ft_to_lang shim is defined in init.lua before lazy.nvim loads
+
 -------------------------------------- globals -----------------------------------------
-g.toggle_theme_icon = "   "
+g.toggle_theme_icon = "   "
 
 -------------------------------------- options ------------------------------------------
 o.laststatus = 3
@@ -27,7 +29,10 @@ o.smartindent = true
 o.tabstop = 2
 o.softtabstop = 2
 
-opt.fillchars = { eob = " " }
+-- FIX 2026-02-13T23:18:09: fillchars is now set in init.lua nvim-ufo init function
+-- The E1511 error occurs when foldcolumn > 0 and fillchars foldopen/foldclose are invalid
+-- By setting fillchars in nvim-ufo init BEFORE any fold operations, we avoid the error
+-- Do NOT set fillchars here to prevent conflicts
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"

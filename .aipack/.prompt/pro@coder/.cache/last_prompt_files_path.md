@@ -17,64 +17,328 @@
 
 # Context Files
 
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
+- lua/.restore/2026-02-13/chadrc.lua.bak
+- lua/.restore/2026-02-13/mappings.lua.bak
+- lua/.restore/2026-02-13/plugins-init.lua.bak
 - lua/autocmds.lua
 - lua/chadrc.lua
 - lua/configs/cmp.lua
 - lua/configs/conform.lua
 - lua/configs/gitsigns.lua
 - lua/configs/lazy.lua
+- lua/configs/lsp.lua
 - lua/configs/lspconfig.lua
 - lua/configs/lualine.lua
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
+- lua/configs/restore-2026-02-13.lua
+- lua/configs/restore-point-2026-02-15.lua
+- lua/configs/restore_point_2026-02-13.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
+- lua/configs/utils.lua
 - lua/custom/chadrc.lua
 - lua/custom/configs/lspconfig.lua
 - lua/custom/configs/rust-tools.lua
 - lua/lspconfig.lua
 - lua/mappings.lua
 - lua/options.lua
+- lua/plugins/_restore_2026-02-13.lua
+- lua/plugins/action_hints.lua
 - lua/plugins/activate.lua
+- lua/plugins/alternate-toggler.lua
+- lua/plugins/alternate_toggler.lua
+- lua/plugins/bigfile.lua
+- lua/plugins/carbon-now.lua
+- lua/plugins/carbon_now.lua
+- lua/plugins/cinnamon.lua
+- lua/plugins/cloak.lua
+- lua/plugins/confirm_quit.lua
+- lua/plugins/crates.lua
+- lua/plugins/extra.lua
+- lua/plugins/fidget.lua
+- lua/plugins/harpoon.lua
+- lua/plugins/hop.lua
+- lua/plugins/illuminate.lua
+- lua/plugins/impatient.lua
 - lua/plugins/init.lua
+- lua/plugins/inlayhints.lua
+- lua/plugins/legendary.lua
+- lua/plugins/lsp_progress.lua
+- lua/plugins/lsp_progress_nvim.lua
+- lua/plugins/lspkind.lua
+- lua/plugins/lspkind_nvim.lua
+- lua/plugins/lspsaga.lua
 - lua/plugins/nvim_foldsign.lua
+- lua/plugins/persistence.lua
+- lua/plugins/pretty_fold.lua
+- lua/plugins/restore-point-2026-02-13.lua
+- lua/plugins/rustaceanvim.lua
+- lua/plugins/sessions.lua
+- lua/plugins/tiny-devicons-auto-colors.lua
+- lua/plugins/tiny_devicons.lua
+- lua/plugins/todo-comments.lua
+- lua/plugins/todo_comments.lua
+- lua/plugins/treesitter.lua
+- lua/plugins/treesitter_extended.lua
+- lua/plugins/treesj.lua
+- lua/plugins/trouble.lua
+- lua/plugins/ufo.lua
+- lua/plugins/ufo_extended.lua
 - lua/plugins/yaml_companion_nvim.lua
 - lua/plugins/yaml_nvim.lua
+- lua/plugins/zen-mode.lua
+- lua/plugins/zen_mode.lua
+- lua/restore-point-2026-02-13.lua
+- lua/restore-point-2026-02-13.md
+- lua/restore-points/2026-02-13-ft-to-lang-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-proxy-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-simplified-fix.md
+- lua/restore-points/2026-02-13-pre-backup-merge.lua
+- lua/restore-points/2026-02-13-pre-backup-migration.md
+- lua/restore-points/2026-02-13-treesitter-fix.lua
+- lua/restore-points/2026-02-13-treesitter-fix.md
+- lua/restore-points/2026-02-13-ufo-border-fix.md
+- lua/restore-points/2026-02-13-ufo-fillchars-fix.md
+- lua/restore-points/2026-02-13-ufo-foldopen-fix.lua
+- lua/restore-points/2026-02-15-custom-chadrc-delegate-to-chadrc.md
+- lua/restore-points/2026-02-15-telescope-config-safe-load-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-builtin-alias-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-final-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1242.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-124455.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1305.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1306.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2026-02-15t12-28-11.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-opts.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-plugins-init.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-ft-to-lang-shim-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-lazyload-hook-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-restore-bak-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-runtime-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-shim-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-silent-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-accuracy-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-activate-dependency-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-dashboard-lazy-load-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-impatient-disable.md
+- lua/restore-points/2026-02-15-telescope-themes-keymap-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-stability-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-wrapper-fix.md
+- lua/restore/2026-02-13_pre-backup-sync.md
+- lua/restore/pre-2026-02-13-mappings.lua.bak
+- lua/restore/pre-2026-02-13-plugins-init.lua.bak
+- lua/restore_point_2026-02-13.lua
+- lua/restore_point_2026_02_13.md
+- lua/restore_points/2026-02-13_fillchars_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_direct_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_rawset_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simple_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simplified_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_telescope_fix.md
+- lua/restore_points/2026-02-13_mappings_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_fillchars_fix.md
+- lua/restore_points/2026-02-13_plugins_init.lua.bak
+- lua/restore_points/2026-02-13_pre_backup_sync.md
+- lua/restore_points/2026-02-13_pre_sync.md
+- lua/restore_points/2026-02-13_pre_treesitter_fix.md
+- lua/restore_points/2026-02-13_pre_yaml_companion.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_treesitter_config_fix.md
+- lua/restore_points/2026-02-13_treesitter_extended_fix.md
+- lua/restore_points/2026-02-13_treesitter_fix.md
+- lua/restore_points/2026-02-13_treesitter_module_fix.md
+- lua/restore_points/2026-02-13_treesitter_textobjects_fix.md
+- lua/restore_points/2026-02-13_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_ufo_fillchars_fix.md
 - init.lua
 
 # Working Files
 
-- lua/chadrc.lua
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
 
 # Struture Files
 
 (Only file paths, not their content)
 
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
+- lua/.restore/2026-02-13/chadrc.lua.bak
+- lua/.restore/2026-02-13/mappings.lua.bak
+- lua/.restore/2026-02-13/plugins-init.lua.bak
 - lua/autocmds.lua
 - lua/chadrc.lua
 - lua/configs/cmp.lua
 - lua/configs/conform.lua
 - lua/configs/gitsigns.lua
 - lua/configs/lazy.lua
+- lua/configs/lsp.lua
 - lua/configs/lspconfig.lua
 - lua/configs/lualine.lua
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
+- lua/configs/restore-2026-02-13.lua
+- lua/configs/restore-point-2026-02-15.lua
+- lua/configs/restore_point_2026-02-13.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
+- lua/configs/utils.lua
 - lua/custom/chadrc.lua
 - lua/custom/configs/lspconfig.lua
 - lua/custom/configs/rust-tools.lua
 - lua/lspconfig.lua
 - lua/mappings.lua
 - lua/options.lua
+- lua/plugins/_restore_2026-02-13.lua
+- lua/plugins/action_hints.lua
 - lua/plugins/activate.lua
+- lua/plugins/alternate-toggler.lua
+- lua/plugins/alternate_toggler.lua
+- lua/plugins/bigfile.lua
+- lua/plugins/carbon-now.lua
+- lua/plugins/carbon_now.lua
+- lua/plugins/cinnamon.lua
+- lua/plugins/cloak.lua
+- lua/plugins/confirm_quit.lua
+- lua/plugins/crates.lua
+- lua/plugins/extra.lua
+- lua/plugins/fidget.lua
+- lua/plugins/harpoon.lua
+- lua/plugins/hop.lua
+- lua/plugins/illuminate.lua
+- lua/plugins/impatient.lua
 - lua/plugins/init.lua
+- lua/plugins/inlayhints.lua
+- lua/plugins/legendary.lua
+- lua/plugins/lsp_progress.lua
+- lua/plugins/lsp_progress_nvim.lua
+- lua/plugins/lspkind.lua
+- lua/plugins/lspkind_nvim.lua
+- lua/plugins/lspsaga.lua
 - lua/plugins/nvim_foldsign.lua
+- lua/plugins/persistence.lua
+- lua/plugins/pretty_fold.lua
+- lua/plugins/restore-point-2026-02-13.lua
+- lua/plugins/rustaceanvim.lua
+- lua/plugins/sessions.lua
+- lua/plugins/tiny-devicons-auto-colors.lua
+- lua/plugins/tiny_devicons.lua
+- lua/plugins/todo-comments.lua
+- lua/plugins/todo_comments.lua
+- lua/plugins/treesitter.lua
+- lua/plugins/treesitter_extended.lua
+- lua/plugins/treesj.lua
+- lua/plugins/trouble.lua
+- lua/plugins/ufo.lua
+- lua/plugins/ufo_extended.lua
 - lua/plugins/yaml_companion_nvim.lua
 - lua/plugins/yaml_nvim.lua
+- lua/plugins/zen-mode.lua
+- lua/plugins/zen_mode.lua
+- lua/restore-point-2026-02-13.lua
+- lua/restore-point-2026-02-13.md
+- lua/restore-points/2026-02-13-ft-to-lang-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-proxy-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-simplified-fix.md
+- lua/restore-points/2026-02-13-pre-backup-merge.lua
+- lua/restore-points/2026-02-13-pre-backup-migration.md
+- lua/restore-points/2026-02-13-treesitter-fix.lua
+- lua/restore-points/2026-02-13-treesitter-fix.md
+- lua/restore-points/2026-02-13-ufo-border-fix.md
+- lua/restore-points/2026-02-13-ufo-fillchars-fix.md
+- lua/restore-points/2026-02-13-ufo-foldopen-fix.lua
+- lua/restore-points/2026-02-15-custom-chadrc-delegate-to-chadrc.md
+- lua/restore-points/2026-02-15-telescope-config-safe-load-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-builtin-alias-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-final-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1242.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-124455.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1305.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1306.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2026-02-15t12-28-11.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-opts.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-plugins-init.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-ft-to-lang-shim-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-lazyload-hook-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-restore-bak-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-runtime-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-shim-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-silent-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-accuracy-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-activate-dependency-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-dashboard-lazy-load-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-impatient-disable.md
+- lua/restore-points/2026-02-15-telescope-themes-keymap-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-stability-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-wrapper-fix.md
+- lua/restore/2026-02-13_pre-backup-sync.md
+- lua/restore/pre-2026-02-13-mappings.lua.bak
+- lua/restore/pre-2026-02-13-plugins-init.lua.bak
+- lua/restore_point_2026-02-13.lua
+- lua/restore_point_2026_02_13.md
+- lua/restore_points/2026-02-13_fillchars_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_direct_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_rawset_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simple_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simplified_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_telescope_fix.md
+- lua/restore_points/2026-02-13_mappings_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_fillchars_fix.md
+- lua/restore_points/2026-02-13_plugins_init.lua.bak
+- lua/restore_points/2026-02-13_pre_backup_sync.md
+- lua/restore_points/2026-02-13_pre_sync.md
+- lua/restore_points/2026-02-13_pre_treesitter_fix.md
+- lua/restore_points/2026-02-13_pre_yaml_companion.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_treesitter_config_fix.md
+- lua/restore_points/2026-02-13_treesitter_extended_fix.md
+- lua/restore_points/2026-02-13_treesitter_fix.md
+- lua/restore_points/2026-02-13_treesitter_module_fix.md
+- lua/restore_points/2026-02-13_treesitter_textobjects_fix.md
+- lua/restore_points/2026-02-13_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_ufo_fillchars_fix.md
 - init.lua
 
 ====
@@ -96,64 +360,328 @@
 
 # Context Files
 
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
+- lua/.restore/2026-02-13/chadrc.lua.bak
+- lua/.restore/2026-02-13/mappings.lua.bak
+- lua/.restore/2026-02-13/plugins-init.lua.bak
 - lua/autocmds.lua
 - lua/chadrc.lua
 - lua/configs/cmp.lua
 - lua/configs/conform.lua
 - lua/configs/gitsigns.lua
 - lua/configs/lazy.lua
+- lua/configs/lsp.lua
 - lua/configs/lspconfig.lua
 - lua/configs/lualine.lua
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
+- lua/configs/restore-2026-02-13.lua
+- lua/configs/restore-point-2026-02-15.lua
+- lua/configs/restore_point_2026-02-13.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
+- lua/configs/utils.lua
 - lua/custom/chadrc.lua
 - lua/custom/configs/lspconfig.lua
 - lua/custom/configs/rust-tools.lua
 - lua/lspconfig.lua
 - lua/mappings.lua
 - lua/options.lua
+- lua/plugins/_restore_2026-02-13.lua
+- lua/plugins/action_hints.lua
 - lua/plugins/activate.lua
+- lua/plugins/alternate-toggler.lua
+- lua/plugins/alternate_toggler.lua
+- lua/plugins/bigfile.lua
+- lua/plugins/carbon-now.lua
+- lua/plugins/carbon_now.lua
+- lua/plugins/cinnamon.lua
+- lua/plugins/cloak.lua
+- lua/plugins/confirm_quit.lua
+- lua/plugins/crates.lua
+- lua/plugins/extra.lua
+- lua/plugins/fidget.lua
+- lua/plugins/harpoon.lua
+- lua/plugins/hop.lua
+- lua/plugins/illuminate.lua
+- lua/plugins/impatient.lua
 - lua/plugins/init.lua
+- lua/plugins/inlayhints.lua
+- lua/plugins/legendary.lua
+- lua/plugins/lsp_progress.lua
+- lua/plugins/lsp_progress_nvim.lua
+- lua/plugins/lspkind.lua
+- lua/plugins/lspkind_nvim.lua
+- lua/plugins/lspsaga.lua
 - lua/plugins/nvim_foldsign.lua
+- lua/plugins/persistence.lua
+- lua/plugins/pretty_fold.lua
+- lua/plugins/restore-point-2026-02-13.lua
+- lua/plugins/rustaceanvim.lua
+- lua/plugins/sessions.lua
+- lua/plugins/tiny-devicons-auto-colors.lua
+- lua/plugins/tiny_devicons.lua
+- lua/plugins/todo-comments.lua
+- lua/plugins/todo_comments.lua
+- lua/plugins/treesitter.lua
+- lua/plugins/treesitter_extended.lua
+- lua/plugins/treesj.lua
+- lua/plugins/trouble.lua
+- lua/plugins/ufo.lua
+- lua/plugins/ufo_extended.lua
 - lua/plugins/yaml_companion_nvim.lua
 - lua/plugins/yaml_nvim.lua
+- lua/plugins/zen-mode.lua
+- lua/plugins/zen_mode.lua
+- lua/restore-point-2026-02-13.lua
+- lua/restore-point-2026-02-13.md
+- lua/restore-points/2026-02-13-ft-to-lang-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-proxy-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-simplified-fix.md
+- lua/restore-points/2026-02-13-pre-backup-merge.lua
+- lua/restore-points/2026-02-13-pre-backup-migration.md
+- lua/restore-points/2026-02-13-treesitter-fix.lua
+- lua/restore-points/2026-02-13-treesitter-fix.md
+- lua/restore-points/2026-02-13-ufo-border-fix.md
+- lua/restore-points/2026-02-13-ufo-fillchars-fix.md
+- lua/restore-points/2026-02-13-ufo-foldopen-fix.lua
+- lua/restore-points/2026-02-15-custom-chadrc-delegate-to-chadrc.md
+- lua/restore-points/2026-02-15-telescope-config-safe-load-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-builtin-alias-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-final-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1242.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-124455.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1305.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1306.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2026-02-15t12-28-11.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-opts.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-plugins-init.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-ft-to-lang-shim-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-lazyload-hook-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-restore-bak-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-runtime-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-shim-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-silent-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-accuracy-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-activate-dependency-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-dashboard-lazy-load-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-impatient-disable.md
+- lua/restore-points/2026-02-15-telescope-themes-keymap-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-stability-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-wrapper-fix.md
+- lua/restore/2026-02-13_pre-backup-sync.md
+- lua/restore/pre-2026-02-13-mappings.lua.bak
+- lua/restore/pre-2026-02-13-plugins-init.lua.bak
+- lua/restore_point_2026-02-13.lua
+- lua/restore_point_2026_02_13.md
+- lua/restore_points/2026-02-13_fillchars_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_direct_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_rawset_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simple_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simplified_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_telescope_fix.md
+- lua/restore_points/2026-02-13_mappings_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_fillchars_fix.md
+- lua/restore_points/2026-02-13_plugins_init.lua.bak
+- lua/restore_points/2026-02-13_pre_backup_sync.md
+- lua/restore_points/2026-02-13_pre_sync.md
+- lua/restore_points/2026-02-13_pre_treesitter_fix.md
+- lua/restore_points/2026-02-13_pre_yaml_companion.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_treesitter_config_fix.md
+- lua/restore_points/2026-02-13_treesitter_extended_fix.md
+- lua/restore_points/2026-02-13_treesitter_fix.md
+- lua/restore_points/2026-02-13_treesitter_module_fix.md
+- lua/restore_points/2026-02-13_treesitter_textobjects_fix.md
+- lua/restore_points/2026-02-13_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_ufo_fillchars_fix.md
 - init.lua
 
 # Working Files
 
-- lua/configs/cmp.lua
+- lua/.restore/2026-02-13/chadrc.lua.bak
 
 # Struture Files
 
 (Only file paths, not their content)
 
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
+- lua/.restore/2026-02-13/chadrc.lua.bak
+- lua/.restore/2026-02-13/mappings.lua.bak
+- lua/.restore/2026-02-13/plugins-init.lua.bak
 - lua/autocmds.lua
 - lua/chadrc.lua
 - lua/configs/cmp.lua
 - lua/configs/conform.lua
 - lua/configs/gitsigns.lua
 - lua/configs/lazy.lua
+- lua/configs/lsp.lua
 - lua/configs/lspconfig.lua
 - lua/configs/lualine.lua
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
+- lua/configs/restore-2026-02-13.lua
+- lua/configs/restore-point-2026-02-15.lua
+- lua/configs/restore_point_2026-02-13.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
+- lua/configs/utils.lua
 - lua/custom/chadrc.lua
 - lua/custom/configs/lspconfig.lua
 - lua/custom/configs/rust-tools.lua
 - lua/lspconfig.lua
 - lua/mappings.lua
 - lua/options.lua
+- lua/plugins/_restore_2026-02-13.lua
+- lua/plugins/action_hints.lua
 - lua/plugins/activate.lua
+- lua/plugins/alternate-toggler.lua
+- lua/plugins/alternate_toggler.lua
+- lua/plugins/bigfile.lua
+- lua/plugins/carbon-now.lua
+- lua/plugins/carbon_now.lua
+- lua/plugins/cinnamon.lua
+- lua/plugins/cloak.lua
+- lua/plugins/confirm_quit.lua
+- lua/plugins/crates.lua
+- lua/plugins/extra.lua
+- lua/plugins/fidget.lua
+- lua/plugins/harpoon.lua
+- lua/plugins/hop.lua
+- lua/plugins/illuminate.lua
+- lua/plugins/impatient.lua
 - lua/plugins/init.lua
+- lua/plugins/inlayhints.lua
+- lua/plugins/legendary.lua
+- lua/plugins/lsp_progress.lua
+- lua/plugins/lsp_progress_nvim.lua
+- lua/plugins/lspkind.lua
+- lua/plugins/lspkind_nvim.lua
+- lua/plugins/lspsaga.lua
 - lua/plugins/nvim_foldsign.lua
+- lua/plugins/persistence.lua
+- lua/plugins/pretty_fold.lua
+- lua/plugins/restore-point-2026-02-13.lua
+- lua/plugins/rustaceanvim.lua
+- lua/plugins/sessions.lua
+- lua/plugins/tiny-devicons-auto-colors.lua
+- lua/plugins/tiny_devicons.lua
+- lua/plugins/todo-comments.lua
+- lua/plugins/todo_comments.lua
+- lua/plugins/treesitter.lua
+- lua/plugins/treesitter_extended.lua
+- lua/plugins/treesj.lua
+- lua/plugins/trouble.lua
+- lua/plugins/ufo.lua
+- lua/plugins/ufo_extended.lua
 - lua/plugins/yaml_companion_nvim.lua
 - lua/plugins/yaml_nvim.lua
+- lua/plugins/zen-mode.lua
+- lua/plugins/zen_mode.lua
+- lua/restore-point-2026-02-13.lua
+- lua/restore-point-2026-02-13.md
+- lua/restore-points/2026-02-13-ft-to-lang-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-proxy-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-simplified-fix.md
+- lua/restore-points/2026-02-13-pre-backup-merge.lua
+- lua/restore-points/2026-02-13-pre-backup-migration.md
+- lua/restore-points/2026-02-13-treesitter-fix.lua
+- lua/restore-points/2026-02-13-treesitter-fix.md
+- lua/restore-points/2026-02-13-ufo-border-fix.md
+- lua/restore-points/2026-02-13-ufo-fillchars-fix.md
+- lua/restore-points/2026-02-13-ufo-foldopen-fix.lua
+- lua/restore-points/2026-02-15-custom-chadrc-delegate-to-chadrc.md
+- lua/restore-points/2026-02-15-telescope-config-safe-load-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-builtin-alias-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-final-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1242.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-124455.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1305.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1306.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2026-02-15t12-28-11.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-opts.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-plugins-init.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-ft-to-lang-shim-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-lazyload-hook-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-restore-bak-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-runtime-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-shim-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-silent-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-accuracy-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-activate-dependency-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-dashboard-lazy-load-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-impatient-disable.md
+- lua/restore-points/2026-02-15-telescope-themes-keymap-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-stability-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-wrapper-fix.md
+- lua/restore/2026-02-13_pre-backup-sync.md
+- lua/restore/pre-2026-02-13-mappings.lua.bak
+- lua/restore/pre-2026-02-13-plugins-init.lua.bak
+- lua/restore_point_2026-02-13.lua
+- lua/restore_point_2026_02_13.md
+- lua/restore_points/2026-02-13_fillchars_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_direct_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_rawset_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simple_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simplified_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_telescope_fix.md
+- lua/restore_points/2026-02-13_mappings_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_fillchars_fix.md
+- lua/restore_points/2026-02-13_plugins_init.lua.bak
+- lua/restore_points/2026-02-13_pre_backup_sync.md
+- lua/restore_points/2026-02-13_pre_sync.md
+- lua/restore_points/2026-02-13_pre_treesitter_fix.md
+- lua/restore_points/2026-02-13_pre_yaml_companion.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_treesitter_config_fix.md
+- lua/restore_points/2026-02-13_treesitter_extended_fix.md
+- lua/restore_points/2026-02-13_treesitter_fix.md
+- lua/restore_points/2026-02-13_treesitter_module_fix.md
+- lua/restore_points/2026-02-13_treesitter_textobjects_fix.md
+- lua/restore_points/2026-02-13_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_ufo_fillchars_fix.md
 - init.lua
 
 ====
@@ -175,1801 +703,327 @@
 
 # Context Files
 
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
+- lua/.restore/2026-02-13/chadrc.lua.bak
+- lua/.restore/2026-02-13/mappings.lua.bak
+- lua/.restore/2026-02-13/plugins-init.lua.bak
 - lua/autocmds.lua
 - lua/chadrc.lua
 - lua/configs/cmp.lua
 - lua/configs/conform.lua
 - lua/configs/gitsigns.lua
 - lua/configs/lazy.lua
+- lua/configs/lsp.lua
 - lua/configs/lspconfig.lua
 - lua/configs/lualine.lua
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
+- lua/configs/restore-2026-02-13.lua
+- lua/configs/restore-point-2026-02-15.lua
+- lua/configs/restore_point_2026-02-13.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
+- lua/configs/utils.lua
 - lua/custom/chadrc.lua
 - lua/custom/configs/lspconfig.lua
 - lua/custom/configs/rust-tools.lua
 - lua/lspconfig.lua
 - lua/mappings.lua
 - lua/options.lua
+- lua/plugins/_restore_2026-02-13.lua
+- lua/plugins/action_hints.lua
 - lua/plugins/activate.lua
+- lua/plugins/alternate-toggler.lua
+- lua/plugins/alternate_toggler.lua
+- lua/plugins/bigfile.lua
+- lua/plugins/carbon-now.lua
+- lua/plugins/carbon_now.lua
+- lua/plugins/cinnamon.lua
+- lua/plugins/cloak.lua
+- lua/plugins/confirm_quit.lua
+- lua/plugins/crates.lua
+- lua/plugins/extra.lua
+- lua/plugins/fidget.lua
+- lua/plugins/harpoon.lua
+- lua/plugins/hop.lua
+- lua/plugins/illuminate.lua
+- lua/plugins/impatient.lua
 - lua/plugins/init.lua
+- lua/plugins/inlayhints.lua
+- lua/plugins/legendary.lua
+- lua/plugins/lsp_progress.lua
+- lua/plugins/lsp_progress_nvim.lua
+- lua/plugins/lspkind.lua
+- lua/plugins/lspkind_nvim.lua
+- lua/plugins/lspsaga.lua
 - lua/plugins/nvim_foldsign.lua
+- lua/plugins/persistence.lua
+- lua/plugins/pretty_fold.lua
+- lua/plugins/restore-point-2026-02-13.lua
+- lua/plugins/rustaceanvim.lua
+- lua/plugins/sessions.lua
+- lua/plugins/tiny-devicons-auto-colors.lua
+- lua/plugins/tiny_devicons.lua
+- lua/plugins/todo-comments.lua
+- lua/plugins/todo_comments.lua
+- lua/plugins/treesitter.lua
+- lua/plugins/treesitter_extended.lua
+- lua/plugins/treesj.lua
+- lua/plugins/trouble.lua
+- lua/plugins/ufo.lua
+- lua/plugins/ufo_extended.lua
 - lua/plugins/yaml_companion_nvim.lua
 - lua/plugins/yaml_nvim.lua
+- lua/plugins/zen-mode.lua
+- lua/plugins/zen_mode.lua
+- lua/restore-point-2026-02-13.lua
+- lua/restore-point-2026-02-13.md
+- lua/restore-points/2026-02-13-ft-to-lang-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-proxy-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-simplified-fix.md
+- lua/restore-points/2026-02-13-pre-backup-merge.lua
+- lua/restore-points/2026-02-13-pre-backup-migration.md
+- lua/restore-points/2026-02-13-treesitter-fix.lua
+- lua/restore-points/2026-02-13-treesitter-fix.md
+- lua/restore-points/2026-02-13-ufo-border-fix.md
+- lua/restore-points/2026-02-13-ufo-fillchars-fix.md
+- lua/restore-points/2026-02-13-ufo-foldopen-fix.lua
+- lua/restore-points/2026-02-15-custom-chadrc-delegate-to-chadrc.md
+- lua/restore-points/2026-02-15-telescope-config-safe-load-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-builtin-alias-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-final-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1242.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-124455.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1305.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1306.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2026-02-15t12-28-11.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-opts.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-plugins-init.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-ft-to-lang-shim-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-lazyload-hook-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-restore-bak-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-runtime-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-shim-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-silent-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-accuracy-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-activate-dependency-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-dashboard-lazy-load-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-impatient-disable.md
+- lua/restore-points/2026-02-15-telescope-themes-keymap-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-stability-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-wrapper-fix.md
+- lua/restore/2026-02-13_pre-backup-sync.md
+- lua/restore/pre-2026-02-13-mappings.lua.bak
+- lua/restore/pre-2026-02-13-plugins-init.lua.bak
+- lua/restore_point_2026-02-13.lua
+- lua/restore_point_2026_02_13.md
+- lua/restore_points/2026-02-13_fillchars_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_direct_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_rawset_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simple_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simplified_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_telescope_fix.md
+- lua/restore_points/2026-02-13_mappings_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_fillchars_fix.md
+- lua/restore_points/2026-02-13_plugins_init.lua.bak
+- lua/restore_points/2026-02-13_pre_backup_sync.md
+- lua/restore_points/2026-02-13_pre_sync.md
+- lua/restore_points/2026-02-13_pre_treesitter_fix.md
+- lua/restore_points/2026-02-13_pre_yaml_companion.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_treesitter_config_fix.md
+- lua/restore_points/2026-02-13_treesitter_extended_fix.md
+- lua/restore_points/2026-02-13_treesitter_fix.md
+- lua/restore_points/2026-02-13_treesitter_module_fix.md
+- lua/restore_points/2026-02-13_treesitter_textobjects_fix.md
+- lua/restore_points/2026-02-13_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_ufo_fillchars_fix.md
 - init.lua
 
 # Working Files
 
-- lua/autocmds.lua
+- lua/.restore/2026-02-13/mappings.lua.bak
 
 # Struture Files
 
 (Only file paths, not their content)
 
+- lua/.restore/2026-02-13/RESTORE_INSTRUCTIONS.md
+- lua/.restore/2026-02-13/chadrc.lua.bak
+- lua/.restore/2026-02-13/mappings.lua.bak
+- lua/.restore/2026-02-13/plugins-init.lua.bak
 - lua/autocmds.lua
 - lua/chadrc.lua
 - lua/configs/cmp.lua
 - lua/configs/conform.lua
 - lua/configs/gitsigns.lua
 - lua/configs/lazy.lua
+- lua/configs/lsp.lua
 - lua/configs/lspconfig.lua
 - lua/configs/lualine.lua
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
+- lua/configs/restore-2026-02-13.lua
+- lua/configs/restore-point-2026-02-15.lua
+- lua/configs/restore_point_2026-02-13.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
+- lua/configs/utils.lua
 - lua/custom/chadrc.lua
 - lua/custom/configs/lspconfig.lua
 - lua/custom/configs/rust-tools.lua
 - lua/lspconfig.lua
 - lua/mappings.lua
 - lua/options.lua
+- lua/plugins/_restore_2026-02-13.lua
+- lua/plugins/action_hints.lua
 - lua/plugins/activate.lua
+- lua/plugins/alternate-toggler.lua
+- lua/plugins/alternate_toggler.lua
+- lua/plugins/bigfile.lua
+- lua/plugins/carbon-now.lua
+- lua/plugins/carbon_now.lua
+- lua/plugins/cinnamon.lua
+- lua/plugins/cloak.lua
+- lua/plugins/confirm_quit.lua
+- lua/plugins/crates.lua
+- lua/plugins/extra.lua
+- lua/plugins/fidget.lua
+- lua/plugins/harpoon.lua
+- lua/plugins/hop.lua
+- lua/plugins/illuminate.lua
+- lua/plugins/impatient.lua
 - lua/plugins/init.lua
+- lua/plugins/inlayhints.lua
+- lua/plugins/legendary.lua
+- lua/plugins/lsp_progress.lua
+- lua/plugins/lsp_progress_nvim.lua
+- lua/plugins/lspkind.lua
+- lua/plugins/lspkind_nvim.lua
+- lua/plugins/lspsaga.lua
 - lua/plugins/nvim_foldsign.lua
+- lua/plugins/persistence.lua
+- lua/plugins/pretty_fold.lua
+- lua/plugins/restore-point-2026-02-13.lua
+- lua/plugins/rustaceanvim.lua
+- lua/plugins/sessions.lua
+- lua/plugins/tiny-devicons-auto-colors.lua
+- lua/plugins/tiny_devicons.lua
+- lua/plugins/todo-comments.lua
+- lua/plugins/todo_comments.lua
+- lua/plugins/treesitter.lua
+- lua/plugins/treesitter_extended.lua
+- lua/plugins/treesj.lua
+- lua/plugins/trouble.lua
+- lua/plugins/ufo.lua
+- lua/plugins/ufo_extended.lua
 - lua/plugins/yaml_companion_nvim.lua
 - lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/conform.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/gitsigns.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/lazy.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/lualine.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/luasnip.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/mason.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/nvimtree.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/telescope.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/treesitter.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/custom/chadrc.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/custom/configs/rust-tools.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/lspconfig.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/mappings.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/options.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/plugins/activate.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/plugins/init.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/plugins/nvim_foldsign.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/plugins/yaml_companion_nvim.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/plugins/yaml_nvim.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- init.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/configs/lspconfig.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-====
-
-# Knowledge Files
-
-- ~/.aipack-base/pack/installed/pro/coder/README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/_README.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cargo-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/cli-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/comments-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/derive-aliases.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/error-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/examples-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/rust-edition-2024.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/struct-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/support-best-practices.md
-- ~/.aipack-base/pack/installed/pro/rust10x/guide/base/test-best-practices.md
-
-# Context Files
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
-- init.lua
-
-# Working Files
-
-- lua/custom/configs/lspconfig.lua
-
-# Struture Files
-
-(Only file paths, not their content)
-
-- lua/autocmds.lua
-- lua/chadrc.lua
-- lua/configs/cmp.lua
-- lua/configs/conform.lua
-- lua/configs/gitsigns.lua
-- lua/configs/lazy.lua
-- lua/configs/lspconfig.lua
-- lua/configs/lualine.lua
-- lua/configs/luasnip.lua
-- lua/configs/mason.lua
-- lua/configs/nvimtree.lua
-- lua/configs/telescope.lua
-- lua/configs/treesitter.lua
-- lua/custom/chadrc.lua
-- lua/custom/configs/lspconfig.lua
-- lua/custom/configs/rust-tools.lua
-- lua/lspconfig.lua
-- lua/mappings.lua
-- lua/options.lua
-- lua/plugins/activate.lua
-- lua/plugins/init.lua
-- lua/plugins/nvim_foldsign.lua
-- lua/plugins/yaml_companion_nvim.lua
-- lua/plugins/yaml_nvim.lua
+- lua/plugins/zen-mode.lua
+- lua/plugins/zen_mode.lua
+- lua/restore-point-2026-02-13.lua
+- lua/restore-point-2026-02-13.md
+- lua/restore-points/2026-02-13-ft-to-lang-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-metatable-fix.md
+- lua/restore-points/2026-02-13-ft-to-lang-proxy-fix.lua
+- lua/restore-points/2026-02-13-ft-to-lang-simplified-fix.md
+- lua/restore-points/2026-02-13-pre-backup-merge.lua
+- lua/restore-points/2026-02-13-pre-backup-migration.md
+- lua/restore-points/2026-02-13-treesitter-fix.lua
+- lua/restore-points/2026-02-13-treesitter-fix.md
+- lua/restore-points/2026-02-13-ufo-border-fix.md
+- lua/restore-points/2026-02-13-ufo-fillchars-fix.md
+- lua/restore-points/2026-02-13-ufo-foldopen-fix.lua
+- lua/restore-points/2026-02-15-custom-chadrc-delegate-to-chadrc.md
+- lua/restore-points/2026-02-15-telescope-config-safe-load-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-builtin-alias-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-entrypoint-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-final-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1242.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-124455.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1305.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-1306.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-2026-02-15t12-28-11.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-opts.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix-plugins-init.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-ft-to-lang-shim-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-lazyload-hook-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-restore-bak-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-runtime-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-shim-hardening.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-silent-fix.md
+- lua/restore-points/2026-02-15-telescope-nvchad-themes-wrapper-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-accuracy-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-activate-dependency-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-dashboard-lazy-load-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-impatient-disable.md
+- lua/restore-points/2026-02-15-telescope-themes-keymap-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-picker-hardening.md
+- lua/restore-points/2026-02-15-telescope-themes-stability-fix.md
+- lua/restore-points/2026-02-15-telescope-themes-wrapper-fix.md
+- lua/restore/2026-02-13_pre-backup-sync.md
+- lua/restore/pre-2026-02-13-mappings.lua.bak
+- lua/restore/pre-2026-02-13-plugins-init.lua.bak
+- lua/restore_point_2026-02-13.lua
+- lua/restore_point_2026_02_13.md
+- lua/restore_points/2026-02-13_fillchars_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_direct_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_metatable_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_proxy_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_rawset_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simple_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_simplified_fix.md
+- lua/restore_points/2026-02-13_ft_to_lang_telescope_fix.md
+- lua/restore_points/2026-02-13_mappings_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_nvim_ufo_fillchars_fix.md
+- lua/restore_points/2026-02-13_plugins_init.lua.bak
+- lua/restore_points/2026-02-13_pre_backup_sync.md
+- lua/restore_points/2026-02-13_pre_sync.md
+- lua/restore_points/2026-02-13_pre_treesitter_fix.md
+- lua/restore_points/2026-02-13_pre_yaml_companion.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_final_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_fix.md
+- lua/restore_points/2026-02-13_telescope_ft_to_lang_metatable_fix.md
+- lua/restore_points/2026-02-13_treesitter_config_fix.md
+- lua/restore_points/2026-02-13_treesitter_extended_fix.md
+- lua/restore_points/2026-02-13_treesitter_fix.md
+- lua/restore_points/2026-02-13_treesitter_module_fix.md
+- lua/restore_points/2026-02-13_treesitter_textobjects_fix.md
+- lua/restore_points/2026-02-13_ufo_e1511_fix.md
+- lua/restore_points/2026-02-13_ufo_fillchars_fix.md
 - init.lua
 

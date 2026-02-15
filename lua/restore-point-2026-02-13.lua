@@ -1,0 +1,66 @@
+-- Restore Point Created: 2026-02-13T21:42:01-07:00
+-- Updated: 2026-02-13T22:07:19-07:00
+-- Updated: 2026-02-13T23:15:16-07:00
+-- Updated: 2026-02-13T23:55:00-07:00
+-- This file documents the state before implementing features from nvim-jan-2026-working.bak
+--
+-- To restore, simply delete the new plugin files and revert mappings.lua to
+-- the version stored in git or backup.
+--
+-- Files modified in this update:
+-- - lua/mappings.lua (added new keymaps)
+-- - lua/plugins/init.lua (added new plugins)
+-- - lua/configs/utils.lua (new file for utilities)
+--
+-- New plugin files created:
+-- - lua/plugins/bigfile.lua
+-- - lua/plugins/cloak.lua
+-- - lua/plugins/illuminate.lua
+-- - lua/plugins/inlayhints.lua
+-- - lua/plugins/legendary.lua
+-- - lua/plugins/lspsaga.lua
+-- - lua/plugins/rustaceanvim.lua
+-- - lua/plugins/sessions.lua
+-- - lua/plugins/harpoon.lua
+-- - lua/plugins/alternate_toggler.lua
+-- - lua/plugins/treesj.lua
+-- - lua/plugins/crates.lua
+-- - lua/plugins/carbon_now.lua
+-- - lua/plugins/trouble.lua
+-- - lua/plugins/ufo_enhanced.lua
+--
+-- Fix applied 2026-02-13T22:07:19-07:00:
+--   - lua/plugins/treesitter_extended.lua: Removed config function that was
+--     attempting to require 'nvim-treesitter.configs' which no longer exists
+--     in nvim-treesitter 1.0+. The file now only declares the plugin as a
+--     dependency without any config function. Textobjects configuration is
+--     handled in lua/plugins/treesitter.lua via the textobjects opts key.
+--
+-- Fix applied 2026-02-13T23:15:16-07:00:
+--   - init.lua (nvim-ufo config): Fixed E1511 error "Wrong number of characters
+--     for field foldopen" by:
+--     1. Removed vim.o.fillchars assignment from nvim-ufo config (now only set
+--        in lua/options.lua using table format)
+--     2. Changed fold handler suffix from Unicode char to ASCII "... %d lines"
+--     3. Changed preview border chars from Unicode to ASCII dashes
+--   - To restore previous nvim-ufo config:
+--     In init.lua nvim-ufo config section, change:
+--       local suffix = (" ... %d lines "):format(endLnum - lnum)
+--     Back to:
+--       local suffix = (" 󰁂 %d "):format(endLnum - lnum)
+--     And change border back to:
+--       border = { "", "─", "", "", "", "─", "", "" },
+--
+-- Fix applied 2026-02-13T23:55:00-07:00:
+--   - init.lua: Simplified ft_to_lang shim for Neovim 0.10+ compatibility
+--     Error was: "attempt to call field 'ft_to_lang' (a nil value)" in Telescope
+--     The previous complex shim with metatables and autocmds was unreliable.
+--     New approach uses simple direct assignment before lazy.nvim loads.
+--   - To restore previous shim approach, replace the simplified shim block with
+--     the complex do...end block that used rawset, metatables, and autocmds.
+
+return {
+  created = "2026-02-13T21:42:01-07:00",
+  updated = "2026-02-13T23:55:00-07:00",
+  description = "Restore point before implementing features from nvim-jan-2026-working.bak"
+}

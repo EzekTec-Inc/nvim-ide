@@ -1,0 +1,73 @@
+-- Restore Point: 2026-02-13T21:52:41-07:00
+-- Updated: 2026-02-13T22:08:03-07:00
+-- Updated: 2026-02-13T23:16:28-07:00
+-- Updated: 2026-02-13T23:59:30-07:00
+-- 
+-- This file documents the changes made to bring the nvim config in line with
+-- the backup at ~/.config/nvim-jan-2026-working.bak/
+--
+-- Changes applied:
+-- 1. Created lua/configs/utils.lua with glb_map and go_to_github_link utilities
+-- 2. Fixed lua/plugins/yaml_nvim.lua - corrected invalid URL
+-- 3. Updated lua/mappings.lua to use utils.glb_map and added Hop 's' keymap
+-- 4. Updated lua/plugins/init.lua:
+--    - Added yaml.nvim plugin
+--    - Added lazy = false to vim-illuminate
+--
+-- Fix applied 2026-02-13T22:08:03-07:00:
+--   - lua/plugins/treesitter_extended.lua: Ensured file returns empty table
+--     with no config function. The nvim-treesitter 1.0+ removed the
+--     'nvim-treesitter.configs' module entirely. All treesitter configuration
+--     is handled in lua/plugins/treesitter.lua.
+--
+-- Fix applied 2026-02-13T23:16:28-07:00:
+--   - lua/options.lua: Fixed E1511 "Wrong number of characters for field foldopen"
+--     The fillchars fields foldopen, foldsep, foldclose require exactly 1
+--     single-byte ASCII character. Empty strings are invalid.
+--     Removed these fields from fillchars as nvim-ufo handles fold display
+--     via fold_virt_text_handler instead.
+--   - To restore previous state, change fillchars in lua/options.lua back to:
+--       vim.opt.fillchars = {
+--         eob = " ",
+--         fold = " ",
+--         foldopen = "",
+--         foldsep = " ",
+--         foldclose = "",
+--       }
+--
+-- To restore previous state:
+-- 1. Delete lua/configs/utils.lua
+-- 2. Revert lua/plugins/yaml_nvim.lua to use "https://tangled.org/cuducos.me/yaml.nvim"
+-- 3. In lua/mappings.lua:
+--    - Change `local map = utils.glb_map` back to `local map = vim.keymap.set`
+--    - Remove the line: map("n", "s", "<cmd>HopWord<CR>", { desc = "Hop to word" })
+-- 4. In lua/plugins/init.lua:
+--    - Remove the yaml.nvim plugin block
+--    - Remove `lazy = false,` from vim-illuminate config
+--
+-- Files that were already properly implemented (no changes needed):
+-- - bigfile.nvim (already in init.lua)
+-- - legendary.nvim (already in plugins/activate.lua area)
+-- - lsp-progress.nvim (already in init.lua)
+-- - lspkind.nvim (already in init.lua)
+-- - lspsaga.nvim (already in init.lua)
+-- - nvim-surround (already in init.lua)
+-- - rustaceanvim (already in init.lua)
+-- - neovim-session-manager (already in init.lua)
+-- - nvim-ufo (already in init.lua)
+-- - treesitter (already in init.lua with similar config)
+-- - inlay-hints.nvim (already in init.lua)
+-- - cloak.nvim (already in init.lua, config structure fixed)
+--
+-- Fix applied 2026-02-13T23:59:30-07:00:
+--   - init.lua: Simplified ft_to_lang shim implementation
+--     The previous metatable proxy approach was not working reliably.
+--     New approach uses direct assignment with multiple re-application points:
+--     1. Immediate assignment after table creation
+--     2. vim.defer_fn for early init overwrites
+--     3. VimEnter autocmd for late init overwrites
+--     4. User LazyDone autocmd for plugin overwrites
+--   - To restore previous (metatable proxy) approach, see
+--     lua/restore-points/2026-02-13-treesitter-fix.md
+
+return {}

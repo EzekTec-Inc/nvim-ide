@@ -1,3 +1,7 @@
+-- FIX 2026-02-13T23:38:09: Treesitter language API compatibility shim moved to init.lua
+-- The shim must run before lazy.nvim loads to prevent Telescope previewer errors
+-- See init.lua for the enhanced ft_to_lang compatibility shim
+
 local autocmd = vim.api.nvim_create_autocmd
 
 -- user event that loads after UIEnter + only if file buf is there

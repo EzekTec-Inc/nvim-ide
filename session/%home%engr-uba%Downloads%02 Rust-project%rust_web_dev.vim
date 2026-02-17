@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Downloads/02\ Rust-project/rr_leptos_demo
+cd ~/Downloads/02\ Rust-project/rust_web_dev
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,11 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 src/components/my_btn.rs
+badd +0 README.md
 argglobal
 %argdel
 $argadd .
-edit src/components/my_btn.rs
+edit README.md
 argglobal
 setlocal foldmethod=manual
 setlocal foldexpr=0
@@ -28,19 +28,17 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 4,5fold
-sil! 3,7fold
-sil! 14,15fold
-sil! 18,25fold
-sil! 17,47fold
-sil! 13,47fold
+sil! 14,16fold
+sil! 47,51fold
+sil! 53,66fold
+sil! 68,69fold
 let &fdl = &fdl
-let s:l = 17 - ((16 * winheight(0) + 17) / 35)
+let s:l = 128 - ((14 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 17
-normal! 011|
+keepjumps 128
+normal! 033|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

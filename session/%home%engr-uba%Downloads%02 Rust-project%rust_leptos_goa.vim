@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Downloads/02\ Rust-project/rr_leptos_demo
+cd ~/Downloads/02\ Rust-project/rust_leptos_goa
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,11 +13,13 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 src/components/my_btn.rs
+badd +19 src/main.rs
+badd +55 README.md
+badd +32 .aipack/.prompt/pro@coder/coder-prompt.md
 argglobal
 %argdel
 $argadd .
-edit src/components/my_btn.rs
+edit .aipack/.prompt/pro@coder/coder-prompt.md
 argglobal
 setlocal foldmethod=manual
 setlocal foldexpr=0
@@ -28,19 +30,20 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 4,5fold
-sil! 3,7fold
-sil! 14,15fold
-sil! 18,25fold
-sil! 17,47fold
-sil! 13,47fold
+sil! 7,11fold
+sil! 18,22fold
+sil! 26,27fold
+sil! 31,32fold
+sil! 69,70fold
+sil! 72,73fold
+sil! 75,76fold
 let &fdl = &fdl
-let s:l = 17 - ((16 * winheight(0) + 17) / 35)
+let s:l = 32 - ((17 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 17
-normal! 011|
+keepjumps 32
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

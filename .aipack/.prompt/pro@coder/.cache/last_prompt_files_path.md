@@ -33,9 +33,7 @@
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
-- lua/configs/restore-2026-02-13.lua
-- lua/configs/restore-point-2026-02-15.lua
-- lua/configs/restore_point_2026-02-13.lua
+- lua/configs/restore-point-2026-02-15-13-34-49.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -117,9 +115,7 @@
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
-- lua/configs/restore-2026-02-13.lua
-- lua/configs/restore-point-2026-02-15.lua
-- lua/configs/restore_point_2026-02-13.lua
+- lua/configs/restore-point-2026-02-15-13-34-49.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -212,9 +208,7 @@
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
-- lua/configs/restore-2026-02-13.lua
-- lua/configs/restore-point-2026-02-15.lua
-- lua/configs/restore_point_2026-02-13.lua
+- lua/configs/restore-point-2026-02-15-13-34-49.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -274,7 +268,7 @@
 
 # Working Files
 
-- lua/configs/lspconfig.lua
+- init.lua
 
 # Struture Files
 
@@ -296,9 +290,7 @@
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
-- lua/configs/restore-2026-02-13.lua
-- lua/configs/restore-point-2026-02-15.lua
-- lua/configs/restore_point_2026-02-13.lua
+- lua/configs/restore-point-2026-02-15-13-34-49.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -391,9 +383,7 @@
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
-- lua/configs/restore-2026-02-13.lua
-- lua/configs/restore-point-2026-02-15.lua
-- lua/configs/restore_point_2026-02-13.lua
+- lua/configs/restore-point-2026-02-15-13-34-49.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -453,7 +443,7 @@
 
 # Working Files
 
-- init.lua
+- lua/configs/lspconfig.lua
 
 # Struture Files
 
@@ -475,9 +465,7 @@
 - lua/configs/luasnip.lua
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
-- lua/configs/restore-2026-02-13.lua
-- lua/configs/restore-point-2026-02-15.lua
-- lua/configs/restore_point_2026-02-13.lua
+- lua/configs/restore-point-2026-02-15-13-34-49.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua

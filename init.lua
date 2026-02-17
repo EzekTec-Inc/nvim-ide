@@ -1,11 +1,42 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
 
+do
+  local group = vim.api.nvim_create_augroup("UserCoreLspKeymaps", { clear = true })
+
+  local function apply(bufnr)
+    if not vim.api.nvim_buf_is_valid(bufnr) then
+      return
+    end
+
+    local function opts(desc)
+      return { buffer = bufnr, desc = "LSP " .. desc, noremap = true, silent = true }
+    end
+
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts "Hover")
+    vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts "Show signature help")
+  end
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = group,
+    callback = function(args)
+      local bufnr = args.buf
+      vim.schedule(function()
+        apply(bufnr)
+      end)
+    end,
+  })
+end
+
 -- FIX 2026-02-13T23:58:08: Robust ft_to_lang shim using metatable proxy
+-- FIX 2026-02-15T13:55:51: Enhanced shim to also patch telescope.previewers.utils directly
 -- The ft_to_lang function was removed in Neovim 0.10+
 -- Telescope previewers still reference it, causing "attempt to call field 'ft_to_lang' (a nil value)"
 -- Previous direct assignment approaches failed because plugins can overwrite the table
 -- Solution: Use a metatable proxy that intercepts all access to vim.treesitter.language
+-- AND patch telescope.previewers.utils.ts_highlighter to use our shim
 
 -- Create the shim function that wraps get_lang (the Neovim 0.10+ replacement)
 local function _nvim_ft_to_lang_shim(ft)
@@ -80,6 +111,54 @@ end
 
 _G._apply_ft_to_lang_shim = _apply_ft_to_lang_shim
 
+-- FIX 2026-02-15T13:55:51: Patch telescope.previewers.utils to use our shim
+local function _patch_telescope_previewer_utils()
+  local ok_utils, utils = pcall(require, "telescope.previewers.utils")
+  if not ok_utils or type(utils) ~= "table" then
+    return
+  end
+
+  -- Store original ts_highlighter if not already patched
+  if utils._original_ts_highlighter == nil and type(utils.ts_highlighter) == "function" then
+    utils._original_ts_highlighter = utils.ts_highlighter
+  end
+
+  -- Replace ts_highlighter with a version that ensures ft_to_lang exists
+  utils.ts_highlighter = function(bufnr, ft)
+    -- Ensure the shim is applied before calling the original
+    if type(_G._apply_ft_to_lang_shim) == "function" then
+      _G._apply_ft_to_lang_shim()
+    end
+
+    -- Double-check ft_to_lang exists
+    if vim.treesitter and vim.treesitter.language then
+      if type(vim.treesitter.language.ft_to_lang) ~= "function" then
+        rawset(vim.treesitter.language, "ft_to_lang", _G._nvim_ft_to_lang_shim)
+      end
+    end
+
+    -- Call original if it exists
+    if type(utils._original_ts_highlighter) == "function" then
+      return utils._original_ts_highlighter(bufnr, ft)
+    end
+
+    -- Fallback implementation if original doesn't exist
+    if not ft or ft == "" then
+      return false
+    end
+
+    local lang = _G._nvim_ft_to_lang_shim(ft)
+    if not lang or lang == "" then
+      return false
+    end
+
+    local ok_highlight = pcall(vim.treesitter.start, bufnr, lang)
+    return ok_highlight
+  end
+end
+
+_G._patch_telescope_previewer_utils = _patch_telescope_previewer_utils
+
 -- FIX 2026-02-15T12:56:41: Ensure :Telescope themes routes to NvChad theme picker.
 
 local function _apply_telescope_nvchad_themes_picker()
@@ -97,6 +176,9 @@ local function _apply_telescope_nvchad_themes_picker()
       opts = opts or {}
       if type(_G._apply_ft_to_lang_shim) == "function" then
         pcall(_G._apply_ft_to_lang_shim)
+      end
+      if type(_G._patch_telescope_previewer_utils) == "function" then
+        pcall(_G._patch_telescope_previewer_utils)
       end
       return _G._nvchad_open_themes_picker(opts)
     end
@@ -141,6 +223,9 @@ local function _apply_telescope_nvchad_themes_picker()
         if type(_G._apply_ft_to_lang_shim) == "function" then
           pcall(_G._apply_ft_to_lang_shim)
         end
+        if type(_G._patch_telescope_previewer_utils) == "function" then
+          pcall(_G._patch_telescope_previewer_utils)
+        end
         return picker(opts)
       end
       return
@@ -156,6 +241,10 @@ local function _apply_telescope_nvchad_themes_picker()
 
     if type(_G._apply_ft_to_lang_shim) == "function" then
       pcall(_G._apply_ft_to_lang_shim)
+    end
+
+    if type(_G._patch_telescope_previewer_utils) == "function" then
+      pcall(_G._patch_telescope_previewer_utils)
     end
 
     if type(_G._nvchad_open_themes_picker) ~= "function" then
@@ -176,6 +265,7 @@ _G._apply_telescope_nvchad_themes_picker = _apply_telescope_nvchad_themes_picker
 
 local function _apply_nvchad_themes_and_ft_to_lang_shims()
   _apply_ft_to_lang_shim()
+  _patch_telescope_previewer_utils()
   _apply_telescope_nvchad_themes_picker()
 end
 
@@ -199,6 +289,75 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "LazyLoad",
   callback = _apply_nvchad_themes_and_ft_to_lang_shims,
 })
+
+-- FIX 2026-02-17T13:18:55-07:00: Lock core navigation keymaps in LSP-attached buffers.
+do
+  local augroup = vim.api.nvim_create_augroup("NvLspKeymapsLock", { clear = true })
+
+  local function lsp_hover()
+    if vim.fn.exists(":RustLsp") == 2 then
+      local ok = pcall(vim.cmd.RustLsp, { "hover", "actions" })
+      if ok then
+        return
+      end
+    end
+
+    pcall(vim.lsp.buf.hover)
+  end
+
+  local function lock_keymaps(bufnr)
+    if not (bufnr and vim.api.nvim_buf_is_valid(bufnr)) then
+      return
+    end
+
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, silent = true })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, silent = true })
+    vim.keymap.set("n", "K", lsp_hover, { buffer = bufnr, silent = true })
+
+    vim.keymap.set("n", "gk", "gk", { buffer = bufnr, silent = true, noremap = true })
+    vim.keymap.set({ "n", "v" }, "gq", "gq", { buffer = bufnr, silent = true, noremap = true })
+  end
+
+  local function get_clients(bufnr)
+    local fn = vim.lsp.get_clients or vim.lsp.get_active_clients
+    if type(fn) ~= "function" then
+      return {}
+    end
+    local ok, clients = pcall(fn, { bufnr = bufnr })
+    if ok and type(clients) == "table" then
+      return clients
+    end
+    return {}
+  end
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = augroup,
+    callback = function(args)
+      vim.schedule(function()
+        lock_keymaps(args.buf)
+      end)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = augroup,
+    callback = function(args)
+      local bufnr = args.buf
+      if not (bufnr and vim.api.nvim_buf_is_valid(bufnr)) then
+        return
+      end
+
+      local clients = get_clients(bufnr)
+      if #clients == 0 then
+        return
+      end
+
+      vim.schedule(function()
+        lock_keymaps(bufnr)
+      end)
+    end,
+  })
+end
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -390,6 +549,10 @@ require("lazy").setup({
     config = function(_, opts)
       if type(_G._apply_ft_to_lang_shim) == "function" then
         pcall(_G._apply_ft_to_lang_shim)
+      end
+
+      if type(_G._patch_telescope_previewer_utils) == "function" then
+        pcall(_G._patch_telescope_previewer_utils)
       end
 
       if type(vim.g.base46_cache) == "string" and vim.g.base46_cache ~= "" then

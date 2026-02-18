@@ -68,8 +68,7 @@ model: gpt-5.2-high
 - Ensure to adhere strictly to the instructions I give to you.
 - Ensure to always create a restore point should the user need to reverse the lastest changes applied to this nvim.
 </rules>
-Investigate and ensure that my keymaps for following functions, `gD`, `gd`, `K`, `gk`, `gq`, `gq`, `gq` are not being overwritten by any other functions. 
-Ensure the functionalities are working accurately.
+Investigate and ensure that am able to copy contents from outside of my terminal and paste into nvim, and vice-versa.
 
 ====
 >   Info: Duration: 2m 38s | ~$0.1669 | Prompt Tokens: 63,181 (cached: 57,088) | Completion Tokens: 10,446 (reasoning: 9,400) 

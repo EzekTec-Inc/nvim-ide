@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Downloads/02\ Rust-project/rr_leptos_demo
+cd ~/Downloads/02\ Rust-project/rust_dioxus_webapp
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,17 +13,15 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +72 README.md
-badd +28 src/components/my_btn.rs
-badd +14 src/main.rs
-badd +34 src/lib.rs
-badd +18 Cargo.toml
-badd +1 src/pages/home.rs
+badd +1 src/main.rs
+badd +1 Cargo.toml
+badd +13 src/components/product_page.rs
 argglobal
 %argdel
 $argadd .
-edit src/pages/home.rs
+edit src/main.rs
 argglobal
+balt Cargo.toml
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -34,20 +32,37 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 sil! 1,3fold
-sil! 16,21fold
-sil! 16,22fold
-sil! 10,25fold
-sil! 9,25fold
-sil! 47,49fold
-sil! 8,54fold
-sil! 7,54fold
+sil! 6,8fold
+sil! 5,9fold
+sil! 12,27fold
+sil! 35,36fold
+sil! 35,37fold
+sil! 32,38fold
+sil! 31,38fold
+sil! 31,39fold
+sil! 30,40fold
+sil! 46,48fold
+sil! 50,54fold
+sil! 49,55fold
+sil! 45,55fold
+sil! 45,56fold
+sil! 44,57fold
+sil! 43,60fold
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 17) / 34)
+43
+sil! normal! zo
+44
+sil! normal! zo
+45
+sil! normal! zo
+45
+sil! normal! zo
+let s:l = 61 - ((33 * winheight(0) + 17) / 34)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 021|
+keepjumps 61
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -61,6 +76,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

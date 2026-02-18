@@ -2,6 +2,99 @@ vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
 
 do
+  if vim.g.clipboard == nil then
+    local function exe(cmd)
+      return vim.fn.executable(cmd) == 1
+    end
+
+    local name, copy, paste = nil, nil, nil
+
+    if vim.fn.has("mac") == 1 and exe("pbcopy") and exe("pbpaste") then
+      name = "pbcopy/pbpaste"
+      copy = { "pbcopy" }
+      paste = { "pbpaste" }
+    elseif (vim.fn.has("win32") == 1 or vim.fn.has("wsl") == 1) and exe("win32yank.exe") then
+      name = "win32yank"
+      copy = { "win32yank.exe", "-i", "--crlf" }
+      paste = { "win32yank.exe", "-o", "--lf" }
+    elseif exe("wl-copy") and exe("wl-paste") then
+      name = "wl-clipboard"
+      copy = { "wl-copy", "--type", "text/plain" }
+      paste = { "wl-paste", "--no-newline" }
+    elseif exe("xclip") then
+      name = "xclip"
+      copy = { "xclip", "-selection", "clipboard" }
+      paste = { "xclip", "-selection", "clipboard", "-o" }
+    elseif exe("xsel") then
+      name = "xsel"
+      copy = { "xsel", "--clipboard", "--input" }
+      paste = { "xsel", "--clipboard", "--output" }
+    end
+
+    if copy and paste then
+      vim.g.clipboard = {
+        name = "user-clipboard (" .. name .. ")",
+        copy = { ["+"] = copy, ["*"] = copy },
+        paste = { ["+"] = paste, ["*"] = paste },
+        cache_enabled = 0,
+      }
+    end
+  end
+end
+
+do
+  local function ensure_clipboard_option()
+    local ok = pcall(function()
+      local clip = vim.opt.clipboard:get()
+      if type(clip) == "table" and not vim.tbl_contains(clip, "unnamedplus") then
+        vim.opt.clipboard:append("unnamedplus")
+      end
+    end)
+    if not ok then
+      vim.o.clipboard = "unnamedplus"
+    end
+  end
+
+  local function del_if_rhs(mode, lhs, rhs)
+    local ok_get, maps = pcall(vim.keymap.get, mode, lhs)
+    if not ok_get or type(maps) ~= "table" then
+      return
+    end
+
+    for _, m in ipairs(maps) do
+      if type(m) == "table" and m.lhs == lhs and m.rhs == rhs and m.buffer == nil then
+        pcall(vim.keymap.del, mode, lhs)
+        return
+      end
+    end
+  end
+
+  _G._nvchad_clipboard_post_mappings_fix = function()
+    ensure_clipboard_option()
+
+    del_if_rhs("n", "y", '"0y')
+    del_if_rhs("v", "y", '"0y')
+    del_if_rhs("x", "y", '"0y')
+
+    del_if_rhs("n", "Y", '"0y$')
+
+    del_if_rhs("n", "yy", '"0yy')
+    del_if_rhs("v", "yy", '"0yy')
+    del_if_rhs("x", "yy", '"0yy')
+
+    del_if_rhs("n", "p", '"0p')
+    del_if_rhs("v", "p", '"0p')
+    del_if_rhs("x", "p", '"0p')
+
+    del_if_rhs("n", "P", '"0P')
+    del_if_rhs("v", "P", '"0P')
+    del_if_rhs("x", "P", '"0P')
+  end
+
+  ensure_clipboard_option()
+end
+
+do
   local group = vim.api.nvim_create_augroup("UserCoreLspKeymaps", { clear = true })
 
   local function apply(bufnr)
@@ -795,4 +888,7 @@ autocmd("VimLeavePre", {
 
 vim.schedule(function()
   require "mappings"
+  if type(_G._nvchad_clipboard_post_mappings_fix) == "function" then
+    pcall(_G._nvchad_clipboard_post_mappings_fix)
+  end
 end)

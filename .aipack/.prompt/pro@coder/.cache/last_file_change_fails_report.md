@@ -4,17 +4,16 @@ See full AI response at:
 
 Below are the search misses by file:
 
-# init.lua
+# lua/mappings.lua
 
 Failed searches:
 
 ````
-vim.api.nvim_create_autocmd("User", {
-  pattern = "LazyLoad",
-  callback = _apply_nvchad_themes_and_ft_to_lang_shims,
-})
-
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+-- yank and everything about it
+map({ "n", "v" }, "y", '"0y', { desc = "Yank selection" })
+map("n", "Y", '"0y$', { desc = "Yank up to EOL" })
+map({ "n", "v" }, "yy", '"0yy', { desc = "Yank line" })
+map({ "n", "v" }, "p", '"0p', { desc = "Paste below" })
+map({ "n", "v" }, "P", '"0P', { desc = "Paste above" })
 ````
 

@@ -34,6 +34,7 @@
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
 - lua/configs/restore-point-2026-02-15-13-34-49.lua
+- lua/configs/restore-point-2026-02-17-13-18-55.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -116,6 +117,7 @@
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
 - lua/configs/restore-point-2026-02-15-13-34-49.lua
+- lua/configs/restore-point-2026-02-17-13-18-55.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -209,6 +211,7 @@
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
 - lua/configs/restore-point-2026-02-15-13-34-49.lua
+- lua/configs/restore-point-2026-02-17-13-18-55.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -291,6 +294,7 @@
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
 - lua/configs/restore-point-2026-02-15-13-34-49.lua
+- lua/configs/restore-point-2026-02-17-13-18-55.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -384,6 +388,7 @@
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
 - lua/configs/restore-point-2026-02-15-13-34-49.lua
+- lua/configs/restore-point-2026-02-17-13-18-55.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua
@@ -466,6 +471,7 @@
 - lua/configs/mason.lua
 - lua/configs/nvimtree.lua
 - lua/configs/restore-point-2026-02-15-13-34-49.lua
+- lua/configs/restore-point-2026-02-17-13-18-55.lua
 - lua/configs/telescope.lua
 - lua/configs/treesitter.lua
 - lua/configs/utils.lua

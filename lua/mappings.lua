@@ -251,11 +251,11 @@ map(
 )
 
 -- yank and everything about it
-map({ "n", "v" }, "y", '"0y', { desc = "Yank selection" })
-map("n", "Y", '"0y$', { desc = "Yank up to EOL" })
-map({ "n", "v" }, "yy", '"0yy', { desc = "Yank line" })
-map({ "n", "v" }, "p", '"0p', { desc = "Paste below" })
-map({ "n", "v" }, "P", '"0P', { desc = "Paste above" })
+map({ "n", "v" }, "y", '"+y', { desc = "Yank selection" })
+map("n", "Y", '"+y$', { desc = "Yank up to EOL" })
+map({ "n", "v" }, "yy", '"+yy', { desc = "Yank line" })
+map({ "n", "v" }, "p", '"+p', { desc = "Paste below" })
+map({ "n", "v" }, "P", '"+P', { desc = "Paste above" })
 map({ "n", "v" }, "<C-y>", '"+y', { desc = "Yank into system clipboard" })
 map("n", "<C-Y>", '"+y$', { desc = "Yank up to EOL into system clipboard" })
 map({ "n", "v" }, "<C-yy>", '"+yy', { desc = "Yank line into system clipboard" })

@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Downloads/02\ Rust-project/rr_leptos_demo
+cd ~/Downloads/02\ Rust-project/rust_leptos_web
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,21 +13,17 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +28 src/components/my_btn.rs
+badd +69 src/components/contactus.rs
 argglobal
 %argdel
 $argadd NvimTree_1
-edit src/components/my_btn.rs
+edit src/components/contactus.rs
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
 wincmd _ | wincmd |
-split
-1wincmd k
-wincmd _ | wincmd |
 vsplit
 1wincmd h
-wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
@@ -38,15 +34,12 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 21 + 19) / 39)
-exe 'vert 1resize ' . ((&columns * 30 + 93) / 186)
-exe '2resize ' . ((&lines * 21 + 19) / 39)
-exe 'vert 2resize ' . ((&columns * 155 + 93) / 186)
-exe '3resize ' . ((&lines * 15 + 19) / 39)
+exe 'vert 1resize ' . ((&columns * 30 + 94) / 188)
+exe 'vert 2resize ' . ((&columns * 157 + 94) / 188)
 argglobal
 enew
 file NvimTree_1
-balt src/components/my_btn.rs
+balt src/components/contactus.rs
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -66,47 +59,30 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 4,5fold
 sil! 3,8fold
-sil! 15,16fold
-sil! 19,26fold
-sil! 18,50fold
-sil! 14,51fold
+sil! 10,11fold
+sil! 22,23fold
+sil! 26,28fold
+sil! 46,48fold
+sil! 35,49fold
+sil! 32,50fold
+sil! 69,71fold
+sil! 57,78fold
+sil! 83,86fold
+sil! 81,87fold
+sil! 90,237fold
+sil! 14,238fold
 let &fdl = &fdl
-let s:l = 36 - ((16 * winheight(0) + 10) / 20)
+let s:l = 14 - ((13 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 36
-normal! 029|
-wincmd w
-argglobal
-if bufexists(fnamemodify("term://~/Downloads/02\ Rust-project/rr_leptos_demo//114441:/bin/bash;\#toggleterm\#1", ":p")) | buffer term://~/Downloads/02\ Rust-project/rr_leptos_demo//114441:/bin/bash;\#toggleterm\#1 | else | edit term://~/Downloads/02\ Rust-project/rr_leptos_demo//114441:/bin/bash;\#toggleterm\#1 | endif
-if &buftype ==# 'terminal'
-  silent file term://~/Downloads/02\ Rust-project/rr_leptos_demo//114441:/bin/bash;\#toggleterm\#1
-endif
-balt src/components/my_btn.rs
-setlocal foldmethod=manual
-setlocal foldexpr=0
-setlocal foldmarker={{{,}}}
-setlocal foldignore=#
-setlocal foldlevel=99
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldenable
-let s:l = 274 - ((14 * winheight(0) + 7) / 15)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 274
+keepjumps 14
 normal! 0
 wincmd w
-3wincmd w
-exe '1resize ' . ((&lines * 21 + 19) / 39)
-exe 'vert 1resize ' . ((&columns * 30 + 93) / 186)
-exe '2resize ' . ((&lines * 21 + 19) / 39)
-exe 'vert 2resize ' . ((&columns * 155 + 93) / 186)
-exe '3resize ' . ((&lines * 15 + 19) / 39)
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 30 + 94) / 188)
+exe 'vert 2resize ' . ((&columns * 157 + 94) / 188)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -208,46 +208,58 @@ _G._apply_ft_to_lang_shim = _apply_ft_to_lang_shim
 local function _patch_telescope_previewer_utils()
   local ok_utils, utils = pcall(require, "telescope.previewers.utils")
   if not ok_utils or type(utils) ~= "table" then
-    return
+    return false
   end
 
-  -- Store original ts_highlighter if not already patched
-  if utils._original_ts_highlighter == nil and type(utils.ts_highlighter) == "function" then
+  if type(_G._apply_ft_to_lang_shim) == "function" then
+    pcall(_G._apply_ft_to_lang_shim)
+  end
+
+  if utils._nvchad_ts_highlighter_patched then
+    return true
+  end
+
+  if type(utils.ts_highlighter) == "function" then
     utils._original_ts_highlighter = utils.ts_highlighter
   end
 
-  -- Replace ts_highlighter with a version that ensures ft_to_lang exists
   utils.ts_highlighter = function(bufnr, ft)
-    -- Ensure the shim is applied before calling the original
     if type(_G._apply_ft_to_lang_shim) == "function" then
-      _G._apply_ft_to_lang_shim()
+      pcall(_G._apply_ft_to_lang_shim)
     end
 
-    -- Double-check ft_to_lang exists
-    if vim.treesitter and vim.treesitter.language then
+    if vim.treesitter and type(vim.treesitter.language) == "table" then
       if type(vim.treesitter.language.ft_to_lang) ~= "function" then
-        rawset(vim.treesitter.language, "ft_to_lang", _G._nvim_ft_to_lang_shim)
+        if type(_G._nvim_ft_to_lang_shim) == "function" then
+          rawset(vim.treesitter.language, "ft_to_lang", _G._nvim_ft_to_lang_shim)
+        end
       end
     end
 
-    -- Call original if it exists
     if type(utils._original_ts_highlighter) == "function" then
-      return utils._original_ts_highlighter(bufnr, ft)
+      local ok, result = pcall(utils._original_ts_highlighter, bufnr, ft)
+      if ok then
+        return result
+      end
     end
 
-    -- Fallback implementation if original doesn't exist
     if not ft or ft == "" then
       return false
     end
 
-    local lang = _G._nvim_ft_to_lang_shim(ft)
-    if not lang or lang == "" then
-      return false
+    if type(_G._nvim_ft_to_lang_shim) == "function" then
+      local lang = _G._nvim_ft_to_lang_shim(ft)
+      if lang and lang ~= "" then
+        local ok_highlight = pcall(vim.treesitter.start, bufnr, lang)
+        return ok_highlight
+      end
     end
 
-    local ok_highlight = pcall(vim.treesitter.start, bufnr, lang)
-    return ok_highlight
+    return false
   end
+
+  utils._nvchad_ts_highlighter_patched = true
+  return true
 end
 
 _G._patch_telescope_previewer_utils = _patch_telescope_previewer_utils

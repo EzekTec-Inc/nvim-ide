@@ -233,6 +233,10 @@ return {
             pcall(_G._apply_ft_to_lang_shim)
           end
 
+          if type(_G._patch_telescope_previewer_utils) == "function" then
+            pcall(_G._patch_telescope_previewer_utils)
+          end
+
           local themes_ext = telescope.extensions and telescope.extensions.themes
           if themes_ext then
             local picker = themes_ext
@@ -241,16 +245,26 @@ return {
             end
 
             if type(picker) == "function" then
-              local ok_picker = pcall(picker, theme_opts)
+              local ok_picker, err = pcall(picker, theme_opts)
               if ok_picker then
                 return
+              else
+                if err and type(err) == "string" then
+                  vim.notify("NvChad theme picker error: " .. err, vim.log.levels.WARN)
+                end
               end
             end
           end
 
           if type(builtin.colorscheme) == "function" then
-            return builtin.colorscheme(theme_opts)
+            local ok_cs, err = pcall(builtin.colorscheme, theme_opts)
+            if not ok_cs and err then
+              vim.notify("Colorscheme fallback error: " .. tostring(err), vim.log.levels.ERROR)
+            end
+            return
           end
+
+          vim.notify("No theme picker available", vim.log.levels.ERROR)
         end
       end
 

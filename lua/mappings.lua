@@ -90,19 +90,8 @@ map(
   { silent = true, desc = "Toggle Line-Lead Char" }
 )
 
--- Toggle Leading Chars on Lines
-map({ "n", "t", "i" }, "<leader>ul", "<cmd>LineLeadCharToggle<CR>", { silent = true, desc = "Toggle Line-Lead Char" })
-
 -- Toggle Bufline
 map({ "n", "t" }, "<leader>ut", "<cmd>TabuflineToggle<CR>", { silent = true, desc = "Toggle Buffer Line" })
-
--- Toggle Leading Chars on Lines
-map(
-  { "n", "t", "i" },
-  "<leader>ul",
-  "<cmd>LineLeadCharToggle<CR>",
-  { silent = true, desc = "Toggle Line-Lead Char" }
-)
 
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })

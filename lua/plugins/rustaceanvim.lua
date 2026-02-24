@@ -19,12 +19,8 @@ return {
             },
             procMacro = {
               enable = true,
+              attributes = { enable = true },
             },
-          },
-        },
-        init_options = {
-          userLanguages = {
-            rust = "html",
           },
         },
       },

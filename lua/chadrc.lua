@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "kanagawa",
+-- 	theme = "catppuccin",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -25,36 +25,44 @@ do
   if type(_G._nvchad_open_themes_picker) ~= "function" then
     _G._nvchad_open_themes_picker = function(opts)
       opts = opts or {}
+
       if type(_G._apply_ft_to_lang_shim) == "function" then
         pcall(_G._apply_ft_to_lang_shim)
       end
 
       local base46_cache = vim.g.base46_cache
       if type(base46_cache) == "string" and base46_cache ~= "" then
-        pcall(dofile, base46_cache .. "telescope")
+        local telescope_hl_path = base46_cache .. "telescope"
+        local stat_ok = pcall(vim.loop.fs_stat, telescope_hl_path)
+        if stat_ok then
+          pcall(dofile, telescope_hl_path)
+        end
       end
 
       local ok_telescope, telescope = pcall(require, "telescope")
-      if not ok_telescope then
+      if not ok_telescope or type(telescope) ~= "table" then
         local ok_lazy, lazy = pcall(require, "lazy")
-        if ok_lazy and type(lazy.load) == "function" then
+        if ok_lazy and type(lazy) == "table" and type(lazy.load) == "function" then
           pcall(lazy.load, { plugins = { "telescope.nvim" } })
         end
 
         ok_telescope, telescope = pcall(require, "telescope")
-        if not ok_telescope then
+        if not ok_telescope or type(telescope) ~= "table" then
+          vim.notify("Telescope not available, falling back to colorscheme picker", vim.log.levels.WARN)
           pcall(vim.cmd, "Telescope colorscheme")
           return
         end
       end
 
       local themes_ext = telescope.extensions and telescope.extensions.themes
-      if not (themes_ext and (type(themes_ext) == "function" or type(themes_ext.themes) == "function")) then
-        local ok_ext = pcall(require, "telescope._extensions.themes")
-        if ok_ext then
-          pcall(telescope.load_extension, "themes")
+      if not (themes_ext and (type(themes_ext) == "function" or (type(themes_ext) == "table" and type(themes_ext.themes) == "function"))) then
+        local ok_ext, ext_module = pcall(require, "telescope._extensions.themes")
+        if ok_ext and type(ext_module) == "table" then
+          local load_ok = pcall(telescope.load_extension, "themes")
+          if load_ok then
+            themes_ext = telescope.extensions and telescope.extensions.themes
+          end
         end
-        themes_ext = telescope.extensions and telescope.extensions.themes
       end
 
       if themes_ext then
@@ -64,16 +72,25 @@ do
         end
 
         if type(picker) == "function" then
-          local ok_picker = pcall(picker, opts)
+          local ok_picker, err = pcall(picker, opts)
           if ok_picker then
             return
+          else
+            if err and type(err) == "string" then
+              vim.notify("Theme picker error: " .. err, vim.log.levels.ERROR)
+            end
           end
         end
       end
 
       local ok_builtin, builtin = pcall(require, "telescope.builtin")
-      if ok_builtin and type(builtin.colorscheme) == "function" then
-        builtin.colorscheme(opts)
+      if ok_builtin and type(builtin) == "table" and type(builtin.colorscheme) == "function" then
+        local ok_cs, err = pcall(builtin.colorscheme, opts)
+        if not ok_cs and err then
+          vim.notify("Colorscheme picker error: " .. tostring(err), vim.log.levels.ERROR)
+        end
+      else
+        vim.notify("No theme picker available", vim.log.levels.ERROR)
       end
     end
   end
@@ -82,18 +99,18 @@ end
 local options = {
 
   base46 = {
-    theme = "kanagawa", -- default theme
+    theme = "catppuccin", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = false,
-    theme_toggle = { "kanagawa", "catppuccin_light" },
+    theme_toggle = { "catppuccin", "catppuccin_light" },
   },
 
   ui = {
-    theme = "kanagawa",
-    theme_toggle = { "kanagawa", "catppuccin_light" },
+    theme = "catppuccin",
+    theme_toggle = { "catppuccin", "catppuccin_light" },
 
     cmp = {
       icons = true,

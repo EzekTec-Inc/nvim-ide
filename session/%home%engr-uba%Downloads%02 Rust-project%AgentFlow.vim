@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.config/nvim
+cd ~/Downloads/02\ Rust-project/AgentFlow
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,14 +13,16 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 init.lua
-badd +179 lua/plugins/init.lua
-badd +65 .aipack/.prompt/pro@coder/coder-prompt.md
+badd +556 README.md
+badd +25 Cargo.toml
+badd +64 examples/agent.rs
+badd +43 examples/workflow.rs
 argglobal
 %argdel
 $argadd .
-edit .aipack/.prompt/pro@coder/coder-prompt.md
+edit README.md
 argglobal
+balt Cargo.toml
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -30,16 +32,42 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 7,11fold
-sil! 18,24fold
-sil! 30,33fold
-sil! 37,41fold
+sil! 11,16fold
+sil! 10,25fold
+sil! 67,70fold
+sil! 66,71fold
+sil! 62,76fold
+sil! 83,85fold
+sil! 106,109fold
+sil! 105,110fold
+sil! 113,116fold
+sil! 112,117fold
+sil! 103,123fold
+sil! 130,135fold
+sil! 163,167fold
+sil! 190,193fold
+sil! 189,194fold
+sil! 198,201fold
+sil! 197,202fold
+sil! 185,207fold
+sil! 214,217fold
+sil! 241,245fold
+sil! 263,264fold
+sil! 261,269fold
+sil! 260,270fold
+sil! 296,298fold
+sil! 376,378fold
+sil! 446,450fold
+sil! 445,451fold
+sil! 443,459fold
+sil! 470,472fold
+sil! 478,481fold
 let &fdl = &fdl
-let s:l = 65 - ((19 * winheight(0) + 20) / 40)
+let s:l = 553 - ((19 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 65
+keepjumps 553
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

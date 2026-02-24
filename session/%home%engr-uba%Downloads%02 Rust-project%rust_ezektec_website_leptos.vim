@@ -13,14 +13,17 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +52 README.md
 badd +1 src/main.rs
+badd +9 Cargo.toml
+badd +1 index.html
+badd +1 input.css
+badd +45 README.md
 argglobal
 %argdel
 $argadd .
-edit src/main.rs
+edit Cargo.toml
 argglobal
-balt README.md
+balt src/main.rs
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -30,21 +33,13 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,2fold
-sil! 4,5fold
-sil! 20,21fold
-sil! 9,29fold
-sil! 8,30fold
-sil! 31,214fold
-sil! 216,219fold
-sil! 220,222fold
 let &fdl = &fdl
-let s:l = 39 - ((33 * winheight(0) + 17) / 34)
+let s:l = 9 - ((8 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 39
-normal! 0
+keepjumps 9
+normal! 014|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

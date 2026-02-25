@@ -133,7 +133,7 @@ if toggleterm_ok then
   _G._NODE_TOGGLE = function()
     node:toggle()
   end
-  map({ "n", "t", "i" }, "<A-o>", "<cmd>lua _NODE_TOGGLE()<CR>", { desc = "Node Terminal" })
+  map({ "n", "t", "i" }, "<A-n>", "<cmd>lua _NODE_TOGGLE()<CR>", { desc = "Node Terminal" })
 
   local python = Terminal:new({ cmd = "python3", hidden = true })
   _G._PYTHON_TOGGLE = function()

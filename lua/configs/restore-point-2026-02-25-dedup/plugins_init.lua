@@ -230,32 +230,11 @@ return {
     "NvChad/nvim-colorizer.lua",
     event = "User FilePost",
     opts = {
-      css = true,
+      user_default_options = { names = false },
       filetypes = {
-        "css",
-        "javascript",
-        "rust",
-        html = { mode = "foreground" },
         "*",
         "!lazy",
       },
-      user_default_options = {
-        RGB = true,
-        RRGGBB = true,
-        names = true,
-        RRGGBBAA = false,
-        AARRGGBB = false,
-        rgb_fn = false,
-        hsl_fn = false,
-        css = false,
-        css_fn = false,
-        mode = "background",
-        tailwind = false,
-        sass = { enable = false, parsers = { "css" } },
-        virtualtext = "■",
-        always_update = false,
-      },
-      buftypes = {},
     },
     config = function(_, opts)
       require("colorizer").setup(opts)

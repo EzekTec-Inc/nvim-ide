@@ -63,7 +63,7 @@ local function toggle_highlight()
     print "Line highlight removed"
   else
     -- Add a new highlight
-    vim.cmd "highlight LineHighlight ctermbg=gray guibg=gray"
+    vim.cmd "highlight LineHighlight ctermbg=22 guibg=#3a5f3a"
     vim.fn.matchadd("LineHighlight", "\\%" .. line_num .. "l")
     print "Line highlighted"
   end

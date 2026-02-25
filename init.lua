@@ -464,6 +464,20 @@ do
   })
 end
 
+-- Suppress lspsaga.nvim client.request/client.supports_method deprecation warnings.
+-- lspsaga/symbol/head.lua registers its own LspAttach autocmd and calls these
+-- regardless of symbol_in_winbar.enable setting. Will be removed in Nvim 0.13.
+-- Intercept vim.deprecate to filter only these two names; all others pass through.
+do
+  local _orig_deprecate = vim.deprecate
+  vim.deprecate = function(name, alternative, version, ...)
+    if name == "client.request" or name == "client.supports_method" then
+      return
+    end
+    return _orig_deprecate(name, alternative, version, ...)
+  end
+end
+
 -- Compat shim: vim.lsp.buf_get_clients deprecated in 0.10, removed in 0.12
 -- Used by action-hints.nvim (roobert/action-hints.nvim)
 vim.lsp.buf_get_clients = function(bufnr)

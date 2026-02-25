@@ -67,10 +67,6 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
       },
     },
   },
@@ -88,7 +84,7 @@ return {
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     ensure_installed = {
       "lua-language-server", "stylua",
-      "html-lsp", "css-lsp", "prettier", "typescript-language-server",
+      "html-lsp", "css-lsp", "prettier",
       "rust-analyzer",
     },
     opts = function()
@@ -110,7 +106,6 @@ return {
     config = function()
       require("configs.lsp").defaults()
       require("configs.lsp").setup_lua_ls()
-      require("configs.lsp").setup_ts_ls()
     end,
   },
 

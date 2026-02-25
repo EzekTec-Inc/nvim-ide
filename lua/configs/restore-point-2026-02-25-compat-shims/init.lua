@@ -464,33 +464,6 @@ do
   })
 end
 
--- Compat shim: vim.lsp.buf_get_clients deprecated in 0.10, removed in 0.12
--- Used by action-hints.nvim (roobert/action-hints.nvim)
-vim.lsp.buf_get_clients = function(bufnr)
-  return vim.lsp.get_clients({ bufnr = bufnr or vim.api.nvim_get_current_buf() })
-end
-
--- Compat shim: vim.validate old table-form deprecated in 0.10, removed in 1.0
--- Used by bigfile.nvim, legendary.nvim, rustaceanvim, inlay-hints.nvim
--- Converts old form: vim.validate({ name = {val, type, optional?} })
--- to new form: vim.validate(name, val, type, optional?)
-do
-  local _orig_validate = vim.validate
-  vim.validate = function(first, ...)
-    if type(first) == "string" then
-      return _orig_validate(first, ...)
-    end
-    if type(first) ~= "table" or select('#', ...) ~= 0 then
-      return _orig_validate(first, ...)
-    end
-    for name, spec in pairs(first) do
-      if type(spec) == "table" then
-        _orig_validate(name, spec[1], spec[2], spec[3])
-      end
-    end
-  end
-end
-
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 

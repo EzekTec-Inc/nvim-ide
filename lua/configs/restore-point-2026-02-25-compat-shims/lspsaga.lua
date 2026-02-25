@@ -7,10 +7,7 @@ return {
         border = 'rounded',
       },
       lightbulb = {
-        enable = false, -- disabled: uses deprecated client.supports_method (removed in Nvim 0.13)
-      },
-      symbol_in_winbar = {
-        enable = false, -- disabled: uses deprecated client.request/supports_method (removed in Nvim 0.13)
+        enable = true,
       },
     }
 

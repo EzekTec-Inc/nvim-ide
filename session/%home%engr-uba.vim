@@ -13,11 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +13 .claude.json
+badd +0 .codeium/windsurf/memories/global_rules.md
 argglobal
 %argdel
-$argadd .claude.json
-edit .claude.json
+$argadd .codeium/windsurf/memories/global_rules.md
+edit .codeium/windsurf/memories/global_rules.md
 argglobal
 setlocal foldmethod=manual
 setlocal foldexpr=0
@@ -28,68 +28,8 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 3,5fold
-sil! 2,6fold
-sil! 12,14fold
-sil! 11,16fold
-sil! 18,43fold
-sil! 59,61fold
-sil! 75,76fold
-sil! 83,86fold
-sil! 46,115fold
-sil! 124,126fold
-sil! 128,138fold
-sil! 154,159fold
-sil! 177,183fold
-sil! 185,191fold
-sil! 176,192fold
-sil! 195,216fold
-sil! 144,217fold
-sil! 229,234fold
-sil! 252,258fold
-sil! 260,266fold
-sil! 251,267fold
-sil! 270,291fold
-sil! 219,292fold
-sil! 319,325fold
-sil! 327,333fold
-sil! 318,334fold
-sil! 337,358fold
-sil! 294,359fold
-sil! 368,371fold
-sil! 365,373fold
-sil! 364,374fold
-sil! 399,406fold
-sil! 361,407fold
-sil! 416,418fold
-sil! 413,420fold
-sil! 412,421fold
-sil! 445,452fold
-sil! 409,453fold
-sil! 143,454fold
-sil! 457,458fold
-sil! 460,461fold
-sil! 456,462fold
-sil! 468,469fold
-sil! 472,474fold
-sil! 476,478fold
-sil! 480,482fold
-sil! 484,486fold
-sil! 488,490fold
-sil! 492,494fold
-sil! 496,498fold
-sil! 500,502fold
-sil! 504,506fold
-sil! 508,510fold
-sil! 512,514fold
-sil! 516,518fold
-sil! 520,522fold
-sil! 524,526fold
-sil! 471,527fold
-sil! 532,533fold
-sil! 1,534fold
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 19) / 38)
+let s:l = 1 - ((0 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt

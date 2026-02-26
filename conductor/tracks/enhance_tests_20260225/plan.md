@@ -1,13 +1,13 @@
 # Implementation Plan: Enhance test coverage and refactor redundant configurations
 
 ## Phase 1: Test Integration
-- [ ] Task: Integrate neotest for Rust and Python
-    - [ ] Write Tests: Ensure neotest loading tests fail if misconfigured
-    - [ ] Implement Feature: Configure neotest adapters in `lua/plugins/neotest.lua`
-- [ ] Task: Verify test execution
-    - [ ] Write Tests: Create a dummy test file to verify test runner
-    - [ ] Implement Feature: Run test suite via `<leader>tt` to confirm success
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Test Integration' (Protocol in workflow.md)
+- [x] Task: Integrate neotest for Rust and Python 33af856
+    - [x] Write Tests: Ensure neotest loading tests fail if misconfigured
+    - [x] Implement Feature: Configure neotest adapters in `lua/plugins/neotest.lua`
+- [x] Task: Verify test execution 33af856
+    - [x] Write Tests: Create a dummy test file to verify test runner
+    - [x] Implement Feature: Run test suite via `<leader>tt` to confirm success
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Test Integration' (Protocol in workflow.md)
 
 ## Phase 2: Refactor Redundant Configurations
 - [ ] Task: Audit existing plugin configurations

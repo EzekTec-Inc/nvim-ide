@@ -9,7 +9,9 @@
 
 ## Frameworks
 - **React.js:** Frontend development framework.
+- **Vue.js:** Frontend development framework.
 - **Express.js & Node.js:** Backend API and server runtime environment.
 
 ## Databases
 - **MongoDB:** NoSQL database for the MERN stack.
+- **PostgreSQL:** Relational database for backend development.

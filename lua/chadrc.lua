@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "catppuccin",
+-- 	theme = "kanagawa",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -99,18 +99,18 @@ end
 local options = {
 
   base46 = {
-    theme = "catppuccin", -- default theme
+    theme = "kanagawa", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = false,
-    theme_toggle = { "catppuccin", "catppuccin_light" },
+    theme_toggle = { "kanagawa", "catppuccin_light" },
   },
 
   ui = {
-    theme = "catppuccin",
-    theme_toggle = { "catppuccin", "catppuccin_light" },
+    theme = "kanagawa",
+    theme_toggle = { "kanagawa", "catppuccin_light" },
 
     cmp = {
       icons = true,

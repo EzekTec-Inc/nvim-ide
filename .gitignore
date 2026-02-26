@@ -1,0 +1,5 @@
+.env
+/target
+
+.gemini/
+gha-creds-*.json

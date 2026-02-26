@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Downloads/02\ Rust-project/AgentFlow
+cd ~/Downloads/02\ Rust-project/mcp-servers/lsp-mcp
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,14 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +164 examples/orchestrator_multi_agent.rs
-badd +273 examples/structured_output.rs
+badd +61 README.md
+badd +3 .gitignore
 argglobal
 %argdel
 $argadd .
-edit examples/structured_output.rs
+edit README.md
 argglobal
-balt examples/orchestrator_multi_agent.rs
+balt .gitignore
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -30,61 +30,27 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,24fold
-sil! 26,33fold
-sil! 42,45fold
-sil! 56,59fold
-sil! 52,62fold
-sil! 64,67fold
-sil! 63,70fold
-sil! 73,74fold
-sil! 75,77fold
-sil! 71,79fold
-sil! 80,82fold
-sil! 51,83fold
-sil! 40,84fold
-sil! 36,85fold
-sil! 98,100fold
-sil! 108,110fold
-sil! 96,120fold
-sil! 94,120fold
-sil! 94,121fold
-sil! 93,122fold
-sil! 91,122fold
-sil! 129,135fold
-sil! 138,140fold
-sil! 148,150fold
-sil! 127,159fold
-sil! 127,160fold
-sil! 126,160fold
-sil! 167,173fold
-sil! 176,178fold
-sil! 186,188fold
-sil! 165,197fold
-sil! 165,198fold
-sil! 164,198fold
-sil! 207,224fold
-sil! 228,230fold
-sil! 227,233fold
-sil! 235,241fold
-sil! 205,248fold
-sil! 205,249fold
-sil! 203,249fold
-sil! 257,261fold
-sil! 257,262fold
-sil! 252,262fold
-sil! 275,278fold
-sil! 273,278fold
-sil! 282,285fold
-sil! 286,289fold
-sil! 290,293fold
-sil! 87,293fold
+sil! 72,75fold
+sil! 82,90fold
+sil! 80,92fold
+sil! 101,109fold
+sil! 99,111fold
+sil! 223,225fold
+sil! 250,252fold
+sil! 256,273fold
+sil! 283,287fold
+sil! 280,289fold
+sil! 296,300fold
+sil! 329,333fold
+sil! 345,347fold
+sil! 338,349fold
+sil! 336,351fold
 let &fdl = &fdl
-let s:l = 273 - ((38 * winheight(0) + 19) / 39)
+let s:l = 61 - ((16 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 273
+keepjumps 61
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

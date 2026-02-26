@@ -13,15 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +153 src/components/main_content.rs
 badd +42 src/models.rs
-badd +10 src/components/header.rs
+badd +138 src/components/main_content.rs
 argglobal
 %argdel
 $argadd .
 edit src/components/main_content.rs
 argglobal
-balt src/components/header.rs
+balt src/models.rs
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -103,12 +102,12 @@ sil! 232,260fold
 sil! 231,261fold
 sil! 230,261fold
 let &fdl = &fdl
-let s:l = 153 - ((18 * winheight(0) + 19) / 39)
+let s:l = 138 - ((9 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 153
-normal! 07|
+keepjumps 138
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -125,9 +125,9 @@ return {
       end
     end)
 
-    local ok, ts_configs = pcall(require, "nvim-treesitter.configs")
-    if ok and ts_configs and ts_configs.setup then
-      ts_configs.setup(opts)
+    local ok, ts = pcall(require, "nvim-treesitter")
+    if ok and ts and ts.setup then
+      ts.setup(opts)
     end
   end,
 }

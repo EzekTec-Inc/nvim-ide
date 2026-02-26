@@ -89,6 +89,12 @@ map(
 -- Toggle Bufline
 map({ "n", "t" }, "<leader>ut", "<cmd>TabuflineToggle<CR>", { silent = true, desc = "Toggle Buffer Line" })
 
+-- cloak toggles
+map("n", "<leader>uc", "<cmd>CloakToggle<CR>", { silent = true, desc = "Toggle Cloak" })
+map("n", "<leader>ue", "<cmd>CloakEnable<CR>", { silent = true, desc = "Enable Cloak" })
+map("n", "<leader>ud", "<cmd>CloakDisable<CR>", { silent = true, desc = "Disable Cloak" })
+map("n", "<leader>up", "<cmd>CloakPreviewLine<CR>", { silent = true, desc = "Preview Cloak Line" })
+
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
@@ -128,6 +134,7 @@ if toggleterm_ok then
     lazygit:toggle()
   end
   map({ "n", "t", "i" }, "<A-l>", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit Terminal" })
+  map("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit (Floating)" })
 
   local node = Terminal:new({ cmd = "node", hidden = true })
   _G._NODE_TOGGLE = function()
@@ -170,7 +177,21 @@ end
 map({ "v", "n", "i" }, "<leader>cn", ":CarbonNow<CR>", { desc = "CarbonNow code-snipper", silent = true })
 
 -- Lspsaga
-map("n", "<C-k>", vim.lsp.buf.hover, { silent = true, desc = "lsp hover info" })
+map("n", "<C-k>", "<cmd>Lspsaga hover_doc<CR>", { silent = true, desc = "Lspsaga hover doc" })
+map("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, desc = "Lspsaga line diagnostics" })
+map("n", "<leader>pd", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true, desc = "Lspsaga prev diagnostic" })
+map("n", "<leader>nd", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, desc = "Lspsaga next diagnostic" })
+
+-- Crates.nvim
+map("n", "<leader>cv", function() require("crates").show_versions_popup() end, { desc = "Crates show versions" })
+map("n", "<leader>cR", function() require("crates").show_features_popup() end, { desc = "Crates show features" })
+map("n", "<leader>cu", function() require("crates").update_crate() end, { desc = "Crates update" })
+map("n", "<leader>cU", function() require("crates").upgrade_crate() end, { desc = "Crates upgrade" })
+map("n", "<leader>cH", function() require("crates").open_homepage() end, { desc = "Crates open homepage" })
+map("n", "<leader>cD", function() require("crates").open_documentation() end, { desc = "Crates open documentation" })
+
+-- YAML Companion
+map("n", "<leader>ys", "<cmd>Telescope yaml_schema<CR>", { desc = "YAML Select Schema" })
 
 -- thePrimeagen's Harpoon
 local harpoon_ok, _ = pcall(require, "harpoon")
@@ -210,11 +231,11 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
--- code action
-map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "lsp code action" })
-map("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+-- code action (Dressing / UI Select)
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+map("n", "<C-Space>", vim.lsp.buf.code_action, silent)
 map("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
-map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+map("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", silent)
 map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", silent)
 
 -- open url / go to GitHub link
@@ -283,7 +304,7 @@ end, { desc = "blankline jump to current context" })
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
 map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
@@ -333,24 +354,13 @@ end
 -- that was causing issues during mappings load
 local surround_ok, nvim_surround = pcall(require, "nvim-surround")
 if surround_ok then
-  nvim_surround.setup({
-    surrounds = {
-        -- ["h"] = false,
-    },
-    keymaps = {
-      insert = "<C-g>s",
-      insert_line = "<C-g>S",
-      normal = "ys",
-      normal_cur = "yss",
-      normal_line = "yS",
-      normal_cur_line = "ySS",
-      visual = "ms",
-      visual_line = "gS",
-      delete = "ds",
-      change = "cs",
-      change_line = "cS",
-    },
-  })
+  pcall(function()
+    nvim_surround.setup({
+      surrounds = {
+          -- ["h"] = false,
+      },
+    })
+  end)
 end
 
 -- global lsp mappings
@@ -408,6 +418,12 @@ map("n", "<leader>tl", "<cmd>Trouble lsp toggle focus=false win.position=right<c
 map("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Trouble location list" })
 map("n", "<leader>tQ", "<cmd>Trouble quickfix toggle<cr>", { desc = "Trouble quickfix" })
 map("n", "<leader>tr", "<cmd>Trouble lsp_references toggle<cr>", { desc = "Trouble LSP references" })
+
+-- todo-comments
+map("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
+map("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
+map("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "Search todo comments" })
+map("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "Trouble todo comments" })
 
 -- treesj split/join (<space>m/j/s in plugin spec = <leader>m/j/s)
 map("n", "<leader>m", "<cmd>TSJToggle<cr>", { desc = "Split/join toggle" })

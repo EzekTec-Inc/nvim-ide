@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Downloads/02\ Rust-project/AgentFlow
+cd ~
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,14 +13,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +164 examples/orchestrator_multi_agent.rs
-badd +273 examples/structured_output.rs
+badd +13 .claude.json
 argglobal
 %argdel
-$argadd .
-edit examples/structured_output.rs
+$argadd .claude.json
+edit .claude.json
 argglobal
-balt examples/orchestrator_multi_agent.rs
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -30,61 +28,72 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,24fold
-sil! 26,33fold
-sil! 42,45fold
-sil! 56,59fold
-sil! 52,62fold
-sil! 64,67fold
-sil! 63,70fold
-sil! 73,74fold
-sil! 75,77fold
-sil! 71,79fold
-sil! 80,82fold
-sil! 51,83fold
-sil! 40,84fold
-sil! 36,85fold
-sil! 98,100fold
-sil! 108,110fold
-sil! 96,120fold
-sil! 94,120fold
-sil! 94,121fold
-sil! 93,122fold
-sil! 91,122fold
-sil! 129,135fold
-sil! 138,140fold
-sil! 148,150fold
-sil! 127,159fold
-sil! 127,160fold
-sil! 126,160fold
-sil! 167,173fold
-sil! 176,178fold
-sil! 186,188fold
-sil! 165,197fold
-sil! 165,198fold
-sil! 164,198fold
-sil! 207,224fold
-sil! 228,230fold
-sil! 227,233fold
-sil! 235,241fold
-sil! 205,248fold
-sil! 205,249fold
-sil! 203,249fold
-sil! 257,261fold
-sil! 257,262fold
-sil! 252,262fold
-sil! 275,278fold
-sil! 273,278fold
-sil! 282,285fold
-sil! 286,289fold
-sil! 290,293fold
-sil! 87,293fold
+sil! 3,5fold
+sil! 2,6fold
+sil! 12,14fold
+sil! 11,16fold
+sil! 18,43fold
+sil! 59,61fold
+sil! 75,76fold
+sil! 83,86fold
+sil! 46,115fold
+sil! 124,126fold
+sil! 128,138fold
+sil! 154,159fold
+sil! 177,183fold
+sil! 185,191fold
+sil! 176,192fold
+sil! 195,216fold
+sil! 144,217fold
+sil! 229,234fold
+sil! 252,258fold
+sil! 260,266fold
+sil! 251,267fold
+sil! 270,291fold
+sil! 219,292fold
+sil! 319,325fold
+sil! 327,333fold
+sil! 318,334fold
+sil! 337,358fold
+sil! 294,359fold
+sil! 368,371fold
+sil! 365,373fold
+sil! 364,374fold
+sil! 399,406fold
+sil! 361,407fold
+sil! 416,418fold
+sil! 413,420fold
+sil! 412,421fold
+sil! 445,452fold
+sil! 409,453fold
+sil! 143,454fold
+sil! 457,458fold
+sil! 460,461fold
+sil! 456,462fold
+sil! 468,469fold
+sil! 472,474fold
+sil! 476,478fold
+sil! 480,482fold
+sil! 484,486fold
+sil! 488,490fold
+sil! 492,494fold
+sil! 496,498fold
+sil! 500,502fold
+sil! 504,506fold
+sil! 508,510fold
+sil! 512,514fold
+sil! 516,518fold
+sil! 520,522fold
+sil! 524,526fold
+sil! 471,527fold
+sil! 532,533fold
+sil! 1,534fold
 let &fdl = &fdl
-let s:l = 273 - ((38 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 273
+keepjumps 1
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

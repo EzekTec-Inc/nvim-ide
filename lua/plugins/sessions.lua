@@ -1,5 +1,6 @@
 return {
   "Shatur/neovim-session-manager",
+  enabled = false, -- conflicts with folke/persistence.nvim
   event = "VimEnter",
   dependencies = {
     "nvim-lua/plenary.nvim",

@@ -5,6 +5,12 @@ return {
     require('lspsaga').setup {
       ui = {
         border = 'rounded',
+        -- Fix code action menu rendering artifacts (powerline triangles with mismatched colors)
+        button = { '', '' },
+      },
+      code_action = {
+        -- Prevent code action UI from conflicting with gitsigns column
+        extend_gitsigns = false,
       },
       lightbulb = {
         enable = false, -- disabled: uses deprecated client.supports_method (removed in Nvim 0.13)

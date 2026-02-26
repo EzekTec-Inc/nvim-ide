@@ -485,7 +485,7 @@ vim.lsp.buf_get_clients = function(bufnr)
 end
 
 -- Compat shim: vim.validate old table-form deprecated in 0.10, removed in 1.0
--- Used by bigfile.nvim, legendary.nvim, rustaceanvim, inlay-hints.nvim
+-- Used by bigfile.nvim, legendary.nvim, rustaceanvim, inlay-hints.nvim, lspsaga
 -- Converts old form: vim.validate({ name = {val, type, optional?} })
 -- to new form: vim.validate(name, val, type, optional?)
 do
@@ -499,7 +499,13 @@ do
     end
     for name, spec in pairs(first) do
       if type(spec) == "table" then
-        _orig_validate(name, spec[1], spec[2], spec[3])
+        local t = spec[2]
+        if t == "t" then t = "table" end
+        if t == "f" then t = "function" end
+        if t == "s" then t = "string" end
+        if t == "n" then t = "number" end
+        if t == "b" then t = "boolean" end
+        _orig_validate(name, spec[1], t, spec[3])
       end
     end
   end

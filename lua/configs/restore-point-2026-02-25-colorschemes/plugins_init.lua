@@ -337,6 +337,23 @@ return {
     end,
   },
 
+  -- Colorschemes
+  { "rktjmp/lush.nvim" },
+  { "sainnhe/edge" },
+  { "sho-87/kanagawa-paper.nvim" },
+  {
+    "uloco/bluloco.nvim",
+    lazy = false,
+    priority = 650,
+    dependencies = { "rktjmp/lush.nvim" },
+  },
+  {
+    "tiagovla/tokyodark.nvim",
+    config = function(_, opts)
+      require("tokyodark").setup(opts or {})
+    end,
+  },
+
   {
     "CosmicNvim/cosmic-ui",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },

@@ -6,6 +6,7 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
     "rouge8/neotest-rust",
+    "nvim-neotest/neotest-python",
   },
   keys = {
     { "<leader>tt", function() require("neotest").run.run() end, desc = "Run nearest test" },
@@ -16,6 +17,9 @@ return {
     require("neotest").setup({
       adapters = {
         require("neotest-rust"),
+        require("neotest-python")({
+          dap = { justMyCode = false },
+        }),
       },
     })
   end,

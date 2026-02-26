@@ -1,16 +1,13 @@
 local M = {}
 
 M.setup = function()
-  local on_attach = require("configs.lsp").on_attach
-  local on_init = require("configs.lsp").on_init
-  local capabilities = require("configs.lsp").capabilities
-  local lspconfig = require("lspconfig")
+  local lsp = require("configs.lsp")
   local util = require "lspconfig/util"
 
-    lspconfig.rust_analyzer.setup({
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
+  lsp.setup_lsp("rust_analyzer", {
+    on_attach = lsp.on_attach,
+    on_init = lsp.on_init,
+    capabilities = lsp.capabilities,
     filetypes = {"rust"},
     root_dir = util.root_pattern("Cargo.toml"),
     settings = {

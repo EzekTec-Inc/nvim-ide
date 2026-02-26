@@ -57,6 +57,21 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
+M.setup_lsp = function(name, opts)
+  if vim.fn.has("nvim-0.11") == 1 then
+    pcall(require, "lspconfig")
+    if opts then
+      vim.lsp.config(name, opts)
+    end
+    vim.lsp.enable(name)
+  else
+    local ok, lspconfig = pcall(require, "lspconfig")
+    if ok then
+      lspconfig[name].setup(opts)
+    end
+  end
+end
+
 M.defaults = function()
   local base46_cache = vim.g.base46_cache
   if type(base46_cache) == "string" and base46_cache ~= "" then
@@ -87,12 +102,7 @@ M.defaults = function()
 end
 
 M.setup_lua_ls = function()
-  local ok, lspconfig = pcall(require, "lspconfig")
-  if not ok then
-    return
-  end
-
-  lspconfig.lua_ls.setup {
+  M.setup_lsp("lua_ls", {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
     on_init = M.on_init,
@@ -114,32 +124,26 @@ M.setup_lua_ls = function()
         },
       },
     },
-  }
+  })
 end
 
 M.setup_ts_ls = function()
-  local ok, lspconfig = pcall(require, "lspconfig")
-  if not ok then return end
-
-  lspconfig.ts_ls.setup {
+  M.setup_lsp("ts_ls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
-  }
+  })
 end
 
 M.setup_other_lsps = function()
-  local ok, lspconfig = pcall(require, "lspconfig")
-  if not ok then return end
-
   local servers = { "html", "cssls", "pyright", "clangd", "volar", "angularls" }
 
   for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
+    M.setup_lsp(lsp, {
       on_attach = M.on_attach,
       on_init = M.on_init,
       capabilities = M.capabilities,
-    }
+    })
   end
 end
 

@@ -90,6 +90,7 @@ return {
       "lua-language-server", "stylua",
       "html-lsp", "css-lsp", "prettier", "typescript-language-server",
       "rust-analyzer",
+      "pyright", "clangd", "vue-language-server", "angular-language-server",
     },
     opts = function()
       return require "nvchad.configs.mason"
@@ -111,6 +112,8 @@ return {
       require("configs.lsp").defaults()
       require("configs.lsp").setup_lua_ls()
       require("configs.lsp").setup_ts_ls()
+      require("configs.lsp").setup_other_lsps()
+      require("configs.lspconfig").setup()
     end,
   },
 

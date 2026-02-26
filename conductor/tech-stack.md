@@ -10,7 +10,10 @@
 ## Frameworks
 - **React.js:** Frontend development framework.
 - **Vue.js:** Frontend development framework.
+- **Angular:** Frontend development framework.
 - **Express.js & Node.js:** Backend API and server runtime environment.
+- **Dioxus:** Frontend, Mobile and Backend development framework in Rust programming.
+- **Leptos:** Frontend and Backend development framework in Rust programming.
 
 ## Databases
 - **MongoDB:** NoSQL database for the MERN stack.

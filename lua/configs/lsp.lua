@@ -128,6 +128,21 @@ M.setup_ts_ls = function()
   }
 end
 
+M.setup_other_lsps = function()
+  local ok, lspconfig = pcall(require, "lspconfig")
+  if not ok then return end
+
+  local servers = { "html", "cssls", "pyright", "clangd", "volar", "angularls" }
+
+  for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup {
+      on_attach = M.on_attach,
+      on_init = M.on_init,
+      capabilities = M.capabilities,
+    }
+  end
+end
+
 -- Create LineLeadCharToggle command if not already defined
 if vim.fn.exists(':LineLeadCharToggle') == 0 then
   local line_lead_char_enabled = true

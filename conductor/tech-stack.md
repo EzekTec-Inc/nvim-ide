@@ -18,3 +18,6 @@
 ## Databases
 - **MongoDB:** NoSQL database for the MERN stack.
 - **PostgreSQL:** Relational database for backend development.
+
+## Testing & Development Tools
+- **Neotest:** Unified test runner integrated directly into Neovim, supporting Rust (`neotest-rust`) and Python (`neotest-python`).

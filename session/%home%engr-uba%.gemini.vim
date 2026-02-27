@@ -13,18 +13,16 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 extensions/conductor/commands/conductor/setup.toml
-badd +1 extensions/conductor/commands/conductor/newTrack.toml
-badd +1 extensions/conductor/commands/conductor/review.toml
-badd +1 extensions/conductor/commands/conductor/implement.toml
-badd +1 extensions/conductor/commands/conductor/status.toml
-badd +0 extensions/conductor/templates/code_styleguides/cpp.md
+badd +3 tmp/developer/logs.json
+badd +2 mcp-server-enablement.json
+badd +4 projects.json
+badd +4 extensions/conductor/templates/code_styleguides/rust.md
 argglobal
 %argdel
 $argadd ./
-edit extensions/conductor/templates/code_styleguides/cpp.md
+edit mcp-server-enablement.json
 argglobal
-balt extensions/conductor/commands/conductor/status.toml
+balt projects.json
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -34,14 +32,16 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 22,28fold
+sil! 2,3fold
+sil! 5,6fold
+sil! 1,7fold
 let &fdl = &fdl
-let s:l = 29 - ((28 * winheight(0) + 21) / 42)
+let s:l = 2 - ((1 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 29
-normal! 0
+keepjumps 2
+normal! 03|
 lcd ~/.gemini
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

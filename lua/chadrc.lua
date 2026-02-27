@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "vscode_dark",
+-- 	theme = "kanagawa",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -99,18 +99,18 @@ end
 local options = {
 
   base46 = {
-    theme = "vscode_dark", -- default theme
+    theme = "kanagawa", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
-    transparency = false,
-    theme_toggle = { "vscode_dark", "catppuccin_light" },
+    transparency = true,
+    theme_toggle = { "kanagawa", "catppuccin_light" },
   },
 
   ui = {
-    theme = "vscode_dark",
-    theme_toggle = { "vscode_dark", "catppuccin_light" },
+    theme = "kanagawa",
+    theme_toggle = { "kanagawa", "catppuccin_light" },
 
     cmp = {
       icons = true,

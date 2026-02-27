@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "aquarium",
+-- 	theme = "vscode_dark",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -99,18 +99,18 @@ end
 local options = {
 
   base46 = {
-    theme = "aquarium", -- default theme
+    theme = "vscode_dark", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = false,
-    theme_toggle = { "aquarium", "catppuccin_light" },
+    theme_toggle = { "vscode_dark", "catppuccin_light" },
   },
 
   ui = {
-    theme = "aquarium",
-    theme_toggle = { "aquarium", "catppuccin_light" },
+    theme = "vscode_dark",
+    theme_toggle = { "vscode_dark", "catppuccin_light" },
 
     cmp = {
       icons = true,

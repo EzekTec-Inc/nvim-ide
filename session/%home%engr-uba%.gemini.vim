@@ -14,15 +14,15 @@ else
   set shortmess=aoO
 endif
 badd +3 tmp/developer/logs.json
-badd +2 mcp-server-enablement.json
+badd +3 mcp-server-enablement.json
 badd +4 projects.json
 badd +4 extensions/conductor/templates/code_styleguides/rust.md
 argglobal
 %argdel
 $argadd ./
-edit mcp-server-enablement.json
+edit tmp/developer/logs.json
 argglobal
-balt projects.json
+balt mcp-server-enablement.json
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -32,16 +32,23 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 2,3fold
-sil! 5,6fold
-sil! 1,7fold
+sil! 2,7fold
+sil! 9,14fold
+sil! 16,21fold
+sil! 23,28fold
+sil! 30,35fold
+sil! 37,42fold
+sil! 44,49fold
+sil! 51,56fold
+sil! 58,63fold
+sil! 1,64fold
 let &fdl = &fdl
-let s:l = 2 - ((1 * winheight(0) + 21) / 42)
+let s:l = 5 - ((4 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
-normal! 03|
+keepjumps 5
+normal! 0
 lcd ~/.gemini
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

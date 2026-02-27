@@ -233,10 +233,10 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- code action (Dressing / UI Select)
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-map("n", "<C-Space>", vim.lsp.buf.code_action, silent)
-map("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
-map("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", silent)
-map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", silent)
+map("n", "<C-Space>", vim.lsp.buf.code_action, { silent = true, desc = "LSP code action" })
+map("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", { silent = true, desc = "LSP code action (visual)" })
+map("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", { silent = true, desc = "LSP Rename (Lspsaga)" })
+map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", { silent = true, desc = "LSP Format buffer" })
 
 -- open url / go to GitHub link
 map("n", "gh", function()
@@ -336,11 +336,11 @@ map(
 -- code fold 
 local ufo_ok, ufo = pcall(require, "ufo")
 if ufo_ok then
-  map("n", "zR", ufo.openAllFolds)
-  map("n", "zM", ufo.closeAllFolds)
-  map("n", "zr", ufo.openFoldsExceptKinds)
-  map("n", "zm", ufo.closeFoldsWith)
-  map("n", "zk", ufo.peekFoldedLinesUnderCursor)
+  map("n", "zR", ufo.openAllFolds, { desc = "Open all folds" })
+  map("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })
+  map("n", "zr", ufo.openFoldsExceptKinds, { desc = "Open folds except kinds" })
+  map("n", "zm", ufo.closeFoldsWith, { desc = "Close folds with" })
+  map("n", "zk", ufo.peekFoldedLinesUnderCursor, { desc = "Peek folded lines under cursor" })
 end
 
 -- -- nvim-surround

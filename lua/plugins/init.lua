@@ -91,6 +91,7 @@ return {
       "html-lsp", "css-lsp", "prettier", "typescript-language-server",
       "rust-analyzer",
       "pyright", "clangd", "vue-language-server", "angular-language-server",
+      "codelldb", "debugpy",
     },
     opts = function()
       return require "nvchad.configs.mason"

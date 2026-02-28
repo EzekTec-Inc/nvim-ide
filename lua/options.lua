@@ -29,10 +29,13 @@ o.smartindent = true
 o.tabstop = 2
 o.softtabstop = 2
 
--- FIX 2026-02-13T23:18:09: fillchars is now set in init.lua nvim-ufo init function
--- The E1511 error occurs when foldcolumn > 0 and fillchars foldopen/foldclose are invalid
--- By setting fillchars in nvim-ufo init BEFORE any fold operations, we avoid the error
--- Do NOT set fillchars here to prevent conflicts
+-- nvim-ufo fold options (must be set before plugin loads)
+o.foldcolumn = "0"
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldenable = true
+vim.opt.fillchars = { eob = " ", fold = " " }
+
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"

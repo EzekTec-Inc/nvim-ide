@@ -13,16 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +3 tmp/developer/logs.json
-badd +3 mcp-server-enablement.json
-badd +4 projects.json
-badd +4 extensions/conductor/templates/code_styleguides/rust.md
+badd +2 extensions/code-review/.gemini-extension-install.json
+badd +20 extensions/code-review/commands/code-review.toml
 argglobal
 %argdel
-$argadd ./
-edit tmp/developer/logs.json
+$argadd .
+edit extensions/code-review/commands/code-review.toml
 argglobal
-balt mcp-server-enablement.json
+balt extensions/code-review/.gemini-extension-install.json
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -32,24 +30,20 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 2,7fold
-sil! 9,14fold
-sil! 16,21fold
-sil! 23,28fold
-sil! 30,35fold
-sil! 37,42fold
-sil! 44,49fold
-sil! 51,56fold
-sil! 58,63fold
-sil! 1,64fold
+sil! 15,17fold
+sil! 28,32fold
+sil! 34,36fold
+sil! 37,41fold
+sil! 72,73fold
+sil! 71,73fold
+sil! 76,78fold
 let &fdl = &fdl
-let s:l = 5 - ((4 * winheight(0) + 21) / 42)
+let s:l = 20 - ((17 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 5
+keepjumps 20
 normal! 0
-lcd ~/.gemini
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

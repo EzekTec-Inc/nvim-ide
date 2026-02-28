@@ -231,10 +231,20 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
--- code action (Dressing / UI Select)
-map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-map("n", "<C-Space>", vim.lsp.buf.code_action, { silent = true, desc = "LSP code action" })
-map("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", { silent = true, desc = "LSP code action (visual)" })
+-- DAP keymaps
+map("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "DAP: Toggle breakpoint" })
+map("n", "<leader>dr", "<cmd>lua require'dap'.continue()<CR>", { desc = "DAP: Start/Continue" })
+map("n", "<leader>di", "<cmd>lua require'dap'.step_into()<CR>", { desc = "DAP: Step into" })
+map("n", "<leader>do", "<cmd>lua require'dap'.step_over()<CR>", { desc = "DAP: Step over" })
+map("n", "<leader>du", "<cmd>lua require'dap'.step_out()<CR>", { desc = "DAP: Step out" })
+map("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<CR>", { desc = "DAP: Terminate" })
+map("n", "<leader>dw", "<cmd>lua require'dap.ui.widgets'.hover()<CR>", { desc = "DAP: Hover widgets" })
+map("n", "<leader>dui", "<cmd>lua require'dapui'.toggle()<CR>", { desc = "DAP: Toggle UI" })
+
+-- code action (Lspsaga)
+map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP code action" })
+map("n", "<C-Space>", "<cmd>Lspsaga code_action<CR>", { silent = true, desc = "LSP code action" })
+map("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, desc = "LSP code action (visual)" })
 map("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", { silent = true, desc = "LSP Rename (Lspsaga)" })
 map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", { silent = true, desc = "LSP Format buffer" })
 
@@ -333,15 +343,12 @@ map(
   { desc = "telescope find all files" }
 )
 
--- code fold 
-local ufo_ok, ufo = pcall(require, "ufo")
-if ufo_ok then
-  map("n", "zR", ufo.openAllFolds, { desc = "Open all folds" })
-  map("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })
-  map("n", "zr", ufo.openFoldsExceptKinds, { desc = "Open folds except kinds" })
-  map("n", "zm", ufo.closeFoldsWith, { desc = "Close folds with" })
-  map("n", "zk", ufo.peekFoldedLinesUnderCursor, { desc = "Peek folded lines under cursor" })
-end
+-- code fold (nvim-ufo — docs require remapping zR/zM to ufo API)
+map("n", "zR", function() require("ufo").openAllFolds() end, { desc = "Open all folds" })
+map("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "Close all folds" })
+map("n", "zr", function() require("ufo").openFoldsExceptKinds() end, { desc = "Open folds except kinds" })
+map("n", "zm", function() require("ufo").closeFoldsWith() end, { desc = "Close folds with" })
+map("n", "zk", function() require("ufo").peekFoldedLinesUnderCursor() end, { desc = "Peek folded lines" })
 
 -- -- nvim-surround
 -- map("n", "<leader>sa", require("nvim-surround").add_surround, { desc = "nvchad surround add" })

@@ -546,31 +546,15 @@ require("lazy").setup({
     ft = "rust",
   },
 
-  "mfussenegger/nvim-dap",
-
-  -- code folding
+  -- code folding (nvim-ufo)
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
-    init = function()
-      -- FIX 2026-02-13T23:18:09: Set fold options BEFORE plugin loads
-      -- E1511 error occurs when foldcolumn > 0 and fillchars foldopen/foldclose are invalid
-      -- Setting foldcolumn to "0" disables the fold column entirely, avoiding fillchars validation
-      -- nvim-ufo displays folds via virtual text, not the fold column
-      vim.o.foldcolumn = "0"
-      vim.o.foldenable = true
-      vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 99
-      vim.o.foldmethod = "manual"
-      -- Set fillchars without any fold-related fields to avoid E1511
-      -- Only set eob (end of buffer) and fold fields which accept any character
-      vim.opt.fillchars = { eob = " ", fold = " " }
-    end,
     config = function()
       local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = (" ... %d "):format(endLnum - lnum)
+        local suffix = ("  󰁂 %d "):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -596,6 +580,9 @@ require("lazy").setup({
       end
 
       require("ufo").setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return { "treesitter", "indent" }
+        end,
         fold_virt_text_handler = handler,
         preview = {
           win_config = {

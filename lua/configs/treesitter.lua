@@ -26,6 +26,7 @@ local options = {
     "query",
     "toml",
     "yaml",
+    "mermaid",
   },
 
   highlight = {

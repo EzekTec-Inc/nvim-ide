@@ -55,6 +55,9 @@ o.splitright = true
 o.timeoutlen = 400
 o.undofile = true
 
+-- Limit shada to 50 items for marks, 100 lines for registers, 10KB per item
+o.shada = "!,'50,<100,s10,h"
+
 -- interval for writing swap file to disk, also used by gitsigns
 o.updatetime = 250
 

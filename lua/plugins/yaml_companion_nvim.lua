@@ -38,6 +38,7 @@ return {
         },
       },
     })
-    require("lspconfig")["yamlls"].setup(cfg)
+    local lsp = require("configs.lsp")
+    lsp.setup_lsp("yamlls", cfg)
   end,
 }

@@ -30,6 +30,11 @@ M.on_attach = function(client, bufnr)
   map("n", "gr", vim.lsp.buf.references, opts "Show references")
 end
 
+-- LSP flags for performance
+M.flags = {
+  debounce_text_changes = 150,
+}
+
 -- disable semanticTokens
 M.on_init = function(client, _)
   if client.supports_method "textDocument/semanticTokens" then
@@ -64,14 +69,75 @@ M.capabilities.textDocument.completion.completionItem = {
 
 M.setup_lsp = function(name, opts)
   if vim.fn.has("nvim-0.11") == 1 then
-    pcall(require, "lspconfig")
-    if opts then
-      vim.lsp.config(name, opts)
+    -- In Nvim 0.11, we should avoid require('lspconfig') if possible
+    -- but we still need to check if the server is executable to avoid spawning errors
+    
+    -- Try to get existing config from core
+    local config = vim.lsp.config[name]
+    
+    -- If not found in core, try to find it in nvim-lspconfig without triggering the main framework warning
+    if not config then
+      local ok, lspconfig_configs = pcall(require, "lspconfig.configs")
+      if ok and lspconfig_configs[name] then
+        config = lspconfig_configs[name]
+      end
     end
-    vim.lsp.enable(name)
+
+    local final_opts = opts or {}
+    local cmd = final_opts.cmd
+    
+    -- If we don't have a cmd in opts, try to get it from the config
+    if not cmd and config and config.default_config then
+      cmd = config.default_config.cmd
+    end
+
+    -- Handle cmd as a function (common in Nvim 0.11 configs like angularls)
+    if type(cmd) == "function" then
+      -- Angular LSP (angularls) in nvim-lspconfig for Nvim 0.11 uses a function for cmd.
+      -- However, the inner call to vim.lsp.rpc.start will fail if 'ngserver' is missing.
+      -- We add an extra check specifically for 'ngserver' if the server name is 'angularls'.
+      if name == "angularls" and vim.fn.executable("ngserver") == 0 then
+        return
+      end
+      
+      -- For other function-based cmds, we trust they handle missing binaries
+      -- or at least don't crash the editor.
+      if opts then
+        vim.lsp.config(name, opts)
+      end
+      vim.lsp.enable(name)
+      return
+    end
+
+    -- Check if executable exists before enabling
+    if cmd and type(cmd) == "table" and #cmd > 0 then
+      local executable = cmd[1]
+      -- For some servers, the first element might be a full path or just a command name
+      if vim.fn.executable(executable) == 1 then
+        if opts then
+          vim.lsp.config(name, opts)
+        end
+        vim.lsp.enable(name)
+      end
+    elseif cmd and type(cmd) == "string" then
+      if vim.fn.executable(cmd) == 1 then
+        if opts then
+          vim.lsp.config(name, opts)
+        end
+        vim.lsp.enable(name)
+      end
+    else
+      -- Fallback: if no cmd, try to see if name itself is executable as a guess
+      if vim.fn.executable(name) == 1 then
+        if opts then
+          vim.lsp.config(name, opts)
+        end
+        vim.lsp.enable(name)
+      end
+    end
   else
     local ok, lspconfig = pcall(require, "lspconfig")
-    if ok then
+    if ok and lspconfig[name] then
       lspconfig[name].setup(opts)
     end
   end
@@ -111,6 +177,7 @@ M.setup_lua_ls = function()
     on_attach = M.on_attach,
     capabilities = M.capabilities,
     on_init = M.on_init,
+    flags = M.flags,
 
     settings = {
       Lua = {
@@ -137,6 +204,7 @@ M.setup_ts_ls = function()
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
+    flags = M.flags,
   })
 end
 
@@ -148,6 +216,7 @@ M.setup_other_lsps = function()
       on_attach = M.on_attach,
       on_init = M.on_init,
       capabilities = M.capabilities,
+      flags = M.flags,
     })
   end
 end

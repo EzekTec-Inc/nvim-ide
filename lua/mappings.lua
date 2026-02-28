@@ -240,6 +240,7 @@ map("n", "<leader>du", "<cmd>lua require'dap'.step_out()<CR>", { desc = "DAP: St
 map("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<CR>", { desc = "DAP: Terminate" })
 map("n", "<leader>dw", "<cmd>lua require'dap.ui.widgets'.hover()<CR>", { desc = "DAP: Hover widgets" })
 map("n", "<leader>dui", "<cmd>lua require'dapui'.toggle()<CR>", { desc = "DAP: Toggle UI" })
+map("n", "<leader>dx", "<cmd>lua require'dap'.terminate()<CR>", { desc = "DAP: Terminate (Toggle)" })
 
 -- code action (Lspsaga)
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP code action" })
@@ -435,7 +436,7 @@ map("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "Trouble todo comments" 
 -- treesj split/join (<space>m/j/s in plugin spec = <leader>m/j/s)
 map("n", "<leader>m", "<cmd>TSJToggle<cr>", { desc = "Split/join toggle" })
 map("n", "<leader>j", "<cmd>TSJSplit<cr>", { desc = "Split code block" })
-map("n", "<leader>s", "<cmd>TSJJoin<cr>", { desc = "Join code block" })
+map("n", "<leader>sj", "<cmd>TSJJoin<cr>", { desc = "Join code block" })
 
 -- activate.nvim plugin browser
 map("n", "<leader>P", function()
@@ -454,9 +455,15 @@ map("v", "<leader>ls", ":VisualDuplicate -1<CR>", { desc = "Duplicate selection 
 map("v", "<leader>lt", ":VisualDuplicate +1<CR>", { desc = "Duplicate selection down" })
 
 -- Scratchpad
-map("n", "<leader>sn", "<cmd>ScratchNew<CR>", { desc = "New scratch" })
+map("n", "<leader>sn", "<cmd>Scratch<CR>", { desc = "New scratch by type" })
+map("n", "<leader>sw", "<cmd>ScratchWithName<CR>", { desc = "New scratch with name" })
 map("n", "<leader>so", "<cmd>ScratchOpen<CR>", { desc = "Open scratch list" })
-map("n", "<leader>sc", "<cmd>Scratch<CR>", { desc = "Open/Toggle last scratch" })
+map("n", "<leader>sc", "<cmd>Scratch<CR>", { desc = "New scratch by type" })
+
+-- Markdown
+map("n", "<leader>um", "<cmd>RenderMarkdown toggle<CR>", { desc = "Toggle Markdown Render" })
+map("n", "<leader>up", "<cmd>LivePreview start<CR>", { desc = "Start Markdown Live Preview" })
+map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Markdown Preview (Mermaid/SVG)" })
 
 --
 -- ---@meta

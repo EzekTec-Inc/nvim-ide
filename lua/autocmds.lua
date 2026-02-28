@@ -73,6 +73,22 @@ autocmd("BufWritePost", {
   end,
 })
 
+-- BigFile handling: disable heavy features for files > 512KB
+local bigfile_group = augroup("BigFileSettings", { clear = true })
+autocmd({ "BufReadPre" }, {
+  group = bigfile_group,
+  callback = function(args)
+    local ok, stat = pcall(vim.loop.fs_stat, args.file)
+    if ok and stat and stat.size > 1024 * 512 then
+      vim.b.bigfile = true
+      vim.b.large_buf = true
+      vim.opt_local.spell = false
+      vim.opt_local.foldmethod = "manual"
+      vim.opt_local.statuscolumn = ""
+    end
+  end,
+})
+
 -- user event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   group = augroup("NvFilePost", { clear = true }),

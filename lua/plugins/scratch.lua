@@ -9,6 +9,7 @@ return {
   config = function()
     require("scratch").setup({
       scratch_file_dir = vim.fn.stdpath("data") .. "/scratch",
+      file_picker = "telescope",
       window_config = {
         relative = "editor",
         width = 0.8,

@@ -13,18 +13,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +8 conductor/index.md
-badd +48 README.md
-badd +110 lua/mappings.lua
-badd +32 lua/options.lua
-badd +10 src/main.rs
-badd +12 lua/plugins/live_preview_nvim.lua
+badd +0 test_rust_project/src/main.rs
 argglobal
 %argdel
-$argadd .
-edit README.md
+edit test_rust_project/src/main.rs
 argglobal
-balt lua/mappings.lua
+balt test_rust_project/src/main.rs
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -34,13 +28,12 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 8,13fold
 let &fdl = &fdl
-let s:l = 70 - ((39 * winheight(0) + 21) / 42)
+let s:l = 1 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 70
+keepjumps 1
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

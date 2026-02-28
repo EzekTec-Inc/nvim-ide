@@ -1,20 +1,22 @@
 return {
   "mrcjkb/rustaceanvim",
-  version = "^4",
+  version = "^5",
   ft = { "rust" },
   dependencies = "neovim/nvim-lspconfig",
-  config = function()
+  init = function()
     vim.g.rustaceanvim = {
       server = {
         on_attach = function(client, bufnr)
+          local lsp = require("configs.lsp")
+          lsp.on_attach(client, bufnr)
           local map = vim.keymap.set
-          local opts = { buffer = bufnr, silent = true }
-          map({ "n", "v" }, "<leader>ca", function() vim.cmd.RustLsp('codeAction') end, opts)
-          map("n", "K", function() vim.cmd.RustLsp({ 'hover', 'actions' }) end, opts)
+          map({ "n", "v" }, "<leader>ca", function() vim.cmd.RustLsp('codeAction') end, { buffer = bufnr, desc = "LSP Code Action (Rust)" })
+          map("n", "K", function() vim.cmd.RustLsp({ 'hover', 'actions' }) end, { buffer = bufnr, desc = "LSP Hover (Rust)" })
         end,
-        settings = {
+        default_settings = {
           ["rust-analyzer"] = {
             cargo = {
+              allFeatures = true,
               buildScripts = { enable = true },
             },
             procMacro = {

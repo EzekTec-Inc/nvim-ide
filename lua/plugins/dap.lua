@@ -28,14 +28,22 @@ return {
       -- Adapters configuration
       
       -- 1. Rust / C++ (codelldb)
-      dap.adapters.codelldb = {
-        type = 'server',
-        port = "${port}",
-        executable = {
-          command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
-          args = {"--port", "${port}"},
-        }
-      }
+      local codelldb_path = vim.fn.stdpath("data") .. '/mason/bin/codelldb'
+      
+      dap.adapters.codelldb = function(on_config)
+        if vim.fn.executable(codelldb_path) == 1 then
+          on_config({
+            type = 'server',
+            port = "${port}",
+            executable = {
+              command = codelldb_path,
+              args = {"--port", "${port}"},
+            }
+          })
+        else
+          vim.notify("codelldb not found. Install it with :MasonInstall codelldb", vim.log.levels.WARN)
+        end
+      end
 
       dap.configurations.rust = {
         {
@@ -55,15 +63,10 @@ return {
       -- 2. Python (debugpy)
       dap.adapters.python = function(cb, config)
         if config.request == 'launch' then
-          local port = 5678
-          local host = '127.0.0.1'
           cb({
-            type = 'server',
-            port = port,
-            host = host,
-            executable = {
-              command = vim.fn.stdpath("data") .. '/mason/bin/debugpy-adapter',
-            }
+            type = 'executable',
+            command = 'python3',
+            args = { '-m', 'debugpy.adapter' },
           })
         end
       end
@@ -80,17 +83,23 @@ return {
         },
       }
 
-      -- 3. JS/TS (pwa-node) - requires chrome-debug-adapter or js-debug-adapter
-      -- Note: This is a basic setup, often improved with nvim-dap-vscode-js
-      dap.adapters["pwa-node"] = {
-        type = "server",
-        host = "localhost",
-        port = "${port}",
-        executable = {
-          command = "node",
-          args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
-        }
-      }
+      -- 3. JS/TS (pwa-node) - requires js-debug-adapter
+      local js_debug_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+      dap.adapters["pwa-node"] = function(on_config)
+        if vim.fn.filereadable(js_debug_path) == 1 then
+          on_config({
+            type = "server",
+            host = "localhost",
+            port = "${port}",
+            executable = {
+              command = "node",
+              args = { js_debug_path, "${port}" },
+            }
+          })
+        else
+          vim.notify("js-debug-adapter not found. Install it with :MasonInstall js-debug-adapter", vim.log.levels.WARN)
+        end
+      end
 
       for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
         dap.configurations[language] = {

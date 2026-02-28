@@ -1,3 +1,10 @@
+if vim.loader then
+  vim.loader.enable()
+end
+
+collectgarbage("setpause", 100)
+collectgarbage("setstepmul", 400)
+
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
 
@@ -540,11 +547,6 @@ require("lazy").setup({
 
   { import = "plugins" },
   "ryanoasis/vim-devicons",
-
-  {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-  },
 
   -- code folding (nvim-ufo)
   {

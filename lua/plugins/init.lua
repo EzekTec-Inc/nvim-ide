@@ -71,6 +71,11 @@ return {
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
         typescriptreact = { "prettier" },
+        rust = { "rustfmt" },
+      },
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
       },
     },
   },
@@ -95,14 +100,6 @@ return {
     },
     opts = function()
       return require "nvchad.configs.mason"
-    end,
-  },
-
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
     end,
   },
 

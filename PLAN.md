@@ -371,6 +371,71 @@ rm lua/plugins/scratch.lua
 
 ---
 
+## Session: 2026-02-27 - Fix Angular LSP Spawning Error
+
+### Problem Identified
+- **Crash on .ts files**: Neovim 0.11 core API `vim.lsp.enable` was attempting to spawn `angularls` on every `.ts` file. If the Angular language server (`ngserver`) was not installed via Mason or in the PATH, it caused a fatal spawning error.
+
+### Changes Made
+
+#### 1. File: `lua/configs/lsp.lua`
+**Status**: Modified
+**Reason**: Make LSP setup more robust and prevent crashes for missing servers.
+
+**Changes**:
+- Enhanced `M.setup_lsp(name, opts)` to verify that the language server's command is executable before calling `vim.lsp.enable`.
+- It now merges user options with `lspconfig` default configurations to accurately determine the expected command.
+
+**Impact**: Prevents "Spawning language server failed" errors when a configured server is not yet installed or missing.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/configs/lsp.lua
+```
+
+---
+
+## Session: 2026-02-27 - Migrate to Neovim 0.11 Core LSP API
+
+### Problem Identified
+- **Deprecation Warnings**: Neovim 0.11+ issued warnings about `require('lspconfig')` being deprecated as a framework.
+- **LSP Spawning Errors**: Missing executables for some LSPs caused crashes on 0.11+ core APIs.
+
+### Changes Made
+
+#### 1. File: `lua/configs/lsp.lua`
+**Status**: Modified
+**Reason**: Use core `vim.lsp.config` and `vim.lsp.enable` while avoiding deprecated `require('lspconfig')`.
+
+**Changes**:
+- Refactored `setup_lsp` to avoid requiring the main `lspconfig` module on Nvim 0.11+.
+- It now checks `vim.lsp.config` and `lspconfig.configs` (internal module) to find default server configurations.
+- Maintains the executable check before enabling to prevent spawning crashes.
+
+#### 2. File: `lua/custom/configs/lspconfig.lua`
+**Status**: Modified
+**Reason**: Remove dependency on `lspconfig.util`.
+
+**Changes**:
+- Replaced `require("lspconfig/util").root_pattern` with a version-agnostic check.
+- On Nvim 0.11+, uses native `vim.fs.root`.
+
+#### 3. File: `lua/plugins/yaml_companion_nvim.lua`
+**Status**: Modified
+**Reason**: Standardize LSP setup.
+
+**Changes**:
+- Switched from direct `require("lspconfig")` call to the `M.setup_lsp` helper.
+
+**Impact**: Eliminates all LSP-related deprecation warnings in Neovim 0.11+ and ensures a stable startup process.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/configs/lsp.lua lua/custom/configs/lspconfig.lua lua/plugins/yaml_companion_nvim.lua
+```
+
+---
+
 ## Session: 2026-02-27 - Optimize Code Action Implementation
 
 ### Problem Identified
@@ -440,4 +505,164 @@ Implemented a full-featured, visual debugging environment for the entire tech st
 ```bash
 git checkout HEAD -- init.lua lua/plugins/init.lua lua/mappings.lua
 rm lua/plugins/dap.lua
+```
+
+---
+
+## Session: 2026-02-27 - Stability and Performance Tweaks
+
+### Timestamp (UTC): 2026-02-27T22:30:00Z
+
+### Summary
+Applied architectural and low-level tweaks to improve Neovim 0.11+ performance and stability, including bytecode caching, garbage collection tuning, LSP debouncing, and large file handling.
+
+### Files Modified
+
+#### 1. `init.lua`
+- **Changes**: Enabled `vim.loader` (bytecode cache) and tuned LuaJIT garbage collector (`setpause`, `setstepmul`).
+- **Reason**: Reduce startup time and editor micro-stutters.
+
+#### 2. `lua/options.lua`
+- **Changes**: Optimized `shada` file size (`!,'50,<100,s10,h`).
+- **Reason**: Prevent `shada` bloat from slowing down startup over time.
+
+#### 3. `lua/configs/lsp.lua`
+- **Changes**: Added `debounce_text_changes = 150` to all LSP server flags.
+- **Reason**: Reduce CPU spikes and UI lag during fast typing by throttling LSP indexing.
+
+#### 4. `lua/autocmds.lua`
+- **Changes**: Implemented `BigFileSettings` augroup to detect files > 512KB.
+- **Reason**: Automatically disable heavy features (Treesitter, Spelling, complex folding) to maintain responsiveness in massive files.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- init.lua lua/options.lua lua/configs/lsp.lua lua/autocmds.lua
+```
+
+---
+
+## Session: 2026-02-27 - Implement Mermaid Support and Markdown Preview
+
+### Timestamp (UTC): 2026-02-27T22:50:00Z
+
+### Summary
+Implemented syntax highlighting for Mermaid diagrams and a browser-based live previewer for high-fidelity Markdown rendering.
+
+### Files Modified
+
+#### 1. `lua/configs/treesitter.lua`
+- **Changes**: Added `mermaid` to `ensure_installed`.
+- **Reason**: Enable syntax highlighting for Mermaid blocks in the buffer.
+
+#### 2. `lua/plugins/markdown_preview.lua`
+- **Changes**: Created file to configure `iamcco/markdown-preview.nvim`.
+- **Reason**: Provide browser-based rendering for Mermaid, SVG, and GitHub-style Markdown.
+
+#### 3. `lua/mappings.lua`
+- **Changes**: Added `<leader>mp` keymap for `MarkdownPreviewToggle`.
+- **Reason**: Provide easy access to high-fidelity Markdown preview.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/configs/treesitter.lua lua/mappings.lua
+rm lua/plugins/markdown_preview.lua
+```
+
+---
+
+## Session: 2026-02-27 - Fix Rust LSP Initialization Conflict
+
+### Timestamp (UTC): 2026-02-27T23:05:00Z
+
+### Summary
+Resolved conflicting Rust configurations and modernized the `rustaceanvim` setup for Neovim 0.11+.
+
+### Files Modified
+
+#### 1. `init.lua`
+- **Changes**: Removed deprecated `rust-tools.nvim` plugin spec.
+- **Reason**: Fix conflict with `rustaceanvim`.
+
+#### 2. `lua/custom/configs/lspconfig.lua`
+- **Changes**: Disabled manual `rust_analyzer` setup.
+- **Reason**: `rustaceanvim` handles server lifecycle independently; manual setup via `lspconfig` causes initialization failures.
+
+#### 3. `lua/plugins/rustaceanvim.lua`
+- **Changes**: Refactored configuration to use `init` block and integrated global LSP handlers (`on_attach`, `capabilities`).
+- **Reason**: Ensure correct initialization timing in Neovim 0.11 and maintain consistent keymaps.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- init.lua lua/custom/configs/lspconfig.lua lua/plugins/rustaceanvim.lua
+```
+
+---
+
+## Session: 2026-02-28 - Fix rustaceanvim Version Constraint
+
+### Timestamp (UTC): 2026-02-28T05:42:00Z
+
+### Summary
+Fixed `rustaceanvim` not loading due to version constraint mismatch.
+
+### Files Modified
+
+#### 1. `lua/plugins/rustaceanvim.lua`
+- **Previous behavior**: `version = "^5"` — lazy.nvim refused to load the plugin because the installed commit (`047f9c9`) is version `4.26.1`, which does not satisfy `^5`.
+- **New behavior**: `version = "^4"` — matches the installed version.
+- **Reason**: The version field was changed to `^5` in the prior session without verifying the locally installed version. lazy.nvim silently skips plugins that do not satisfy their version constraint.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/plugins/rustaceanvim.lua
+```
+
+---
+
+## Session: 2026-02-28 - Fix rustaceanvim mason.nvim incompatibility
+
+### Timestamp (UTC): 2026-02-28T05:45:00Z
+
+### Summary
+Fixed `rustaceanvim` initialization crash caused by breaking changes in `mason.nvim` v2.0.0+.
+
+### Files Modified
+
+#### 1. `lua/plugins/rustaceanvim.lua`
+- **Previous behavior**: `version = "^4"`.
+- **New behavior**: `version = "^5"`.
+- **Reason**: The older version of `rustaceanvim` (`v4.26.1`) attempted to use `codelldb_package:get_install_path()` which was removed in `mason.nvim` v2.0.0. This caused a fatal error preventing `.rs` files from rendering and `rust-analyzer` from loading. Updating to `^5` incorporates upstream fixes for this compatibility issue.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/plugins/rustaceanvim.lua
+```
+
+---
+
+## Session: 2026-02-28 - Fix Rust Analyzer Auto-formatting
+
+### Timestamp (UTC): 2026-02-28T06:05:00Z
+
+### Summary
+Fixed `rust-analyzer` not triggering and missing format-on-save functionality for Rust files. The previous session changed `rustaceanvim` version constraint to `^5` but `lazy-lock.json` was out of date causing lazy.nvim to skip loading it entirely.
+
+### Files Modified
+
+#### 1. `lazy-lock.json`
+- **Changes**: Updated by running `nvim --headless "+Lazy! sync" +qa`.
+- **Reason**: Upgraded `rustaceanvim` locally to satisfy the new `^5` constraint. This restores `rustaceanvim` functionality and triggers `rust-analyzer`.
+
+#### 2. `lua/plugins/init.lua`
+- **Changes**: 
+  - Added `rust = { "rustfmt" }` to `stevearc/conform.nvim` `formatters_by_ft`.
+  - Added `format_on_save = { timeout_ms = 500, lsp_fallback = true }` to `stevearc/conform.nvim`.
+  - Removed `rust-lang/rust.vim` plugin completely.
+- **Reason**: Standardize the formatting workflow through `conform.nvim` (aligning Rust with TS/JS). `rust-lang/rust.vim` is redundant, conflicts with `rustaceanvim` and `conform.nvim`, and isn't needed for formatting anymore.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/plugins/init.lua
+# To restore plugins to their prior states:
+# You may need to manually rollback `lazy-lock.json` or restore `rust.vim`
 ```

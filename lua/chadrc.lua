@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "chadracula-evondev",
+-- 	theme = "gruvbox",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -99,18 +99,18 @@ end
 local options = {
 
   base46 = {
-    theme = "chadracula-evondev", -- default theme
+    theme = "gruvbox", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = true,
-    theme_toggle = { "chadracula-evondev", "catppuccin_light" },
+    theme_toggle = { "gruvbox", "catppuccin_light" },
   },
 
   ui = {
-    theme = "chadracula-evondev",
-    theme_toggle = { "chadracula-evondev", "catppuccin_light" },
+    theme = "gruvbox",
+    theme_toggle = { "gruvbox", "catppuccin_light" },
 
     cmp = {
       icons = true,

@@ -453,6 +453,11 @@ map("n", "<leader>ld", ":LineDuplicate +1<CR>", { desc = "Duplicate line down" }
 map("v", "<leader>ls", ":VisualDuplicate -1<CR>", { desc = "Duplicate selection up" })
 map("v", "<leader>lt", ":VisualDuplicate +1<CR>", { desc = "Duplicate selection down" })
 
+-- Scratchpad
+map("n", "<leader>sn", "<cmd>ScratchNew<CR>", { desc = "New scratch" })
+map("n", "<leader>so", "<cmd>ScratchOpen<CR>", { desc = "Open scratch list" })
+map("n", "<leader>sc", "<cmd>Scratch<CR>", { desc = "Open/Toggle last scratch" })
+
 --
 -- ---@meta
 

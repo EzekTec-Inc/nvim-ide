@@ -336,6 +336,41 @@ git checkout HEAD -- lua/autocmds.lua
 
 ---
 
+## Session: 2026-02-27 - Implement Persistent Scratchpad
+
+### Problem Identified
+- **Missing Persistent Scratchpad**: No built-in way to create and manage persistent notes/snippets that are stored outside the project directory.
+
+### Changes Made
+
+#### 1. File: `lua/plugins/scratch.lua`
+**Status**: Created
+**Reason**: Implement `LintaoAmons/scratch.nvim` for persistent, project-independent scratch files.
+
+**Changes**:
+- Configured to store scratches in `~/.local/share/nvim/scratch`.
+- Enabled rounded border and centered layout for the scratch interface.
+- Integrated with `dressing.nvim` for selection UI.
+
+#### 2. File: `lua/mappings.lua`
+**Status**: Modified
+**Reason**: Add intuitive keymaps for scratchpad management.
+
+**Changes**:
+- Added `<leader>sn` -> `ScratchNew` (Create new scratch file).
+- Added `<leader>so` -> `ScratchOpen` (Open existing scratch via picker).
+- Added `<leader>sc` -> `Scratch` (Open/Toggle the last used scratch file).
+
+**Impact**: Provides a robust, persistent note-taking and snippet-testing environment that doesn't clutter projects.
+
+### Rollback Instructions
+```bash
+git checkout HEAD -- lua/mappings.lua
+rm lua/plugins/scratch.lua
+```
+
+---
+
 ## Session: 2026-02-27 - Optimize Code Action Implementation
 
 ### Problem Identified

@@ -460,13 +460,10 @@ map("n", "<leader>sw", "<cmd>ScratchWithName<CR>", { desc = "New scratch with na
 map("n", "<leader>so", "<cmd>ScratchOpen<CR>", { desc = "Open scratch list" })
 map("n", "<leader>sc", "<cmd>Scratch<CR>", { desc = "New scratch by type" })
 
--- Markdown
+-- Markdown & Mermaid
 map("n", "<leader>um", "<cmd>RenderMarkdown toggle<CR>", { desc = "Toggle Markdown Render" })
-map("n", "<leader>up", "<cmd>LivePreview start<CR>", { desc = "Start Markdown Live Preview" })
-map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Markdown Preview (Mermaid/SVG)" })
-
---
--- ---@meta
+map("n", "<leader>lp", "<cmd>LivePreview<CR>", { desc = "Toggle Live Preview (Mermaid/Markdown)" })
+map("n", "<leader>ls", "<cmd>LivePreviewStop<CR>", { desc = "Stop Live Preview" })
 
 -- ---@class ApiKeymapOpts
 -- ---@field nowait? boolean If true, once the `lhs` is matched, the `rhs` will be executed

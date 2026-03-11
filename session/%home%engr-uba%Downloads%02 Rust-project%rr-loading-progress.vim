@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~
+cd ~/Downloads/02\ Rust-project/rr-loading-progress
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,12 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +6 Documents/GitHub/desktop-tutorial/README.md
+badd +66 src/main.rs
+badd +7 Cargo.toml
 argglobal
 %argdel
-$argadd Documents/GitHub/desktop-tutorial/README.md
-edit Documents/GitHub/desktop-tutorial/README.md
+$argadd .
+edit src/main.rs
 argglobal
+balt Cargo.toml
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -28,14 +30,21 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,6fold
+sil! 20,24fold
+sil! 16,26fold
+sil! 43,47fold
+sil! 42,48fold
+sil! 50,54fold
+sil! 49,55fold
+sil! 37,59fold
+sil! 10,66fold
 let &fdl = &fdl
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+let s:l = 66 - ((38 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 012|
+keepjumps 66
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

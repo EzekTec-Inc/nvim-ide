@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~
+cd ~/.letta
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,12 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +6 Documents/GitHub/desktop-tutorial/README.md
+badd +1 agents/agent-f1e91871-5f6e-4489-b739-b4707f790336/memory/.letta/config.json
+badd +0 plans/2026-03-01-agent-rename.md
 argglobal
 %argdel
-$argadd Documents/GitHub/desktop-tutorial/README.md
-edit Documents/GitHub/desktop-tutorial/README.md
+$argadd .
+edit plans/2026-03-01-agent-rename.md
 argglobal
+balt agents/agent-f1e91871-5f6e-4489-b739-b4707f790336/memory/.letta/config.json
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -28,14 +30,28 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,6fold
+sil! 3,13fold
+sil! 19,25fold
+sil! 17,25fold
+sil! 30,35fold
+sil! 27,37fold
+sil! 41,54fold
+sil! 39,54fold
+sil! 58,62fold
+sil! 65,69fold
+sil! 56,69fold
+sil! 75,83fold
+sil! 71,87fold
+sil! 15,87fold
+sil! 89,97fold
+sil! 1,97fold
 let &fdl = &fdl
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+let s:l = 3 - ((2 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 012|
+keepjumps 3
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

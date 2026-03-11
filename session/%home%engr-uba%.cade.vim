@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~
+cd ~/.cade
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,12 +13,14 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +6 Documents/GitHub/desktop-tutorial/README.md
+badd +49 settings.json
+badd +1 skills/pdf/forms.md
 argglobal
 %argdel
-$argadd Documents/GitHub/desktop-tutorial/README.md
-edit Documents/GitHub/desktop-tutorial/README.md
+$argadd .
+edit settings.json
 argglobal
+balt skills/pdf/forms.md
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -28,14 +30,25 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,6fold
+sil! 4,6fold
+sil! 8,18fold
+sil! 21,22fold
+sil! 24,25fold
+sil! 27,28fold
+sil! 32,35fold
+sil! 30,36fold
+sil! 40,44fold
+sil! 38,45fold
+sil! 47,49fold
+sil! 20,50fold
+sil! 1,51fold
 let &fdl = &fdl
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+let s:l = 1 - ((0 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 012|
+keepjumps 1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -277,7 +277,6 @@ return {
     lazy = false,
     keys = {
       { "<A-f>", function() require("FTerm").toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
-      { "<A-i>", function() require("FTerm").toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
     },
     config = function()
       require("FTerm").setup({
@@ -294,9 +293,6 @@ return {
     "akinsho/toggleterm.nvim",
     version = "*",
     lazy = false,
-    keys = {
-      { "<A-h>", function() require("toggleterm").toggle(1, 15, vim.loop.cwd(), "horizontal") end, mode = { "n", "t" }, desc = "Toggle horizontal terminal" },
-    },
     config = function()
       require("toggleterm").setup({
         size = 20,
@@ -308,13 +304,9 @@ return {
         start_in_insert = true,
         insert_mappings = true,
         persist_size = true,
-        direction = "float",
+        direction = "horizontal",
         close_on_exit = true,
         shell = vim.o.shell,
-        float_opts = {
-          border = "curved",
-          winblend = 3,
-        },
       })
     end,
   },

@@ -666,3 +666,45 @@ git checkout HEAD -- lua/plugins/init.lua
 # To restore plugins to their prior states:
 # You may need to manually rollback `lazy-lock.json` or restore `rust.vim`
 ```
+
+---
+
+## Session: 2026-03-11 - Fix Terminal Configuration Issues
+
+### Timestamp (UTC): 2026-03-11T03:45:00Z
+
+### Summary
+Removed duplicate keymaps, dead code, and mismatched `toggleterm` direction config from the terminal setup.
+
+### Files Modified
+- `lua/plugins/init.lua`
+- `lua/mappings.lua`
+
+### Exact Reason
+Four issues existed in the terminal configuration:
+1. `<A-i>` was a duplicate of `<A-f>` — both called `FTerm.toggle()`.
+2. `<A-h>` was defined in both `init.lua` plugin `keys` table and `mappings.lua`. The `keys` table wins in lazy.nvim; the `mappings.lua` definition was dead.
+3. `toggleterm.setup()` had `direction = "float"` and `float_opts` but the only keymap opens a horizontal terminal — the float direction was unreachable.
+4. `_MINI_TERM` and `_NEW_TERM` globals were defined in `mappings.lua` with no keymaps — dead code.
+
+### Previous Behavior
+- `<A-i>` and `<A-f>` both toggled FTerm float (duplicate).
+- `<A-h>` was registered twice; `init.lua` version shadowed `mappings.lua` version.
+- `toggleterm` defaulted to float direction but was only ever opened as horizontal.
+- `_MINI_TERM` and `_NEW_TERM` were allocated as globals on every startup with no way to invoke them.
+
+### New Behavior
+- `<A-f>` is the sole FTerm float toggle.
+- `<A-h>` is defined only in `mappings.lua` (single source of truth).
+- `toggleterm` `direction = "horizontal"`, `float_opts` removed — matches actual usage.
+- `_MINI_TERM` and `_NEW_TERM` dead code removed.
+
+### Rollback Instructions
+In `lua/plugins/init.lua`:
+- Restore `{ "<A-i>", ... }` entry to FTerm `keys` table.
+- Restore `keys = { { "<A-h>", ... } }` block to toggleterm spec.
+- Restore `direction = "float"` and `float_opts = { border = "curved", winblend = 3 }` in `toggleterm.setup()`.
+
+In `lua/mappings.lua`:
+- Restore `<A-i>` map block after the `<A-f>` block.
+- Restore `_MINI_TERM` and `_NEW_TERM` blocks after the `_PYTHON_TOGGLE` block.

@@ -116,10 +116,6 @@ map({ "n", "t" }, "<A-f>", function()
   require("FTerm").toggle()
 end, { desc = "terminal toggle floating term" })
 
-map({ "n", "t" }, "<A-i>", function()
-  require("FTerm").toggle()
-end, { desc = "terminal toggle floating term" })
-
 map({ "n", "t" }, "<A-h>", function()
   vim.cmd("ToggleTerm direction=horizontal size=15")
 end, { desc = "terminal toggleable horizontal term" })
@@ -147,16 +143,6 @@ if toggleterm_ok then
     python:toggle()
   end
   map({ "n", "t", "i" }, "<A-p>", "<cmd>lua _PYTHON_TOGGLE()<CR>", { desc = "Python Terminal" })
-
-  local mini_term = Terminal:new({ hidden = true })
-  _G._MINI_TERM = function()
-    mini_term:toggle()
-  end
-
-  local new_term = Terminal:new({ hidden = true })
-  _G._NEW_TERM = function()
-    new_term:toggle()
-  end
 end
 
 

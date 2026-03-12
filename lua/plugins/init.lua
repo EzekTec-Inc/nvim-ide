@@ -329,14 +329,7 @@ return {
     config = true,
   },
 
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({})
-    end,
-  },
+  -- nvim-surround moved to lua/plugins/nvim_surround.lua
 
   {
     "CosmicNvim/cosmic-ui",

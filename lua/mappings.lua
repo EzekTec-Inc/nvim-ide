@@ -351,25 +351,8 @@ map("n", "zr", function() require("ufo").openFoldsExceptKinds() end, { desc = "O
 map("n", "zm", function() require("ufo").closeFoldsWith() end, { desc = "Close folds with" })
 map("n", "zk", function() require("ufo").peekFoldedLinesUnderCursor() end, { desc = "Peek folded lines" })
 
--- -- nvim-surround
--- map("n", "<leader>sa", require("nvim-surround").add_surround, { desc = "nvchad surround add" })
--- map("n", "<leader>sd", require("nvim-surround").delete_surround, { desc = "nvchad surround delete" })
--- map("n", "<leader>sc", require("nvim-surround").change_surround, { desc = "nvchad surround change" })
---
--- NOTE: nvim-surround setup moved to plugin config in lua/plugins/init.lua
--- to avoid loading issues during mappings initialization
--- FIX 2026-02-13T23:15:58: Removed require("nvim-surround").setup() call
--- that was causing issues during mappings load
-local surround_ok, nvim_surround = pcall(require, "nvim-surround")
-if surround_ok then
-  pcall(function()
-    nvim_surround.setup({
-      surrounds = {
-          -- ["h"] = false,
-      },
-    })
-  end)
-end
+-- nvim-surround: setup and keymaps live in lua/plugins/nvim_surround.lua
+-- Default keys: ys<motion><char>  cs<old><new>  ds<char>  (visual) S<char>
 
 -- global lsp mappings
 map("n", "<leader>dss", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })

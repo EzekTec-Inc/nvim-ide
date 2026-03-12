@@ -750,3 +750,25 @@ In `lua/configs/lsp.lua`:
 
 In `lua/configs/conform.lua`:
 - Remove `markdown = { "prettier" }` from the `formatters_by_ft` table.
+
+### Session: 2026-03-11 - Markdown System Fixes (Part 2)
+
+#### Timestamp (UTC): 2026-03-11T04:22:00Z
+
+#### Summary
+Implemented large-file performance safeguards to prevent Neovim UI lag/stuttering when opening massive markdown files (e.g., changelogs or API specifications) with `render-markdown.nvim`.
+
+#### Files Modified
+- `lua/plugins/markdown_extended.lua`
+- `lua/autocmds.lua`
+
+#### Exact Reason
+`render-markdown.nvim` is a heavy plugin that parses the Treesitter tree and injects hundreds or thousands of extmarks (virtual UI elements) for headings, code blocks, and lists. On very large files (> 512KB), this operation causes the editor to lag significantly during typing and scrolling.
+
+#### New Behavior
+- Added `max_file_size = 0.5` (512 KB) to `render-markdown.nvim` options. The plugin now natively disables itself for any file over 512KB.
+- Updated the `FileType` autocmd in `lua/autocmds.lua` to immediately abort and *not* set `conceallevel = 2` if the buffer is flagged as `vim.b.bigfile` or `vim.b.large_buf`. This ensures you don't end up with hidden raw syntax and no rendered icons on large files.
+
+#### Rollback Instructions
+- In `lua/plugins/markdown_extended.lua`: remove the `max_file_size = 0.5,` line.
+- In `lua/autocmds.lua`: remove the `if vim.b.bigfile or vim.b.large_buf then return end` block from the bottom `FileType` autocmd.

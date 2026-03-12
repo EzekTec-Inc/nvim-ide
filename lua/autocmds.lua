@@ -119,6 +119,10 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
 autocmd("FileType", {
   pattern = { "markdown", "quarto", "Avante" },
   callback = function()
+    -- Skip if bigfile is detected to prevent UI lag on massive docs
+    if vim.b.bigfile or vim.b.large_buf then
+      return
+    end
     vim.opt_local.conceallevel = 2
     vim.opt_local.concealcursor = "nc" -- hide while not typing in the line
   end,

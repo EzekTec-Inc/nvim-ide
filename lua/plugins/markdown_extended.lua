@@ -4,6 +4,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = { "markdown", "quarto", "Avante" },
 		opts = {
+			max_file_size = 0.5, -- Disable for files larger than 512KB to prevent UI lag
 			file_types = { "markdown", "quarto", "Avante" },
 			code = {
 				sign = false,

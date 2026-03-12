@@ -114,3 +114,12 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
     end
   end,
 })
+
+-- Enable conceallevel for markdown and quarto files to allow render-markdown.nvim to hide syntax
+autocmd("FileType", {
+  pattern = { "markdown", "quarto", "Avante" },
+  callback = function()
+    vim.opt_local.conceallevel = 2
+    vim.opt_local.concealcursor = "nc" -- hide while not typing in the line
+  end,
+})

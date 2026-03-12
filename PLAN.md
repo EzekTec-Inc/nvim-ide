@@ -708,3 +708,45 @@ In `lua/plugins/init.lua`:
 In `lua/mappings.lua`:
 - Restore `<A-i>` map block after the `<A-f>` block.
 - Restore `_MINI_TERM` and `_NEW_TERM` blocks after the `_PYTHON_TOGGLE` block.
+
+---
+
+## Session: 2026-03-11 - Markdown System Fixes (Part 1)
+
+### Timestamp (UTC): 2026-03-11T04:15:00Z
+
+### Summary
+Fixed critical bottlenecks in the markdown rendering and LSP setup to allow `render-markdown.nvim` to function correctly and provide fully-featured IDE support for markdown editing.
+
+### Files Modified
+- `lua/autocmds.lua`
+- `lua/plugins/init.lua`
+- `lua/configs/lsp.lua`
+- `lua/configs/conform.lua`
+
+### Exact Reason
+1. **Conceallevel bottleneck:** `render-markdown.nvim` relies on Neovim's `conceallevel` to hide syntax characters like `#` for headings. Since `conceallevel` defaults to `0`, the markdown syntax characters and the plugin's rendered UI icons were overlapping.
+2. **Missing LSP/Formatter bottleneck:** The environment had visual rendering and live preview plugins, but no actual language server (`marksman`) or formatter (`prettier`) configured for markdown, meaning autocomplete, diagnostics, and auto-formatting were broken/missing for `.md` files.
+
+### Previous Behavior
+- `render-markdown.nvim` icons clashed with raw markdown syntax because `conceallevel` was `0`.
+- No LSP attached to markdown buffers.
+- No formatter registered for markdown in `conform.nvim`.
+
+### New Behavior
+- `vim.opt_local.conceallevel = 2` and `concealcursor = "nc"` are applied via `FileType` autocmd to `markdown`, `quarto`, and `Avante` files. Syntax characters are hidden in Normal mode and revealed in Insert/Visual mode.
+- `marksman` is installed via Mason and attached to markdown buffers via `nvim-lspconfig`.
+- `prettier` is registered for markdown formatting in `conform.nvim`.
+
+### Rollback Instructions
+In `lua/autocmds.lua`:
+- Remove the `FileType` autocmd block at the bottom of the file targeting `markdown`, `quarto`, and `Avante`.
+
+In `lua/plugins/init.lua`:
+- Remove `"marksman"` from the `ensure_installed` list in the `mason.nvim` config.
+
+In `lua/configs/lsp.lua`:
+- Remove `"marksman"` from the `servers` list in `M.setup_other_lsps`.
+
+In `lua/configs/conform.lua`:
+- Remove `markdown = { "prettier" }` from the `formatters_by_ft` table.

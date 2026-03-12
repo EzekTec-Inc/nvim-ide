@@ -209,7 +209,7 @@ M.setup_ts_ls = function()
 end
 
 M.setup_other_lsps = function()
-  local servers = { "html", "cssls", "pyright", "clangd", "volar", "angularls" }
+  local servers = { "html", "cssls", "pyright", "clangd", "volar", "angularls", "marksman" }
 
   for _, lsp in ipairs(servers) do
     M.setup_lsp(lsp, {

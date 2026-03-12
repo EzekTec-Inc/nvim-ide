@@ -94,7 +94,7 @@ return {
     ensure_installed = {
       "lua-language-server", "stylua",
       "html-lsp", "css-lsp", "prettier", "typescript-language-server",
-      "rust-analyzer",
+      "rust-analyzer", "marksman",
       "pyright", "clangd", "vue-language-server", "angular-language-server",
       "codelldb", "debugpy",
     },

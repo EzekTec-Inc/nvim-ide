@@ -2,7 +2,7 @@ return {
   "brianhuster/live-preview.nvim",
   ft = { "markdown", "html", "svg" },
   config = function()
-    require("live_preview").setup {
+    require("livepreview").setup {
       port = 5500,
       address = "127.0.0.1",
       browser = "default",  -- uses system default browser

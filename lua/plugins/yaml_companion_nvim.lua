@@ -14,11 +14,9 @@ return {
   dependencies = {
     "neovim/nvim-lspconfig",
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
     "b0o/schemastore.nvim",
   },
   config = function()
-    require("telescope").load_extension("yaml_schema")
     local cfg = require("yaml-companion").setup({
       builtin_matchers = {
         kubernetes = { enabled = true },
@@ -40,5 +38,10 @@ return {
     })
     local lsp = require("configs.lsp")
     lsp.setup_lsp("yamlls", cfg)
+
+    -- Schema picker (uses vim.ui.select — no telescope extension needed)
+    vim.keymap.set("n", "<leader>ys", function()
+      require("yaml-companion").open_ui_select()
+    end, { desc = "YAML: select schema", buffer = true })
   end,
 }

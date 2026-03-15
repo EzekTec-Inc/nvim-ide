@@ -134,3 +134,11 @@ git restore lua/mappings.lua
 # PLAN.md is append-only by policy. To remove this entry from the working tree ONLY:
 # git restore PLAN.md
 ```
+
+## 2026-03-15 23:13:36 UTC
+- Summary: Aligned plugin keymaps in lua/mappings.lua with plugin specs and which-key-visible descriptions.
+- Files modified: lua/mappings.lua, PLAN.md
+- Exact reason: Several plugins declared keys in their plugin specs that were missing or conflicting in lua/mappings.lua, causing inaccurate implementation and inconsistent which-key display.
+- Previous behavior: YAML schema selection used a Telescope command not provided by yaml-companion; DAP step-out conflicted with DBUI toggle on <leader>du; Trouble and Neotest both used <leader>t*; Dadbod UI, Neogit, Kulala, and GrugFar plugin keys existed in plugin specs but were not mirrored in lua/mappings.lua; Treesj join used <leader>sj instead of the plugin spec key.
+- New behavior: YAML schema selection calls yaml-companion directly; DAP step-out uses <leader>dO; Trouble uses <leader>x* while Neotest uses <leader>t*; Dadbod UI (<leader>du), Neogit (<leader>gn), Kulala (<leader>rq/<leader>rt), and GrugFar (<leader>sr) are now present in lua/mappings.lua; Treesj join now uses <leader>s. All affected mappings retain desc values for which-key display.
+- Rollback instructions: git revert HEAD to undo this change after commit, or restore lua/mappings.lua and PLAN.md from the previous commit.

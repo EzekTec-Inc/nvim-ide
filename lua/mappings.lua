@@ -183,7 +183,12 @@ if crates_ok then
 end
 
 -- YAML Companion
-map("n", "<leader>ys", "<cmd>Telescope yaml_schema<CR>", { desc = "YAML Select Schema" })
+map("n", "<leader>ys", function()
+  local ok, companion = pcall(require, "yaml-companion")
+  if ok then
+    companion.open_ui_select()
+  end
+end, { desc = "YAML select schema" })
 
 -- thePrimeagen's Harpoon
 local harpoon_ok, _ = pcall(require, "harpoon")
@@ -228,7 +233,7 @@ map("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc =
 map("n", "<leader>dr", "<cmd>lua require'dap'.continue()<CR>", { desc = "DAP: Start/Continue" })
 map("n", "<leader>di", "<cmd>lua require'dap'.step_into()<CR>", { desc = "DAP: Step into" })
 map("n", "<leader>do", "<cmd>lua require'dap'.step_over()<CR>", { desc = "DAP: Step over" })
-map("n", "<leader>du", "<cmd>lua require'dap'.step_out()<CR>", { desc = "DAP: Step out" })
+map("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<CR>", { desc = "DAP: Step out" })
 map("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<CR>", { desc = "DAP: Terminate" })
 map("n", "<leader>dw", "<cmd>lua require'dap.ui.widgets'.hover()<CR>", { desc = "DAP: Hover widgets" })
 map("n", "<leader>dui", "<cmd>lua require'dapui'.toggle()<CR>", { desc = "DAP: Toggle UI" })
@@ -393,14 +398,52 @@ end
 map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle Zen Mode" })
 
 -- trouble diagnostics
-map("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics" })
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics" })
 map("n", "<leader>tx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics (alt)" })
-map("n", "<leader>tX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Trouble buffer diagnostics" })
-map("n", "<leader>to", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Trouble symbols" })
-map("n", "<leader>tl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "Trouble LSP" })
-map("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Trouble location list" })
-map("n", "<leader>tQ", "<cmd>Trouble quickfix toggle<cr>", { desc = "Trouble quickfix" })
-map("n", "<leader>tr", "<cmd>Trouble lsp_references toggle<cr>", { desc = "Trouble LSP references" })
+map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Trouble buffer diagnostics" })
+map("n", "<leader>xo", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Trouble symbols" })
+map("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "Trouble LSP" })
+map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Trouble location list" })
+map("n", "<leader>xQ", "<cmd>Trouble quickfix toggle<cr>", { desc = "Trouble quickfix" })
+map("n", "<leader>xr", "<cmd>Trouble lsp_references toggle<cr>", { desc = "Trouble LSP references" })
+
+-- neotest
+map("n", "<leader>tt", function() require("neotest").run.run() end, { desc = "Run nearest test" })
+map("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run file tests" })
+map("n", "<leader>ts", function() require("neotest").summary.toggle() end, { desc = "Toggle test summary" })
+
+-- dadbod ui
+map("n", "<leader>du", "<cmd>DBUIToggle<cr>", { desc = "Toggle DB UI" })
+
+-- neogit
+map("n", "<leader>gn", "<cmd>Neogit<cr>", { desc = "Neogit" })
+
+-- kulala
+map("n", "<leader>rq", function()
+  local ft = vim.bo.filetype
+  local ext = vim.fn.expand("%:e")
+  if ft == "http" or ft == "rest" or ext == "http" or ext == "rest" or ext == "https" then
+    if ft ~= "http" and ft ~= "rest" then vim.bo.filetype = "http" end
+    require("kulala").run()
+  else
+    vim.notify("Kulala only runs in .http, .https, or .rest files", vim.log.levels.WARN)
+  end
+end, { desc = "Run HTTP Request" })
+map("n", "<leader>rt", function()
+  local ft = vim.bo.filetype
+  local ext = vim.fn.expand("%:e")
+  if ft == "http" or ft == "rest" or ext == "http" or ext == "rest" or ext == "https" then
+    if ft ~= "http" and ft ~= "rest" then vim.bo.filetype = "http" end
+    require("kulala").toggle_view()
+  else
+    vim.notify("Kulala only runs in .http, .https, or .rest files", vim.log.levels.WARN)
+  end
+end, { desc = "Toggle Headers/Body View" })
+
+-- grug-far
+map("n", "<leader>sr", function()
+  require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
+end, { desc = "Search and replace (GrugFar)" })
 
 -- todo-comments
 map("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
@@ -411,7 +454,7 @@ map("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "Trouble todo comments" 
 -- treesj split/join (<space>m/j/s in plugin spec = <leader>m/j/s)
 map("n", "<leader>m", "<cmd>TSJToggle<cr>", { desc = "Split/join toggle" })
 map("n", "<leader>j", "<cmd>TSJSplit<cr>", { desc = "Split code block" })
-map("n", "<leader>sj", "<cmd>TSJJoin<cr>", { desc = "Join code block" })
+map("n", "<leader>s", "<cmd>TSJJoin<cr>", { desc = "Join code block" })
 
 -- activate.nvim plugin browser
 map("n", "<leader>P", function()

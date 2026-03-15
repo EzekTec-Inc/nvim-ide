@@ -35,8 +35,8 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
-map("n", "<C-d>", "<cmd>RustMoveItemDown<CR>^n", { desc = "Rust move line down" })
-map("n", "<C-u>", "<cmd>RustMoveItemUp<CR>^n", { desc = "Rust move line up" })
+map("n", "<leader>jd", "<cmd>RustMoveItemDown<CR>^n", { desc = "Rust move line down" })
+map("n", "<leader>ju", "<cmd>RustMoveItemUp<CR>^n", { desc = "Rust move line up" })
 
 -- highlight line toggle
 local function toggle_highlight()
@@ -200,7 +200,7 @@ if hop_ok then
 end
 
 -- Hop keymaps (alternative direct commands)
-map("n", "s", "<cmd>HopWord<CR>", { desc = "Hop to word" })
+map("n", "<leader>sw", "<cmd>HopWord<CR>", { desc = "Hop to word" })
 
 -- Persistence session mappings
 local persistence_ok, persistence = pcall(require, "persistence")

@@ -13,14 +13,42 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +16 README.md
-badd +0 ARCHITECTURE.md
 argglobal
 %argdel
-$argadd .
-edit ARCHITECTURE.md
+$argadd NvimTree_1
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 20 + 95) / 191)
+exe 'vert 2resize ' . ((&columns * 170 + 95) / 191)
 argglobal
-balt README.md
+enew
+file NvimTree_1
+setlocal foldmethod=manual
+setlocal foldexpr=0
+setlocal foldmarker={{{,}}}
+setlocal foldignore=#
+setlocal foldlevel=99
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal nofoldenable
+lcd ~/Downloads/02\ Rust-project/CADE
+wincmd w
+argglobal
+enew
 setlocal foldmethod=manual
 setlocal foldexpr=0
 setlocal foldmarker={{{,}}}
@@ -29,41 +57,10 @@ setlocal foldlevel=99
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
-silent! normal! zE
-sil! 7,9fold
-sil! 5,9fold
-sil! 15,18fold
-sil! 13,18fold
-sil! 22,28fold
-sil! 20,28fold
-sil! 32,34fold
-sil! 30,34fold
-sil! 11,34fold
-sil! 40,45fold
-sil! 38,45fold
-sil! 49,54fold
-sil! 47,54fold
-sil! 58,59fold
-sil! 56,59fold
-sil! 63,64fold
-sil! 61,64fold
-sil! 36,64fold
-sil! 68,74fold
-sil! 66,74fold
-sil! 78,82fold
-sil! 76,82fold
-sil! 85,88fold
-sil! 84,88fold
-sil! 91,96fold
-sil! 90,96fold
-sil! 1,96fold
-let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 21) / 42)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 1
-normal! 022|
+wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 20 + 95) / 191)
+exe 'vert 2resize ' . ((&columns * 170 + 95) / 191)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -71,6 +68,8 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
+let &winminheight = s:save_winminheight
+let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

@@ -5,3 +5,4 @@ target
 .gemini/
 gha-creds-*.json
 __pycache__/
+session/

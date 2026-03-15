@@ -9,10 +9,5 @@ return {
       sync_scroll = true,   -- sync scroll preview with editor
       dynamic_root = false,
     }
-
-    local map = vim.keymap.set
-    local opts = { noremap = true, silent = true }
-    map("n", "<leader>lp", ":LivePreview<CR>", vim.tbl_extend("force", opts, { desc = "Toggle Live Preview" }))
-    map("n", "<leader>ls", ":LivePreviewStop<CR>", vim.tbl_extend("force", opts, { desc = "Stop Live Preview" }))
   end,
 }

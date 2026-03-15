@@ -111,7 +111,6 @@ return {
       require("configs.lsp").setup_lua_ls()
       require("configs.lsp").setup_ts_ls()
       require("configs.lsp").setup_other_lsps()
-      require("custom.configs.lspconfig").setup()
     end,
   },
 

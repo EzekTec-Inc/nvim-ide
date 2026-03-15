@@ -37,7 +37,6 @@ map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 map("n", "<C-d>", "<cmd>RustMoveItemDown<CR>^n", { desc = "Rust move line down" })
 map("n", "<C-u>", "<cmd>RustMoveItemUp<CR>^n", { desc = "Rust move line up" })
-map("n", "<C-k>", vim.lsp.buf.hover, { desc = "lsp hover info" })
 
 -- highlight line toggle
 local function toggle_highlight()

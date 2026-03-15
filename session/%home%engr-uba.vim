@@ -13,11 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +6 Documents/GitHub/desktop-tutorial/README.md
+badd +23 .openviking/ov.conf
 argglobal
 %argdel
-$argadd Documents/GitHub/desktop-tutorial/README.md
-edit Documents/GitHub/desktop-tutorial/README.md
+$argadd .openviking/ov.conf
+edit .openviking/ov.conf
 argglobal
 setlocal foldmethod=manual
 setlocal foldexpr=0
@@ -28,14 +28,19 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 1,6fold
+sil! 2,3fold
+sil! 5,7fold
+sil! 10,15fold
+sil! 9,17fold
+sil! 19,24fold
+sil! 1,25fold
 let &fdl = &fdl
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+let s:l = 21 - ((20 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 012|
+keepjumps 21
+normal! 019|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

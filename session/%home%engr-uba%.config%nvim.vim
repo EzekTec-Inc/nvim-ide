@@ -13,11 +13,29 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +16 bot-the-great-20260305T055636.json
+badd +1 .
 argglobal
 %argdel
 $argadd .
-edit bot-the-great-20260305T055636.json
+edit .
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 20 + 95) / 191)
+exe 'vert 2resize ' . ((&columns * 170 + 95) / 191)
 argglobal
 setlocal foldmethod=manual
 setlocal foldexpr=0
@@ -28,23 +46,38 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
-sil! 2,7fold
-sil! 13,16fold
-sil! 18,21fold
-sil! 23,26fold
-sil! 12,27fold
-sil! 1,28fold
 let &fdl = &fdl
-1
-sil! normal! zo
-12
-sil! normal! zo
-let s:l = 8 - ((7 * winheight(0) + 21) / 43)
+let s:l = 1 - ((0 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 8
-normal! 04|
+keepjumps 1
+normal! 0
+wincmd w
+argglobal
+if bufexists(fnamemodify("term://~/.config/nvim//42716:/bin/bash", ":p")) | buffer term://~/.config/nvim//42716:/bin/bash | else | edit term://~/.config/nvim//42716:/bin/bash | endif
+if &buftype ==# 'terminal'
+  silent file term://~/.config/nvim//42716:/bin/bash
+endif
+balt .
+setlocal foldmethod=manual
+setlocal foldexpr=0
+setlocal foldmarker={{{,}}}
+setlocal foldignore=#
+setlocal foldlevel=99
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldenable
+let s:l = 29 - ((28 * winheight(0) + 21) / 43)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 29
+normal! 043|
+wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 20 + 95) / 191)
+exe 'vert 2resize ' . ((&columns * 170 + 95) / 191)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -52,6 +85,8 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
+let &winminheight = s:save_winminheight
+let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

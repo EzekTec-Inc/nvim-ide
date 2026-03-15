@@ -3,7 +3,7 @@ return {
   event = "BufReadPre",
   config = function()
     require("persistence").setup {
-      dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+      dir = vim.fn.expand(vim.fn.stdpath "data" .. "/sessions/"),
       options = { "buffers", "curdir", "tabpages", "winsize" },
     }
   end,

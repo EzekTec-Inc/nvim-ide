@@ -221,21 +221,6 @@ M.setup_other_lsps = function()
   end
 end
 
--- Create LineLeadCharToggle command if not already defined
-if vim.fn.exists(':LineLeadCharToggle') == 0 then
-  local line_lead_char_enabled = true
-  vim.api.nvim_create_user_command("LineLeadCharToggle", function()
-    line_lead_char_enabled = not line_lead_char_enabled
-    if line_lead_char_enabled then
-      vim.opt.list = true
-      print("Line lead chars enabled")
-    else
-      vim.opt.list = false
-      print("Line lead chars disabled")
-    end
-  end, { desc = "Toggle line lead characters" })
-end
-
 return M
 
 

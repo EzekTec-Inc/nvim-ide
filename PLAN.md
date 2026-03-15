@@ -142,3 +142,11 @@ git restore lua/mappings.lua
 - Previous behavior: YAML schema selection used a Telescope command not provided by yaml-companion; DAP step-out conflicted with DBUI toggle on <leader>du; Trouble and Neotest both used <leader>t*; Dadbod UI, Neogit, Kulala, and GrugFar plugin keys existed in plugin specs but were not mirrored in lua/mappings.lua; Treesj join used <leader>sj instead of the plugin spec key.
 - New behavior: YAML schema selection calls yaml-companion directly; DAP step-out uses <leader>dO; Trouble uses <leader>x* while Neotest uses <leader>t*; Dadbod UI (<leader>du), Neogit (<leader>gn), Kulala (<leader>rq/<leader>rt), and GrugFar (<leader>sr) are now present in lua/mappings.lua; Treesj join now uses <leader>s. All affected mappings retain desc values for which-key display.
 - Rollback instructions: git revert HEAD to undo this change after commit, or restore lua/mappings.lua and PLAN.md from the previous commit.
+
+## 2026-03-15 23:22:24 UTC
+- Summary: Updated the active NvChad theme to solarized_dark and recorded the resulting lazy-lock plugin revision changes.
+- Files modified: lua/chadrc.lua, lazy-lock.json, PLAN.md
+- Exact reason: Persist the current theme selection and commit the associated lockfile state produced by the plugin manager.
+- Previous behavior: The config defaulted to bearded-arc in lua/chadrc.lua, and lazy-lock.json referenced the previously locked plugin commits.
+- New behavior: The config now defaults to solarized_dark with matching theme toggles, and lazy-lock.json reflects the currently resolved plugin commit revisions.
+- Rollback instructions: git revert HEAD to undo after commit, or restore lua/chadrc.lua, lazy-lock.json, and PLAN.md from the previous commit.

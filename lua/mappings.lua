@@ -98,18 +98,20 @@ map("n", "<leader>up", "<cmd>CloakPreviewLine<CR>", { silent = true, desc = "Pre
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
 -- new terminals
-map("n", "<leader>h", function()
-  require("nvchad.term").new { pos = "sp" }
-end, { desc = "terminal new horizontal term" })
-map("n", "<leader>v", function()
-  require("nvchad.term").new { pos = "vsp" }
-end, { desc = "terminal new vertical window" })
+local nvterm_ok, nvterm = pcall(require, "nvchad.term")
+if nvterm_ok then
+  map("n", "<leader>h", function()
+    nvterm.new { pos = "sp" }
+  end, { desc = "terminal new horizontal term" })
+  map("n", "<leader>v", function()
+    nvterm.new { pos = "vsp" }
+  end, { desc = "terminal new vertical window" })
 
--- toggleable
-map({ "n", "t" }, "<A-v>", function()
-  require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
-end, { desc = "terminal toggleable vertical term" })
-
+  -- toggleable
+  map({ "n", "t" }, "<A-v>", function()
+    nvterm.toggle { pos = "vsp", id = "vtoggleTerm" }
+  end, { desc = "terminal toggleable vertical term" })
+end
 
 map({ "n", "t" }, "<A-f>", function()
   require("FTerm").toggle()
@@ -170,12 +172,15 @@ map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, desc = 
 map("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, desc = "Lspsaga line diagnostics" })
 
 -- Crates.nvim
-map("n", "<leader>cv", function() require("crates").show_versions_popup() end, { desc = "Crates show versions" })
-map("n", "<leader>cR", function() require("crates").show_features_popup() end, { desc = "Crates show features" })
-map("n", "<leader>cu", function() require("crates").update_crate() end, { desc = "Crates update" })
-map("n", "<leader>cU", function() require("crates").upgrade_crate() end, { desc = "Crates upgrade" })
-map("n", "<leader>cH", function() require("crates").open_homepage() end, { desc = "Crates open homepage" })
-map("n", "<leader>cD", function() require("crates").open_documentation() end, { desc = "Crates open documentation" })
+local crates_ok, crates = pcall(require, "crates")
+if crates_ok then
+  map("n", "<leader>cv", function() crates.show_versions_popup() end, { desc = "Crates show versions" })
+  map("n", "<leader>cR", function() crates.show_features_popup() end, { desc = "Crates show features" })
+  map("n", "<leader>cu", function() crates.update_crate() end, { desc = "Crates update" })
+  map("n", "<leader>cU", function() crates.upgrade_crate() end, { desc = "Crates upgrade" })
+  map("n", "<leader>cH", function() crates.open_homepage() end, { desc = "Crates open homepage" })
+  map("n", "<leader>cD", function() crates.open_documentation() end, { desc = "Crates open documentation" })
+end
 
 -- YAML Companion
 map("n", "<leader>ys", "<cmd>Telescope yaml_schema<CR>", { desc = "YAML Select Schema" })

@@ -1,3 +1,11 @@
+fn main() {
+    let new_world = "New World! <insert world icon here>";
+
+    let res = new_world.chars().split(|c| c == ' ').collect::<Vec<char>>();
+
+    println!("Hello, world!");
+}
+
 #[cfg(test)]
 mod tests {
     #[test]

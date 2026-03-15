@@ -161,11 +161,13 @@ end
 -- carbon-now create share beautiful images of source code
 map({ "v", "n", "i" }, "<leader>cn", ":CarbonNow<CR>", { desc = "CarbonNow code-snipper", silent = true })
 
--- Lspsaga
+-- Lspsaga: unified LSP UI mappings
 map("n", "<C-k>", "<cmd>Lspsaga hover_doc<CR>", { silent = true, desc = "Lspsaga hover doc" })
+map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, desc = "Lspsaga code action" })
+map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true, desc = "Lspsaga rename symbol" })
+map("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true, desc = "Lspsaga prev diagnostic" })
+map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, desc = "Lspsaga next diagnostic" })
 map("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, desc = "Lspsaga line diagnostics" })
-map("n", "<leader>pd", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true, desc = "Lspsaga prev diagnostic" })
-map("n", "<leader>nd", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, desc = "Lspsaga next diagnostic" })
 
 -- Crates.nvim
 map("n", "<leader>cv", function() require("crates").show_versions_popup() end, { desc = "Crates show versions" })
@@ -339,7 +341,7 @@ map("n", "zk", function() require("ufo").peekFoldedLinesUnderCursor() end, { des
 -- nvim-surround: setup and keymaps live in lua/plugins/nvim_surround.lua
 -- Default keys: ys<motion><char>  cs<old><new>  ds<char>  (visual) S<char>
 
--- global lsp mappings
+-- global lsp mappings (keep minimal; Lspsaga handles most UI)
 map("n", "<leader>dss", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
 
 -- tabufline

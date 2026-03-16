@@ -158,3 +158,19 @@ git restore lua/mappings.lua
 - Previous behavior: src/main.rs did not contain the current main function block present in the working tree.
 - New behavior: src/main.rs now includes the inspected main function exactly as requested, with no corrective edits applied.
 - Rollback instructions: git revert HEAD to undo after commit, or restore src/main.rs and PLAN.md from the previous commit.
+
+## 2026-03-15 23:49:36 UTC
+- Summary: Centralized the <leader>s namespace into lua/mappings.lua and removed duplicate plugin-side bindings.
+- Files modified: lua/mappings.lua, lua/configs/lsp.lua, lua/plugins/treesitter.lua, lua/plugins/grug-far.lua, PLAN.md
+- Exact reason: Ensure <leader>s mappings are housed in lua/mappings.lua as requested and eliminate verified collisions/hidden mappings.
+- Previous behavior: <leader>sh, <leader>sa, and <leader>sA were defined outside lua/mappings.lua, and <leader>sr plus <leader>sw had duplicate/conflicting definitions.
+- New behavior: The <leader>s namespace is defined from lua/mappings.lua, with <leader>sw no longer conflicting with Hop and plugin-side duplicate <leader>sr registration removed.
+- Rollback instructions: git revert HEAD to undo after commit, or restore the listed files from the previous commit.
+
+## 2026-03-16 00:08:25 UTC
+- Summary: Updated the active NvChad theme to ayu_dark.
+- Files modified: lua/chadrc.lua, PLAN.md
+- Exact reason: User manually updated the theme selection to ayu_dark in the working tree.
+- Previous behavior: The config defaulted to solarized_dark in lua/chadrc.lua.
+- New behavior: The config now defaults to ayu_dark with matching theme toggles.
+- Rollback instructions: git revert HEAD to undo after commit, or restore lua/chadrc.lua and PLAN.md from the previous commit.

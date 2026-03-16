@@ -136,8 +136,6 @@ return {
       -- ── Swap arguments ───────────────────────────────────────────────────
       -- <leader>sa → swap with next argument
       -- <leader>sA → swap with previous argument
-      map("n", "<leader>sa", function() swap.swap_next("@parameter.inner")     end, { desc = "Swap next argument" })
-      map("n", "<leader>sA", function() swap.swap_previous("@parameter.inner") end, { desc = "Swap prev argument" })
     end,
   },
 }

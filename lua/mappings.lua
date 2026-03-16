@@ -210,7 +210,6 @@ if hop_ok then
 end
 
 -- Hop keymaps (alternative direct commands)
-map("n", "<leader>sw", "<cmd>HopWord<CR>", { desc = "Hop to word" })
 
 -- Persistence session mappings
 local persistence_ok, persistence = pcall(require, "persistence")
@@ -474,6 +473,9 @@ map("v", "<leader>lt", ":VisualDuplicate +1<CR>", { desc = "Duplicate selection 
 
 -- Scratchpad
 map("n", "<leader>sn", "<cmd>Scratch<CR>", { desc = "New scratch by type" })
+map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "Show signature help" })
+map("n", "<leader>sa", function() require("nvim-treesitter.textobjects.swap").swap_next("@parameter.inner") end, { desc = "Swap next argument" })
+map("n", "<leader>sA", function() require("nvim-treesitter.textobjects.swap").swap_previous("@parameter.inner") end, { desc = "Swap prev argument" })
 map("n", "<leader>sw", "<cmd>ScratchWithName<CR>", { desc = "New scratch with name" })
 map("n", "<leader>so", "<cmd>ScratchOpen<CR>", { desc = "Open scratch list" })
 map("n", "<leader>sc", "<cmd>Scratch<CR>", { desc = "New scratch by type" })

@@ -123,10 +123,13 @@ local function cade_export_theme()
 	local theme = { name = "nvim-exported", author = "cade.nvim", colors = colors }
 	local theme_dir = os.getenv("HOME") .. "/.cade/themes"
 	vim.fn.mkdir(theme_dir, "p")
-	local file = io.open(theme_dir .. "/nvim-exported.json", "w")
-	if file then
+	local ok, err = pcall(function()
+		local file = assert(io.open(theme_dir .. "/nvim-exported.json", "w"))
 		file:write(vim.fn.json_encode(theme))
 		file:close()
+	end)
+	if not ok then
+		vim.notify("[cade] theme export failed: " .. tostring(err), vim.log.levels.WARN)
 	end
 end
 

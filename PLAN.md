@@ -204,3 +204,25 @@ User requested commit of existing unstaged change.
 ```bash
 git revert 3e8ec5b
 ```
+
+---
+
+## Session: 2026-04-04T17:00:00Z — Deprecation & error-handling fixes (3 items)
+
+### Fix 1 — vim.loop → vim.uv compat shim
+- **Files:** `init.lua:16`, `lua/autocmds.lua:81`, `lua/chadrc.lua:36`
+- **Change:** `vim.loop.fs_stat` → `(vim.uv or vim.loop).fs_stat`
+- **Reason:** `vim.loop` deprecated; breaks on Neovim 0.12+
+- **Rollback:** `git revert 2f20339`
+
+### Fix 2 — client.supports_method → capability table check
+- **Files:** `lua/configs/lsp.lua:34`
+- **Change:** `client.supports_method "textDocument/semanticTokens"` → `client.server_capabilities and client.server_capabilities.semanticTokensProvider`
+- **Reason:** `client.supports_method` removed in Neovim 0.13
+- **Rollback:** `git revert a744d27`
+
+### Fix 3 — io.open error handling
+- **Files:** `init.lua:126-133`
+- **Change:** Wrapped file write in `pcall` + `assert`; added `vim.notify` on failure
+- **Reason:** Silent failures on disk full / permission errors
+- **Rollback:** `git revert 46dcde6`

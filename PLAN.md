@@ -174,3 +174,33 @@ git restore lua/mappings.lua
 - Previous behavior: The config defaulted to solarized_dark in lua/chadrc.lua.
 - New behavior: The config now defaults to ayu_dark with matching theme toggles.
 - Rollback instructions: git revert HEAD to undo after commit, or restore lua/chadrc.lua and PLAN.md from the previous commit.
+
+---
+
+## Session: 2026-04-04T16:00:00Z — Theme switch: bearded-arc → gruvchad
+
+### Summary of change
+Committed unstaged theme change in `lua/chadrc.lua`. Switched default theme from `bearded-arc` to `gruvchad` across all relevant fields.
+
+### Files modified
+- `lua/chadrc.lua`
+- `PLAN.md`
+
+### Exact changes
+- `base46.theme`: `"bearded-arc"` → `"gruvchad"`
+- `base46.theme_toggle[1]`: `"bearded-arc"` → `"gruvchad"`
+- `ui.theme`: `"bearded-arc"` → `"gruvchad"`
+- `ui.theme_toggle[1]`: `"bearded-arc"` → `"gruvchad"`
+- Comment block updated to match
+
+### Reason
+User requested commit of existing unstaged change.
+
+### Previous behavior → New behavior
+- Previous: Neovim started with `bearded-arc` theme; toggle cycled bearded-arc ↔ catppuccin_light
+- New: Neovim starts with `gruvchad`; toggle cycles gruvchad ↔ catppuccin_light
+
+### Rollback
+```bash
+git revert 3e8ec5b
+```

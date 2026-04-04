@@ -78,7 +78,7 @@ local bigfile_group = augroup("BigFileSettings", { clear = true })
 autocmd({ "BufReadPre" }, {
 	group = bigfile_group,
 	callback = function(args)
-		local ok, stat = pcall(vim.loop.fs_stat, args.file)
+		local ok, stat = pcall((vim.uv or vim.loop).fs_stat, args.file)
 		if ok and stat and stat.size > 1024 * 512 then
 			vim.b.bigfile = true
 			vim.b.large_buf = true

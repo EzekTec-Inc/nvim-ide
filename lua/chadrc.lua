@@ -33,7 +33,7 @@ do
       local base46_cache = vim.g.base46_cache
       if type(base46_cache) == "string" and base46_cache ~= "" then
         local telescope_hl_path = base46_cache .. "telescope"
-        local stat_ok = pcall(vim.loop.fs_stat, telescope_hl_path)
+        local stat_ok = pcall((vim.uv or vim.loop).fs_stat, telescope_hl_path)
         if stat_ok then
           pcall(dofile, telescope_hl_path)
         end

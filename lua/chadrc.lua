@@ -8,7 +8,7 @@
 --
 -- -- M.ui = {theme = 'catppuccin'} -- This was the default I selected initially
 -- M.ui = {
--- 	theme = "bearded-arc",
+-- 	theme = "gruvchad",
 --
 -- 	-- hl_override = {
 -- 	-- 	Comment = { italic = true },
@@ -99,18 +99,18 @@ end
 local options = {
 
   base46 = {
-    theme = "bearded-arc", -- default theme
+    theme = "gruvchad", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = true,
-    theme_toggle = { "bearded-arc", "catppuccin_light" },
+    theme_toggle = { "gruvchad", "catppuccin_light" },
   },
 
   ui = {
-    theme = "bearded-arc",
-    theme_toggle = { "bearded-arc", "catppuccin_light" },
+    theme = "gruvchad",
+    theme_toggle = { "gruvchad", "catppuccin_light" },
 
     cmp = {
       icons = true,

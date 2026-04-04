@@ -31,7 +31,7 @@ M.flags = {
 
 -- disable semanticTokens
 M.on_init = function(client, _)
-  if client.supports_method "textDocument/semanticTokens" then
+  if client.server_capabilities and client.server_capabilities.semanticTokensProvider then
     client.server_capabilities.semanticTokensProvider = nil
   end
 end

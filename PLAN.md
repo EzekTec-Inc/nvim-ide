@@ -257,3 +257,17 @@ git revert 8e3c81d
 ```bash
 git revert b2d8775
 ```
+
+---
+
+## Session: 2026-04-05T15:55:00Z — Code review resolution
+
+### Files modified
+- `lua/plugins/dap.lua`: Replaced `${workspaceRoot}` with `vim.fn.getcwd()`. Fixed Python DAP adapter to use Mason's debugpy and respect venv.
+- `lua/autocmds.lua`: Removed duplicate `local autocmd` declaration.
+- `lua/configs/lsp.lua`: Removed dead `-- EXAMPLE` code block.
+
+### Rollback
+```bash
+git revert a63a7b4 af60189 5e24289
+```

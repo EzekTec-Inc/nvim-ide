@@ -271,3 +271,15 @@ git revert b2d8775
 ```bash
 git revert a63a7b4 af60189 5e24289
 ```
+
+---
+
+## Session: 2026-04-05T16:55:00Z — Move documentation to docs/
+
+### Files modified
+- Renamed `CODE_REVIEW.md`, `INDEX.md`, `MERMAID_SETUP.md`, `MODERNIZATION_GUIDE.md`, and `REVIEW_SUMMARY.md` to the `docs/` directory.
+
+### Rollback
+```bash
+git revert af4aff6
+```

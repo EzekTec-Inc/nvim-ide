@@ -244,3 +244,16 @@ User requested commit.
 ```bash
 git revert 8e3c81d
 ```
+
+---
+
+## Session: 2026-04-05T15:49:00Z — Theme switch & plugin lock updates
+
+### Files modified
+- `lua/chadrc.lua`: Switched theme to `solarized_osaka`.
+- `lazy-lock.json`: Auto-updated plugin lockfile.
+
+### Rollback
+```bash
+git revert b2d8775
+```

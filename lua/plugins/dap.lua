@@ -53,7 +53,7 @@ return {
           program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
           end,
-          cwd = '${workspaceRoot}',
+          cwd = vim.fn.getcwd(),
           stopOnEntry = false,
         },
       }
@@ -108,7 +108,7 @@ return {
             request = "launch",
             name = "Launch file",
             program = "${file}",
-            cwd = "${workspaceRoot}",
+            cwd = vim.fn.getcwd(),
           },
         }
       end

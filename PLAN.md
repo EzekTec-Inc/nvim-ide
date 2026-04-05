@@ -283,3 +283,15 @@ git revert a63a7b4 af60189 5e24289
 ```bash
 git revert af4aff6
 ```
+
+---
+
+## Session: 2026-04-05T17:15:00Z — Fix Neovim freeze and LSP loading failure
+
+### Files modified
+- `lua/plugins/nvim_surround.lua`: Removed deprecated v3 `keymaps` configuration. `nvim-surround` v4 throws an error when `keymaps` are passed to `setup()`, which broke the lazy-loading chain (`BufReadPost` -> `User FilePost`) and caused Neovim to freeze and skip LSP initialization for the first file.
+
+### Rollback
+```bash
+git revert 3d63722
+```

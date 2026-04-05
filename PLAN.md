@@ -295,3 +295,16 @@ git revert af4aff6
 ```bash
 git revert 3d63722
 ```
+
+---
+
+## Session: 2026-04-05T17:35:00Z — Cleanup and artifact management
+
+### Files modified
+- `.gitignore`: Added `.cade-todo.md` to prevent tracking tool artifacts.
+- Removed test artifacts (`test.lua`, `test2.lua`, `test_freeze.lua`) from the working directory.
+
+### Rollback
+```bash
+git revert 5674999
+```

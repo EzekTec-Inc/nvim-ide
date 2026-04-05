@@ -61,15 +61,11 @@ return {
       dap.configurations.cpp = dap.configurations.rust
 
       -- 2. Python (debugpy)
-      dap.adapters.python = function(cb, config)
-        if config.request == 'launch' then
-          cb({
-            type = 'executable',
-            command = 'python3',
-            args = { '-m', 'debugpy.adapter' },
-          })
-        end
-      end
+      dap.adapters.python = {
+        type = 'executable',
+        command = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python",
+        args = { '-m', 'debugpy.adapter' },
+      }
 
       dap.configurations.python = {
         {
@@ -78,7 +74,7 @@ return {
           name = "Launch file",
           program = "${file}",
           pythonPath = function()
-            return 'python3'
+            return vim.env.VIRTUAL_ENV and (vim.env.VIRTUAL_ENV .. "/bin/python") or 'python3'
           end,
         },
       }

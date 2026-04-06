@@ -1,3 +1,8 @@
+-- ==============================================================================
+-- Module:      plugins/core_utils
+-- Description: Core Utility plugins.
+--              Manages Formatting (conform.nvim), UI components, AI, etc.
+-- ==============================================================================
 return {
   "nvim-lua/plenary.nvim",
   {

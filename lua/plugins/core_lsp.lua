@@ -1,3 +1,8 @@
+-- ==============================================================================
+-- Module:      plugins/core_lsp
+-- Description: Core Language Server Protocol and Completion plugins.
+--              Manages Mason, nvim-lspconfig, nvim-cmp, and snippets.
+-- ==============================================================================
 return {
   {
     "williamboman/mason.nvim",

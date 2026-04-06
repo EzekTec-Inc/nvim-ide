@@ -1,3 +1,8 @@
+-- ==============================================================================
+-- Module:      plugins/core_editor
+-- Description: Core Editor and Workspace plugins.
+--              Manages NvimTree, Gitsigns, and Terminal integrations.
+-- ==============================================================================
 return {
   {
     "nvim-tree/nvim-tree.lua",

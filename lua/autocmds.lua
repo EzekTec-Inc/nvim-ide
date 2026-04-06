@@ -128,35 +128,6 @@ autocmd("FileType", {
 	end,
 })
 
--- Custom Autocmds Extracted from init.lua
-do
-	local group = vim.api.nvim_create_augroup("UserCoreLspKeymaps", { clear = true })
-
-	local function apply(bufnr)
-		if not vim.api.nvim_buf_is_valid(bufnr) then
-			return
-		end
-
-		local function opts(desc)
-			return { buffer = bufnr, desc = "LSP " .. desc, noremap = true, silent = true }
-		end
-
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
-		vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts("Show signature help"))
-	end
-
-	vim.api.nvim_create_autocmd("LspAttach", {
-		group = group,
-		callback = function(args)
-			local bufnr = args.buf
-			vim.schedule(function()
-				apply(bufnr)
-			end)
-		end,
-	})
-end
 -- FIX 2026-02-17T13:18:55-07:00: Lock core navigation keymaps in LSP-attached buffers.
 do
 	local augroup = vim.api.nvim_create_augroup("NvLspKeymapsLock", { clear = true })

@@ -1,3 +1,8 @@
+-- ==============================================================================
+-- Module:      plugins/core_ui
+-- Description: Core User Interface plugins.
+--              Manages themes (base46, nvchad/ui), Telescope, WhichKey, etc.
+-- ==============================================================================
 return {
   {
     "NvChad/base46",

@@ -1,3 +1,8 @@
+-- ==============================================================================
+-- Module:      configs/lsp
+-- Description: Custom LSP setup compatible with Neovim 0.11+ core APIs
+--              (vim.lsp.config/enable) with fallback to nvim-lspconfig.
+-- ==============================================================================
 -- FIX 2026-02-13T23:40:46: ft_to_lang shim is now centralized in init.lua using _G
 
 local M = {}

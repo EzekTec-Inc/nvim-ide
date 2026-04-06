@@ -308,3 +308,20 @@ git revert 3d63722
 ```bash
 git revert 5674999
 ```
+
+---
+
+## Session: 2026-04-05T18:35:00Z — Consolidate LSP keymaps & Add module docstrings
+
+### Files modified
+- `lua/autocmds.lua`: Removed redundant `UserCoreLspKeymaps` autocommand block. Retained the `NvLspKeymapsLock` to preserve Rust `K` hover logic.
+- `lua/configs/lsp.lua`: Prepended module docstring header.
+- `lua/plugins/core_lsp.lua`: Prepended module docstring header.
+- `lua/plugins/core_ui.lua`: Prepended module docstring header.
+- `lua/plugins/core_editor.lua`: Prepended module docstring header.
+- `lua/plugins/core_utils.lua`: Prepended module docstring header.
+
+### Rollback
+```bash
+git revert HEAD
+```

@@ -7,6 +7,11 @@ gha-creds-*.json
 __pycache__/
 session/
 .cade-todo.md
+.cade/
+.aipack/
+session/
+bot-the-great-20260305T055636.json
+PLAN.md
 
 local-db-dump.sql
 private-notes.md

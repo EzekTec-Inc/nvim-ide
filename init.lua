@@ -54,6 +54,8 @@ vim.schedule(function()
 	end
 end)
 
+-- ========================= CADE (Coding AI assistant with Desktop Extensions) =========================
+-- Code section that exports any currently set theme in neovim to a JSON file for CADE to injest and use in colorthemes in CADE.
 local function cade_export_theme()
 	local function int_to_hex(color)
 		return color and string.format("#%06x", color) or nil
@@ -120,7 +122,7 @@ local function cade_export_theme()
 		end
 	end
 
-	local theme = { name = "nvim-exported", author = "cade.nvim", colors = colors }
+	local theme = { name = "nvim-exported", author = "https://github.com/EzekTec-Inc", colors = colors }
 	local theme_dir = os.getenv("HOME") .. "/.cade/themes"
 	vim.fn.mkdir(theme_dir, "p")
 	local ok, err = pcall(function()
@@ -140,3 +142,5 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 -- Run once on startup
 cade_export_theme()
+
+-- ========================= CADE (Coding AI assistant with Desktop Extensions) =========================

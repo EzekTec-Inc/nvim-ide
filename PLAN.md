@@ -351,3 +351,17 @@ git revert HEAD
 ```bash
 git revert 2df289a
 ```
+
+---
+
+## Session: 2026-04-05T18:55:00Z — Theme update, gitignore cleanup, and init.lua comments
+
+### Files modified
+- `lua/chadrc.lua`: Changed active theme from `solarized_osaka` to `aylin`.
+- `.geminiignore` / `.gitignore`: Removed `.geminiignore` and consolidated its ignores into `.gitignore`.
+- `init.lua`: Added descriptive section comments for the CADE theme export block and updated the author metadata.
+
+### Rollback
+```bash
+git revert HEAD
+```

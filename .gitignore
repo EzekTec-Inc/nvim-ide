@@ -7,3 +7,6 @@ gha-creds-*.json
 __pycache__/
 session/
 .cade-todo.md
+
+local-db-dump.sql
+private-notes.md

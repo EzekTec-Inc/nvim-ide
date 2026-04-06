@@ -365,3 +365,15 @@ git revert 2df289a
 ```bash
 git revert HEAD
 ```
+
+---
+
+## Session: 2026-04-05T19:00:00Z — Remove unused directories
+
+### Files modified
+- Deleted unused backup and template directories: `snippets/`, `src/`, and `starter/`.
+
+### Rollback
+```bash
+git revert 082d80d
+```

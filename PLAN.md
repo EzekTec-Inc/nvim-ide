@@ -387,5 +387,17 @@ git revert 082d80d
 
 ### Rollback
 ```bash
+git revert 13812fc
+```
+
+---
+
+## Session: 2026-04-05T21:40:00Z — Update line highlight and add config reload mapping
+
+### Files modified
+- `lua/mappings.lua`: Changed the highlight color for `LineHighlight` to `#e5c07b` with `ctermbg=220`. Added a new normal mode mapping `<leader>sv` to source `$MYVIMRC` and reload the configuration with a notification.
+
+### Rollback
+```bash
 git revert HEAD
 ```

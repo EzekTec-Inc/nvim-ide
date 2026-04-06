@@ -62,7 +62,7 @@ local function toggle_highlight()
     print "Line highlight removed"
   else
     -- Add a new highlight
-    vim.cmd "highlight LineHighlight ctermbg=22 guibg=#3a5f3a"
+    vim.cmd "highlight LineHighlight ctermbg=220 guibg=#e5c07b"
     vim.fn.matchadd("LineHighlight", "\\%" .. line_num .. "l")
     print "Line highlighted"
   end
@@ -274,6 +274,12 @@ map("n", "<C-Y>", '"+y$', { desc = "Yank up to EOL into system clipboard" })
 map({ "n", "v" }, "<C-yy>", '"+yy', { desc = "Yank line into system clipboard" })
 map({ "n", "v" }, "<C-p>", '"+p', { desc = "Paste below from system clipboard" })
 map({ "n", "v" }, "<C-P>", '"+P', { desc = "Paste above from system clipboard" })
+
+-- source/reload config
+map("n", "<leader>sv", function()
+  vim.cmd("source $MYVIMRC")
+  vim.notify("Config reloaded!", vim.log.levels.INFO)
+end, { desc = "Source/reload config" })
 
 -- plugin management
 map('n', '<leader>pc', ':Lazy check<cr>', { desc = 'Check plugins' })

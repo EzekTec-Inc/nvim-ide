@@ -1,5 +1,7 @@
 # Modernization Guide: Preserve & Improve
 
+> **UPDATE (2026-04-05):** All tasks outlined in this guide have been successfully executed and committed to the repository. This guide is retained for historical context.
+
 This guide shows you how to modernize your Neovim config **without losing any of your customizations**. Each change is backward-compatible and can be reverted.
 
 ---

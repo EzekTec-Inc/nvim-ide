@@ -129,6 +129,7 @@ return {
   },
   {
     "Exafunction/codeium.vim",
+    enabled = false,
     event = "BufEnter",
     config = function()
       vim.keymap.set("i", "<C-g>", function()

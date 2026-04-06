@@ -377,3 +377,15 @@ git revert HEAD
 ```bash
 git revert 082d80d
 ```
+
+---
+
+## Session: 2026-04-05T19:15:00Z — Disable Codeium AI
+
+### Files modified
+- `lua/plugins/core_utils.lua`: Added `enabled = false` to the `Exafunction/codeium.vim` plugin spec to disable it, leaving Avante as the sole active LLM service.
+
+### Rollback
+```bash
+git revert HEAD
+```

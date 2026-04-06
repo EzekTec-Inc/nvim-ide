@@ -404,6 +404,20 @@ git revert 9e58f1d
 
 ---
 
+## Session: 2026-04-05T22:00:00Z — Re-enable Codeium and update mappings
+
+### Files modified
+- `lua/plugins/core_utils.lua`: Re-enabled `Exafunction/codeium.vim`.
+- `lua/mappings.lua`: Added `<C-g>` and `<C-Tab>` mappings for Codeium.
+- `lua/plugins/avante.lua`: Formatted file.
+
+### Rollback
+```bash
+git revert HEAD
+```
+
+---
+
 ## Session: 2026-04-05T21:45:00Z — Theme switch and mappings formatting
 
 ### Files modified

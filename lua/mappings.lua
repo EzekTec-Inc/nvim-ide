@@ -539,6 +539,14 @@ map("n", "<leader>um", "<cmd>RenderMarkdown toggle<CR>", { desc = "Toggle Markdo
 map("n", "<leader>lp", "<cmd>LivePreview<CR>", { desc = "Toggle Live Preview (Mermaid/Markdown)" })
 map("n", "<leader>ls", "<cmd>LivePreviewStop<CR>", { desc = "Stop Live Preview" })
 
+-- Codeium AI completion
+map("i", "<C-g>", function()
+	return vim.fn["codeium#Accept"]()
+end, { expr = true, silent = true, desc = "Codeium accept suggestion" })
+map("i", "<C-Tab>", function()
+	return vim.fn["codeium#CycleCompletions"](1)
+end, { expr = true, silent = true, desc = "Codeium cycle completions" })
+
 -- ---@class ApiKeymapOpts
 -- ---@field nowait? boolean If true, once the `lhs` is matched, the `rhs` will be executed
 -- ---@field expr? boolean Specify whether the `rhs` is an expression to be evaluated or not (default false)

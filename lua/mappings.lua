@@ -1,6 +1,6 @@
-require "nvchad.mappings"
+require("nvchad.mappings")
 
-local utils = require "configs.utils"
+local utils = require("configs.utils")
 local map = utils.glb_map
 -- local map = vim.keymap.set
 local silent = { silent = true }
@@ -8,18 +8,18 @@ local silent = { silent = true }
 -- Line lead char toggle
 local line_lead_char_enabled = true
 vim.api.nvim_create_user_command("LineLeadCharToggle", function()
-  line_lead_char_enabled = not line_lead_char_enabled
-  if line_lead_char_enabled then
-    vim.opt.list = true
-    print("Line lead chars enabled")
-  else
-    vim.opt.list = false
-    print("Line lead chars disabled")
-  end
+	line_lead_char_enabled = not line_lead_char_enabled
+	if line_lead_char_enabled then
+		vim.opt.list = true
+		print("Line lead chars enabled")
+	else
+		vim.opt.list = false
+		print("Line lead chars disabled")
+	end
 end, { desc = "Toggle line lead characters" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
--- The key-bindings here "i" allows to hold down the "Ctrl" key ot move around in 
+-- The key-bindings here "i" allows to hold down the "Ctrl" key ot move around in
 -- "insert mode" without using the arrow keys
 map("i", "jj", "<ESC>")
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
@@ -40,32 +40,32 @@ map("n", "<leader>ju", "<cmd>RustMoveItemUp<CR>^n", { desc = "Rust move line up"
 
 -- highlight line toggle
 local function toggle_highlight()
-  local line_num = vim.fn.line "."
-  local highlight_group = "LineHighlight"
+	local line_num = vim.fn.line(".")
+	local highlight_group = "LineHighlight"
 
-  -- Get all matches
-  local matches = vim.fn.getmatches()
+	-- Get all matches
+	local matches = vim.fn.getmatches()
 
-  local match_id = nil
+	local match_id = nil
 
-  -- Check if there's already a match for the current line
-  for _, match in ipairs(matches) do
-    if match.group == highlight_group and match.pattern == "\\%" .. line_num .. "l" then
-      match_id = match.id
-      break
-    end
-  end
+	-- Check if there's already a match for the current line
+	for _, match in ipairs(matches) do
+		if match.group == highlight_group and match.pattern == "\\%" .. line_num .. "l" then
+			match_id = match.id
+			break
+		end
+	end
 
-  if match_id then
-    -- Remove the existing match
-    vim.fn.matchdelete(match_id)
-    print "Line highlight removed"
-  else
-    -- Add a new highlight
-    vim.cmd "highlight LineHighlight ctermbg=220 guibg=#e5c07b"
-    vim.fn.matchadd("LineHighlight", "\\%" .. line_num .. "l")
-    print "Line highlighted"
-  end
+	if match_id then
+		-- Remove the existing match
+		vim.fn.matchdelete(match_id)
+		print("Line highlight removed")
+	else
+		-- Add a new highlight
+		vim.cmd("highlight LineHighlight ctermbg=208 ctermfg=0 guibg=#ff9800 guifg=#000000")
+		vim.fn.matchadd("LineHighlight", "\\%" .. line_num .. "l")
+		print("Line highlighted")
+	end
 end
 map("n", "<leader>ha", toggle_highlight, { desc = "Toggle Highlight Line" })
 map("n", "<leader>hr", "<cmd>call clearmatches()<CR>", { desc = "Clear All Highlights" })
@@ -78,12 +78,7 @@ map("n", "<leader>uh", "<cmd>ToggleInlayHints<CR>", { silent = true, desc = "Tog
 
 -- Toggle Leading Chars on Lines
 -- LineLeadCharToggle
-map(
-  { "n", "t", "i" },
-  "<leader>ul",
-  "<cmd>LineLeadCharToggle<CR>",
-  { silent = true, desc = "Toggle Line-Lead Char" }
-)
+map({ "n", "t", "i" }, "<leader>ul", "<cmd>LineLeadCharToggle<CR>", { silent = true, desc = "Toggle Line-Lead Char" })
 
 -- Toggle Bufline
 map({ "n", "t" }, "<leader>ut", "<cmd>TabuflineToggle<CR>", { silent = true, desc = "Toggle Buffer Line" })
@@ -100,52 +95,51 @@ map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 -- new terminals
 local nvterm_ok, nvterm = pcall(require, "nvchad.term")
 if nvterm_ok then
-  map("n", "<leader>h", function()
-    nvterm.new { pos = "sp" }
-  end, { desc = "terminal new horizontal term" })
-  map("n", "<leader>v", function()
-    nvterm.new { pos = "vsp" }
-  end, { desc = "terminal new vertical window" })
+	map("n", "<leader>h", function()
+		nvterm.new({ pos = "sp" })
+	end, { desc = "terminal new horizontal term" })
+	map("n", "<leader>v", function()
+		nvterm.new({ pos = "vsp" })
+	end, { desc = "terminal new vertical window" })
 
-  -- toggleable
-  map({ "n", "t" }, "<A-v>", function()
-    nvterm.toggle { pos = "vsp", id = "vtoggleTerm" }
-  end, { desc = "terminal toggleable vertical term" })
+	-- toggleable
+	map({ "n", "t" }, "<A-v>", function()
+		nvterm.toggle({ pos = "vsp", id = "vtoggleTerm" })
+	end, { desc = "terminal toggleable vertical term" })
 end
 
 map({ "n", "t" }, "<A-f>", function()
-  require("FTerm").toggle()
+	require("FTerm").toggle()
 end, { desc = "terminal toggle floating term" })
 
 map({ "n", "t" }, "<A-h>", function()
-  vim.cmd("ToggleTerm direction=horizontal size=15")
+	vim.cmd("ToggleTerm direction=horizontal size=15")
 end, { desc = "terminal toggleable horizontal term" })
 
 -- Toggle terminal with lazygit, node, python (requires toggleterm)
 local toggleterm_ok, _ = pcall(require, "toggleterm")
 if toggleterm_ok then
-  local Terminal = require("toggleterm.terminal").Terminal
-  
-  local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-  _G._LAZYGIT_TOGGLE = function()
-    lazygit:toggle()
-  end
-  map({ "n", "t", "i" }, "<A-l>", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit Terminal" })
-  map("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit (Floating)" })
+	local Terminal = require("toggleterm.terminal").Terminal
 
-  local node = Terminal:new({ cmd = "node", hidden = true })
-  _G._NODE_TOGGLE = function()
-    node:toggle()
-  end
-  map({ "n", "t", "i" }, "<A-o>", "<cmd>lua _NODE_TOGGLE()<CR>", { desc = "Node Terminal" })
+	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+	_G._LAZYGIT_TOGGLE = function()
+		lazygit:toggle()
+	end
+	map({ "n", "t", "i" }, "<A-l>", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit Terminal" })
+	map("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit (Floating)" })
 
-  local python = Terminal:new({ cmd = "python3", hidden = true })
-  _G._PYTHON_TOGGLE = function()
-    python:toggle()
-  end
-  map({ "n", "t", "i" }, "<A-p>", "<cmd>lua _PYTHON_TOGGLE()<CR>", { desc = "Python Terminal" })
+	local node = Terminal:new({ cmd = "node", hidden = true })
+	_G._NODE_TOGGLE = function()
+		node:toggle()
+	end
+	map({ "n", "t", "i" }, "<A-o>", "<cmd>lua _NODE_TOGGLE()<CR>", { desc = "Node Terminal" })
+
+	local python = Terminal:new({ cmd = "python3", hidden = true })
+	_G._PYTHON_TOGGLE = function()
+		python:toggle()
+	end
+	map({ "n", "t", "i" }, "<A-p>", "<cmd>lua _PYTHON_TOGGLE()<CR>", { desc = "Python Terminal" })
 end
-
 
 -- -- vim sourround
 -- map({ "n", "v"}, "<leader>sa", function()
@@ -174,39 +168,51 @@ map("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true
 -- Crates.nvim
 local crates_ok, crates = pcall(require, "crates")
 if crates_ok then
-  map("n", "<leader>cv", function() crates.show_versions_popup() end, { desc = "Crates show versions" })
-  map("n", "<leader>cR", function() crates.show_features_popup() end, { desc = "Crates show features" })
-  map("n", "<leader>cu", function() crates.update_crate() end, { desc = "Crates update" })
-  map("n", "<leader>cU", function() crates.upgrade_crate() end, { desc = "Crates upgrade" })
-  map("n", "<leader>cH", function() crates.open_homepage() end, { desc = "Crates open homepage" })
-  map("n", "<leader>cD", function() crates.open_documentation() end, { desc = "Crates open documentation" })
+	map("n", "<leader>cv", function()
+		crates.show_versions_popup()
+	end, { desc = "Crates show versions" })
+	map("n", "<leader>cR", function()
+		crates.show_features_popup()
+	end, { desc = "Crates show features" })
+	map("n", "<leader>cu", function()
+		crates.update_crate()
+	end, { desc = "Crates update" })
+	map("n", "<leader>cU", function()
+		crates.upgrade_crate()
+	end, { desc = "Crates upgrade" })
+	map("n", "<leader>cH", function()
+		crates.open_homepage()
+	end, { desc = "Crates open homepage" })
+	map("n", "<leader>cD", function()
+		crates.open_documentation()
+	end, { desc = "Crates open documentation" })
 end
 
 -- YAML Companion
 map("n", "<leader>ys", function()
-  local ok, companion = pcall(require, "yaml-companion")
-  if ok then
-    companion.open_ui_select()
-  end
+	local ok, companion = pcall(require, "yaml-companion")
+	if ok then
+		companion.open_ui_select()
+	end
 end, { desc = "YAML select schema" })
 
 -- thePrimeagen's Harpoon
 local harpoon_ok, _ = pcall(require, "harpoon")
 if harpoon_ok then
-  local mark = require "harpoon.mark"
-  local ui = require "harpoon.ui"
-  map("n", "<C-a>", mark.add_file, { desc = "Harpoon add file" })
-  map("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon toggle menu" })
+	local mark = require("harpoon.mark")
+	local ui = require("harpoon.ui")
+	map("n", "<C-a>", mark.add_file, { desc = "Harpoon add file" })
+	map("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon toggle menu" })
 end
 
 -- Hop navigation
 local hop_ok, hop = pcall(require, "hop")
 if hop_ok then
-  hop.setup({})
-  map("n", "<leader>hw", "<cmd>HopWord<CR>", { desc = "Hop Word" })
-  map("n", "<leader>hl", "<cmd>HopLine<CR>", { desc = "Hop Line" })
-  map("n", "<leader>hc", "<cmd>HopChar1<CR>", { desc = "Hop Char1" })
-  map("n", "<leader>hC", "<cmd>HopChar2<CR>", { desc = "Hop Char2" })
+	hop.setup({})
+	map("n", "<leader>hw", "<cmd>HopWord<CR>", { desc = "Hop Word" })
+	map("n", "<leader>hl", "<cmd>HopLine<CR>", { desc = "Hop Line" })
+	map("n", "<leader>hc", "<cmd>HopChar1<CR>", { desc = "Hop Char1" })
+	map("n", "<leader>hC", "<cmd>HopChar2<CR>", { desc = "Hop Char2" })
 end
 
 -- Hop keymaps (alternative direct commands)
@@ -214,9 +220,15 @@ end
 -- Persistence session mappings
 local persistence_ok, persistence = pcall(require, "persistence")
 if persistence_ok then
-  map("n", "<leader>qs", function() persistence.load() end, { desc = "Restore Session" })
-  map("n", "<leader>ql", function() persistence.load({ last = true }) end, { desc = "Restore Last Session" })
-  map("n", "<leader>qd", function() persistence.stop() end, { desc = "Don't Save Current Session" })
+	map("n", "<leader>qs", function()
+		persistence.load()
+	end, { desc = "Restore Session" })
+	map("n", "<leader>ql", function()
+		persistence.load({ last = true })
+	end, { desc = "Restore Last Session" })
+	map("n", "<leader>qd", function()
+		persistence.stop()
+	end, { desc = "Don't Save Current Session" })
 end
 
 -- Move Lines
@@ -243,24 +255,29 @@ map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "LSP code action
 map("n", "<C-Space>", "<cmd>Lspsaga code_action<CR>", { silent = true, desc = "LSP code action" })
 map("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, desc = "LSP code action (visual)" })
 map("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", { silent = true, desc = "LSP Rename (Lspsaga)" })
-map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", { silent = true, desc = "LSP Format buffer" })
+map(
+	"n",
+	"<leader>cf",
+	"<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
+	{ silent = true, desc = "LSP Format buffer" }
+)
 
 -- open url / go to GitHub link
 map("n", "gh", function()
-  utils.go_to_github_link()
+	utils.go_to_github_link()
 end, { desc = "Go to GitHub link generated from string" })
 
 -- highlights under cursor
 if vim.fn.has("nvim-0.9.0") == 1 then
-  map("n", "<leader>i", vim.show_pos, { desc = "Inspect Pos" })
+	map("n", "<leader>i", vim.show_pos, { desc = "Inspect Pos" })
 end
 
 -- toggler alternate
 map(
-  { "n", "v" },
-  "<leader>ta",
-  "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>",
-  { silent = true, desc = "Toggle alternate text/symbol" }
+	{ "n", "v" },
+	"<leader>ta",
+	"<cmd>lua require('alternate-toggler').toggleAlternate()<CR>",
+	{ silent = true, desc = "Toggle alternate text/symbol" }
 )
 
 -- yank and everything about it
@@ -277,40 +294,40 @@ map({ "n", "v" }, "<C-P>", '"+P', { desc = "Paste above from system clipboard" }
 
 -- source/reload config
 map("n", "<leader>sv", function()
-  vim.cmd("source $MYVIMRC")
-  vim.notify("Config reloaded!", vim.log.levels.INFO)
+	vim.cmd("source $MYVIMRC")
+	vim.notify("Config reloaded!", vim.log.levels.INFO)
 end, { desc = "Source/reload config" })
 
 -- plugin management
-map('n', '<leader>pc', ':Lazy check<cr>', { desc = 'Check plugins' })
-map('n', '<leader>pu', ':Lazy update<cr>', { desc = 'Update plugins' })
-map('n', '<leader>ps', ':Lazy show<cr>', { desc = 'Show plugins' })
-map('n', '<leader>ph', ':Lazy help<cr>', { desc = 'Help' })
-map('n', '<leader>pp', ':Lazy profile<cr>', { desc = 'Profile' })
-map('n', '<leader>px', ':Lazy clear<cr>', { desc = 'Clear uninstalled plugins' })
-map('n', '<leader>pr', ':Lazy restore<cr>', { desc = 'Restore plugins from lockfile' })
+map("n", "<leader>pc", ":Lazy check<cr>", { desc = "Check plugins" })
+map("n", "<leader>pu", ":Lazy update<cr>", { desc = "Update plugins" })
+map("n", "<leader>ps", ":Lazy show<cr>", { desc = "Show plugins" })
+map("n", "<leader>ph", ":Lazy help<cr>", { desc = "Help" })
+map("n", "<leader>pp", ":Lazy profile<cr>", { desc = "Profile" })
+map("n", "<leader>px", ":Lazy clear<cr>", { desc = "Clear uninstalled plugins" })
+map("n", "<leader>pr", ":Lazy restore<cr>", { desc = "Restore plugins from lockfile" })
 
 -- whichkey
 map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
 
 map("n", "<leader>wk", function()
-  vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
+	vim.cmd("WhichKey " .. vim.fn.input("WhichKey: "))
 end, { desc = "whichkey query lookup" })
 
 -- blankline
 map("n", "<leader>cc", function()
-  local config = { scope = {} }
-  config.scope.exclude = { language = {}, node_type = {} }
-  config.scope.include = { node_type = {} }
-  local node = require("ibl.scope").get(vim.api.nvim_get_current_buf(), config)
+	local config = { scope = {} }
+	config.scope.exclude = { language = {}, node_type = {} }
+	config.scope.include = { node_type = {} }
+	local node = require("ibl.scope").get(vim.api.nvim_get_current_buf(), config)
 
-  if node then
-    local start_row, _, end_row, _ = node:range()
-    if start_row ~= end_row then
-      vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start_row + 1, 0 })
-      vim.api.nvim_feedkeys("_", "n", true)
-    end
-  end
+	if node then
+		local start_row, _, end_row, _ = node:range()
+		if start_row ~= end_row then
+			vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start_row + 1, 0 })
+			vim.api.nvim_feedkeys("_", "n", true)
+		end
+	end
 end, { desc = "blankline jump to current context" })
 
 -- telescope
@@ -324,34 +341,44 @@ map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 map("n", "<leader>th", function()
-  if type(_G._apply_ft_to_lang_shim) == "function" then
-    pcall(_G._apply_ft_to_lang_shim)
-  end
+	if type(_G._apply_ft_to_lang_shim) == "function" then
+		pcall(_G._apply_ft_to_lang_shim)
+	end
 
-  if type(_G._nvchad_open_themes_picker) ~= "function" then
-    pcall(require, "chadrc")
-  end
+	if type(_G._nvchad_open_themes_picker) ~= "function" then
+		pcall(require, "chadrc")
+	end
 
-  if type(_G._nvchad_open_themes_picker) == "function" then
-    _G._nvchad_open_themes_picker()
-  else
-    pcall(vim.cmd, "Telescope themes")
-  end
+	if type(_G._nvchad_open_themes_picker) == "function" then
+		_G._nvchad_open_themes_picker()
+	else
+		pcall(vim.cmd, "Telescope themes")
+	end
 end, { desc = "telescope nvchad themes" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
 map(
-  "n",
-  "<leader>fa",
-  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-  { desc = "telescope find all files" }
+	"n",
+	"<leader>fa",
+	"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+	{ desc = "telescope find all files" }
 )
 
 -- code fold (nvim-ufo — docs require remapping zR/zM to ufo API)
-map("n", "zR", function() require("ufo").openAllFolds() end, { desc = "Open all folds" })
-map("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "Close all folds" })
-map("n", "zr", function() require("ufo").openFoldsExceptKinds() end, { desc = "Open folds except kinds" })
-map("n", "zm", function() require("ufo").closeFoldsWith() end, { desc = "Close folds with" })
-map("n", "zk", function() require("ufo").peekFoldedLinesUnderCursor() end, { desc = "Peek folded lines" })
+map("n", "zR", function()
+	require("ufo").openAllFolds()
+end, { desc = "Open all folds" })
+map("n", "zM", function()
+	require("ufo").closeAllFolds()
+end, { desc = "Close all folds" })
+map("n", "zr", function()
+	require("ufo").openFoldsExceptKinds()
+end, { desc = "Open folds except kinds" })
+map("n", "zm", function()
+	require("ufo").closeFoldsWith()
+end, { desc = "Close folds with" })
+map("n", "zk", function()
+	require("ufo").peekFoldedLinesUnderCursor()
+end, { desc = "Peek folded lines" })
 
 -- nvim-surround: setup and keymaps live in lua/plugins/nvim_surround.lua
 -- Default keys: ys<motion><char>  cs<old><new>  ds<char>  (visual) S<char>
@@ -363,17 +390,16 @@ map("n", "<leader>dss", vim.diagnostic.setloclist, { desc = "lsp diagnostic locl
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
 
 map("n", "<tab>", function()
-  require("nvchad.tabufline").next()
+	require("nvchad.tabufline").next()
 end, { desc = "buffer goto next" })
 
 map("n", "<S-tab>", function()
-  require("nvchad.tabufline").prev()
+	require("nvchad.tabufline").prev()
 end, { desc = "buffer goto prev" })
 
 map("n", "<leader>x", function()
-  require("nvchad.tabufline").close_buffer()
+	require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
-
 
 -- Comment
 map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
@@ -389,14 +415,14 @@ map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "open NvimTree focus wi
 vim.opt.list = true
 
 for i = 1, 9, 1 do
-  -- Move to desired buffer line using Alt + 1-9 keys
-  vim.keymap.set("n", string.format("<A-%s>", i), function()
-    vim.api.nvim_set_current_buf(vim.t.bufsic)
-  end, { desc = "which_key_ignore" })
-  -- Move to desired tab group instantly using Leader + 1-9 keys
-  vim.keymap.set("n", string.format("<leader>%s", i), function()
-    vim.api.nvim_set_current_tabpage(i)
-  end, { desc = "which_key_ignore" })
+	-- Move to desired buffer line using Alt + 1-9 keys
+	vim.keymap.set("n", string.format("<A-%s>", i), function()
+		vim.api.nvim_set_current_buf(vim.t.bufsic)
+	end, { desc = "which_key_ignore" })
+	-- Move to desired tab group instantly using Leader + 1-9 keys
+	vim.keymap.set("n", string.format("<leader>%s", i), function()
+		vim.api.nvim_set_current_tabpage(i)
+	end, { desc = "which_key_ignore" })
 end
 
 -- zen mode
@@ -413,9 +439,15 @@ map("n", "<leader>xQ", "<cmd>Trouble quickfix toggle<cr>", { desc = "Trouble qui
 map("n", "<leader>xr", "<cmd>Trouble lsp_references toggle<cr>", { desc = "Trouble LSP references" })
 
 -- neotest
-map("n", "<leader>tt", function() require("neotest").run.run() end, { desc = "Run nearest test" })
-map("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run file tests" })
-map("n", "<leader>ts", function() require("neotest").summary.toggle() end, { desc = "Toggle test summary" })
+map("n", "<leader>tt", function()
+	require("neotest").run.run()
+end, { desc = "Run nearest test" })
+map("n", "<leader>tf", function()
+	require("neotest").run.run(vim.fn.expand("%"))
+end, { desc = "Run file tests" })
+map("n", "<leader>ts", function()
+	require("neotest").summary.toggle()
+end, { desc = "Toggle test summary" })
 
 -- dadbod ui
 map("n", "<leader>du", "<cmd>DBUIToggle<cr>", { desc = "Toggle DB UI" })
@@ -425,34 +457,42 @@ map("n", "<leader>gn", "<cmd>Neogit<cr>", { desc = "Neogit" })
 
 -- kulala
 map("n", "<leader>rq", function()
-  local ft = vim.bo.filetype
-  local ext = vim.fn.expand("%:e")
-  if ft == "http" or ft == "rest" or ext == "http" or ext == "rest" or ext == "https" then
-    if ft ~= "http" and ft ~= "rest" then vim.bo.filetype = "http" end
-    require("kulala").run()
-  else
-    vim.notify("Kulala only runs in .http, .https, or .rest files", vim.log.levels.WARN)
-  end
+	local ft = vim.bo.filetype
+	local ext = vim.fn.expand("%:e")
+	if ft == "http" or ft == "rest" or ext == "http" or ext == "rest" or ext == "https" then
+		if ft ~= "http" and ft ~= "rest" then
+			vim.bo.filetype = "http"
+		end
+		require("kulala").run()
+	else
+		vim.notify("Kulala only runs in .http, .https, or .rest files", vim.log.levels.WARN)
+	end
 end, { desc = "Run HTTP Request" })
 map("n", "<leader>rt", function()
-  local ft = vim.bo.filetype
-  local ext = vim.fn.expand("%:e")
-  if ft == "http" or ft == "rest" or ext == "http" or ext == "rest" or ext == "https" then
-    if ft ~= "http" and ft ~= "rest" then vim.bo.filetype = "http" end
-    require("kulala").toggle_view()
-  else
-    vim.notify("Kulala only runs in .http, .https, or .rest files", vim.log.levels.WARN)
-  end
+	local ft = vim.bo.filetype
+	local ext = vim.fn.expand("%:e")
+	if ft == "http" or ft == "rest" or ext == "http" or ext == "rest" or ext == "https" then
+		if ft ~= "http" and ft ~= "rest" then
+			vim.bo.filetype = "http"
+		end
+		require("kulala").toggle_view()
+	else
+		vim.notify("Kulala only runs in .http, .https, or .rest files", vim.log.levels.WARN)
+	end
 end, { desc = "Toggle Headers/Body View" })
 
 -- grug-far
 map("n", "<leader>sr", function()
-  require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
+	require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
 end, { desc = "Search and replace (GrugFar)" })
 
 -- todo-comments
-map("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
-map("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
+map("n", "]t", function()
+	require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+map("n", "[t", function()
+	require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
 map("n", "<leader>st", "<cmd>TodoTelescope<CR>", { desc = "Search todo comments" })
 map("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "Trouble todo comments" })
 
@@ -463,12 +503,16 @@ map("n", "<leader>s", "<cmd>TSJJoin<cr>", { desc = "Join code block" })
 
 -- activate.nvim plugin browser
 map("n", "<leader>P", function()
-  local ok, activate = pcall(require, "activate")
-  if ok then activate.list_plugins() end
+	local ok, activate = pcall(require, "activate")
+	if ok then
+		activate.list_plugins()
+	end
 end, { desc = "List plugins (activate)" })
 map("n", "<leader>pP", function()
-  local ok, activate = pcall(require, "activate")
-  if ok then activate.list_plugins() end
+	local ok, activate = pcall(require, "activate")
+	if ok then
+		activate.list_plugins()
+	end
 end, { desc = "List plugins (activate)" })
 
 -- duplicate lines (legendary + duplicate.nvim)
@@ -480,8 +524,12 @@ map("v", "<leader>lt", ":VisualDuplicate +1<CR>", { desc = "Duplicate selection 
 -- Scratchpad
 map("n", "<leader>sn", "<cmd>Scratch<CR>", { desc = "New scratch by type" })
 map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "Show signature help" })
-map("n", "<leader>sa", function() require("nvim-treesitter.textobjects.swap").swap_next("@parameter.inner") end, { desc = "Swap next argument" })
-map("n", "<leader>sA", function() require("nvim-treesitter.textobjects.swap").swap_previous("@parameter.inner") end, { desc = "Swap prev argument" })
+map("n", "<leader>sa", function()
+	require("nvim-treesitter.textobjects.swap").swap_next("@parameter.inner")
+end, { desc = "Swap next argument" })
+map("n", "<leader>sA", function()
+	require("nvim-treesitter.textobjects.swap").swap_previous("@parameter.inner")
+end, { desc = "Swap prev argument" })
 map("n", "<leader>sw", "<cmd>ScratchWithName<CR>", { desc = "New scratch with name" })
 map("n", "<leader>so", "<cmd>ScratchOpen<CR>", { desc = "Open scratch list" })
 map("n", "<leader>sc", "<cmd>Scratch<CR>", { desc = "New scratch by type" })

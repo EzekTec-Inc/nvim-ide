@@ -399,5 +399,18 @@ git revert 13812fc
 
 ### Rollback
 ```bash
+git revert 9e58f1d
+```
+
+---
+
+## Session: 2026-04-05T21:45:00Z — Theme switch and mappings formatting
+
+### Files modified
+- `lua/chadrc.lua`: Changed active theme to `rxyhn`.
+- `lua/mappings.lua`: Formatted code, changed the highlight color for `LineHighlight` to `ctermbg=208 ctermfg=0 guibg=#ff9800 guifg=#000000`.
+
+### Rollback
+```bash
 git revert HEAD
 ```

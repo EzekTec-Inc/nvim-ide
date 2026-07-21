@@ -13,6 +13,7 @@ This repository contains a highly optimized and modern Neovim configuration base
   - **Web:** `html`, `cssls`, `volar` (Vue), `angularls` (Angular)
 - **Modern UI:** Enhanced with `lspsaga.nvim`, `trouble.nvim`, `dressing.nvim`, and `noice.nvim` (via NvChad).
 - **Productivity Boosters:** Harpoon, Hop navigation, ToggleTerm, and Lazygit integration.
+- **CADE IDE Bridge:** Live two-way integration with the CADE agent via `cade-ide-mcp`. The agent reads open buffers, active file, selection, diagnostics, and workspace folders — and can apply edits, open files, run terminals/tasks, and drive `nvim-dap` directly from chat.
 
 ## 🛠 Installation
 
@@ -64,6 +65,18 @@ git clone https://github.com/EzekTec-Inc/nvim.git ~/.config/nvim
 | `<A-h>` | Toggle Horizontal Terminal (ToggleTerm) |
 | `<leader>gg` | Lazygit (Floating) |
 
+### CADE IDE Bridge
+| Command | Action |
+| --- | --- |
+| `:CadeReconnect` | Reconnect to `cade-ide-mcp` |
+| `:CadeCheckConnection` | Show connection state + current snapshot |
+| `:CadeDisconnect` | Drop the bridge |
+
+## 🔧 Recent Improvements (Apr 2026)
+
+- **CADE IDE Integration:** Added the `cade-neovim` plugin that speaks the `cade-ide-mcp` protocol over TCP loopback. State is auto-pushed on every `BufEnter`/`CursorMoved`/`ModeChanged`/`DiagnosticChanged` (50 ms debounced).
+- **Theme Export:** `cade_export_theme()` writes `~/.cade/themes/nvim-exported.json` on startup and on every `ColorScheme` change so the CADE UI mirrors your editor palette.
+
 ## 🔧 Recent Improvements (Feb 2026)
 
 - **LSP Core Migration:** Fully migrated to `vim.lsp.config` core API for Neovim 0.11, resolving long-standing deprecation warnings.
@@ -74,3 +87,4 @@ git clone https://github.com/EzekTec-Inc/nvim.git ~/.config/nvim
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+

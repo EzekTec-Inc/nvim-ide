@@ -42,11 +42,26 @@ return {
         return { "treesitter", "indent" }
       end
 
-      -- For everything else, prefer LSP, then treesitter if a parser exists, else indent
+      -- For everything else, use custom function to chain LSP -> Treesitter -> Indent
       local has_ts = pcall(vim.treesitter.get_parser, bufnr)
       if has_ts then
-        return { "lsp", "treesitter" }
+        return function(buf)
+          local function handleFallbackException(err, providerName)
+            if type(err) == "string" and err:match("UfoFallbackException") then
+              return require("ufo").getFolds(buf, providerName)
+            else
+              return require("promise").reject(err)
+            end
+          end
+
+          return require("ufo").getFolds(buf, "lsp"):catch(function(err)
+            return handleFallbackException(err, "treesitter")
+          end):catch(function(err)
+            return handleFallbackException(err, "indent")
+          end)
+        end
       end
+
       return { "lsp", "indent" }
     end,
 

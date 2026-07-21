@@ -143,4 +143,40 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -- Run once on startup
 cade_export_theme()
 
+-- Set up Neovim RPC server for CADE integration
+local socket_path = "/tmp/nvim.pipe"
+if vim.env.NVIM_LISTEN_ADDRESS == nil or vim.env.NVIM_LISTEN_ADDRESS == "" then
+	vim.env.NVIM_LISTEN_ADDRESS = socket_path
+	pcall(vim.fn.serverstart, socket_path)
+	print("CADE: Started listening on " .. socket_path)
+end
+
 -- ========================= CADE (Coding AI assistant with Desktop Extensions) =========================
+
+-- cade-ide-mcp: ensure CadeReconnect is available immediately
+vim.api.nvim_create_user_command("CadeReconnect", function()
+	local ok, m = pcall(require, "cade_ide")
+	if ok then
+		m.reconnect()
+	else
+		vim.notify("cade_ide not loaded", vim.log.levels.WARN)
+	end
+end, { desc = "Reconnect CADE IDE bridge" })
+
+vim.api.nvim_create_user_command("CadeCheckConnection", function()
+	local ok, m = pcall(require, "cade_ide")
+	if ok then
+		m.check_connection()
+	else
+		vim.notify("cade_ide not loaded", vim.log.levels.WARN)
+	end
+end, { desc = "Check CADE IDE bridge connection" })
+
+vim.api.nvim_create_user_command("CadeDisconnect", function()
+	local ok, m = pcall(require, "cade_ide")
+	if ok then
+		m.disconnect()
+	else
+		vim.notify("cade_ide not loaded", vim.log.levels.WARN)
+	end
+end, { desc = "Disconnect CADE IDE bridge" })
